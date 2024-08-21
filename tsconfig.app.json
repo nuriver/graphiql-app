@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "types": ["vitest/globals"],
+    "plugins": [{ "name": "next" }],
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "preserve",
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true
+  },
+  "include": [
+    "src",
+    "tests",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts",
+    "legacy/_app.tsx",
+    "legacy/_document.tsx",
+    "legacy/index.tsx",
+    "legacy/hooks",
+    "legacy/Flyout.test.tsx",
+    "tests/components/LoadingIndicator.test.tsx",
+    "legacy/Pagination.test.tsx",
+    "legacy/PlanetData.test.tsx",
+    "legacy/PlanetDetails.test.tsx",
+    "legacy/SearchItems.test.tsx",
+    "legacy/SearchItemsWrapper.test.tsx",
+    "legacy/SearchSection.test.tsx",
+    "legacy/index.test.tsx"
+  ],
+  "exclude": ["./node_modules"]
+}
