@@ -1,3 +1,11 @@
+import RequestBlock from './requestBlock';
+import '../../styles/main.scss';
+
 export default function Page() {
-  return <h1>Hello, restfull page!</h1>;
+  return (
+    <div className="rest-client">
+      <h1>REST Client</h1>
+      <RequestBlock />
+    </div>
+  );
 }

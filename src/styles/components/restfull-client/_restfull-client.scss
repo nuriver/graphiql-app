@@ -1,0 +1,78 @@
+.rest-client {
+  padding: 0 100px;
+  width: 100%;
+  max-width: 1520px;
+  .rest__label {
+    font-size: 24px;
+  }
+  .rest__input,
+  .rest__button {
+    padding: 20px;
+    border: 2px solid #65558f;
+    border-radius: 15px;
+    transition: all 0.2s ease-in-out;
+    font-size: 24px;
+    background-color: #efefef;
+  }
+  .rest__button:hover {
+    color: #ffffff;
+    background-color: #65558f;
+    cursor: pointer;
+  }
+  .rest__button:disabled {
+    background-color: #efefef;
+    cursor: default;
+    color: #1010104d;
+  }
+  .rest__select {
+    padding: 20px;
+    border: 2px solid #65558f;
+    border-radius: 20px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .rest-client__request {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    border: 2px solid #65558f;
+    border-radius: 15px;
+    padding: 50px 20px;
+    .request__method-url {
+      display: flex;
+      gap: 20px;
+    }
+    .request__method,
+    .request__endpoint,
+    .request__variables {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 2px solid #65558f;
+      border-radius: 15px;
+      padding: 20px;
+    }
+    .request__method {
+      width: 100%;
+      max-width: 300px;
+    }
+    .request__endpoint {
+      width: 100%;
+      max-width: 1130px;
+    }
+    .method__select {
+      border: 2px solid #65558f;
+      border-radius: 15px;
+      padding: 20px;
+      font-size: 24px;
+    }
+
+    .variables__add-variable {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

@@ -1,1 +1,98 @@
-/*# sourceMappingURL=main.css.map */
+html * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+}
+
+h1 {
+  margin: 50px 150px;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.rest-client {
+  padding: 0 100px;
+  width: 100%;
+  max-width: 1520px;
+}
+.rest-client .rest__label {
+  font-size: 24px;
+}
+.rest-client .rest__input,
+.rest-client .rest__button {
+  padding: 20px;
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
+  font-size: 24px;
+  background-color: #efefef;
+}
+.rest-client .rest__button:hover {
+  color: #ffffff;
+  background-color: #65558f;
+  cursor: pointer;
+}
+.rest-client .rest__button:disabled {
+  background-color: #efefef;
+  cursor: default;
+  color: rgba(16, 16, 16, 0.3019607843);
+}
+.rest-client .rest__select {
+  padding: 20px;
+  border: 2px solid #65558f;
+  border-radius: 20px;
+  font-size: 32px;
+  font-weight: 500;
+}
+.rest-client .rest-client__request {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  padding: 50px 20px;
+}
+.rest-client .rest-client__request .request__method-url {
+  display: flex;
+  gap: 20px;
+}
+.rest-client .rest-client__request .request__method,
+.rest-client .rest-client__request .request__endpoint,
+.rest-client .rest-client__request .request__variables {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  padding: 20px;
+}
+.rest-client .rest-client__request .request__method {
+  width: 100%;
+  max-width: 300px;
+}
+.rest-client .rest-client__request .request__endpoint {
+  width: 100%;
+  max-width: 1130px;
+}
+.rest-client .rest-client__request .method__select {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 24px;
+}
+.rest-client .rest-client__request .variables__add-variable {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+} /*# sourceMappingURL=main.css.map */
