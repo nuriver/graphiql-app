@@ -3,8 +3,10 @@ export default function Headers(): JSX.Element {
     <div className="graphiql-headers-wrapper">
       <header className="graphiql-headers-header">
         <h3>Headers</h3>
-        <button>add headers</button>
-        <button>show less</button>
+        <button className="add-headers-button">add headers</button>
+        <button className="content-toggle-button">
+          <span></span>
+        </button>
       </header>
       <main className="graphiql-headers-main">
         <section className="graphiql-headers-key-wrapper">

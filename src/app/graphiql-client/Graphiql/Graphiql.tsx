@@ -8,11 +8,13 @@ export default function Graphiql(): JSX.Element {
   return (
     <section className="graphiql">
       <h2>GraphiQL Client</h2>
-      <EndpointInput />
-      <SdlInput />
-      <Headers />
-      <Query />
-      <Variables />
+      <div className="graphiql-wrapper">
+        <EndpointInput />
+        <SdlInput />
+        <Headers />
+        <Query />
+        <Variables />
+      </div>
     </section>
   );
 }

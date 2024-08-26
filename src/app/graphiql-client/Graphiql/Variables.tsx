@@ -1,9 +1,13 @@
-export default function SdlInput(): JSX.Element {
+export default function Variables(): JSX.Element {
   return (
     <div className="graphiql-variables-wrapper">
-      <h3>Variables</h3>
+      <header className="graphiql-variables-header">
+        <h3>Variables</h3>
+        <button className="content-toggle-button">
+          <span></span>
+        </button>
+      </header>
       <textarea name="" id=""></textarea>
-      <button>Show less</button>
     </div>
   );
 }

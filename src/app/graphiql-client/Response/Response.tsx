@@ -6,8 +6,10 @@ export default function Response(): JSX.Element {
   return (
     <section className="graphiql-response">
       <h2>Response</h2>
-      <StatusOutput />
-      <Body />
+      <div className="response-wrapper">
+        <StatusOutput />
+        <Body />
+      </div>
       <Documentation />
     </section>
   );

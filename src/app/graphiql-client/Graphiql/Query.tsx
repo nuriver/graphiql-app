@@ -1,4 +1,4 @@
-export default function SdlInput(): JSX.Element {
+export default function Query(): JSX.Element {
   return (
     <div className="graphiql-query-wrapper">
       <h3>Query</h3>
