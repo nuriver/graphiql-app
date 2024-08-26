@@ -1,57 +1,106 @@
 .rest-client {
+  display: flex;
+  flex-direction: column;
   padding: 0 100px;
   width: 100%;
   max-width: 1520px;
-  .rest__label {
-    font-size: 24px;
-  }
-  .rest__input,
-  .rest__button {
-    padding: 20px;
-    border: 2px solid #65558f;
-    border-radius: 15px;
-    transition: all 0.2s ease-in-out;
-    font-size: 24px;
-    background-color: #efefef;
-  }
-  .rest__button:hover {
-    color: #ffffff;
-    background-color: #65558f;
-    cursor: pointer;
-  }
-  .rest__button:disabled {
-    background-color: #efefef;
-    cursor: default;
-    color: #1010104d;
-  }
-  .rest__select {
-    padding: 20px;
-    border: 2px solid #65558f;
-    border-radius: 20px;
-    font-size: 32px;
-    font-weight: 500;
-  }
-  .rest-client__request {
+  .rest-client__request,
+  .rest-client__response {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 20px;
-    border: 2px solid #65558f;
+    border: 2px solid $main-color;
     border-radius: 15px;
     padding: 50px 20px;
-    .request__method-url {
+    .request__method-url,
+    .headers__add-header,
+    .variables__add-variable,
+    .headers-list__item {
       display: flex;
       gap: 20px;
+      align-items: center;
+      font-size: 24px;
+    }
+    .rest__label {
+      font-size: 24px;
+    }
+    .rest__input {
+      border: none;
+    }
+    .rest__input,
+    .rest__button,
+    .body-input__button {
+      padding: 20px;
+      border-radius: 15px;
+      transition: all 0.2s ease-in-out;
+      font-size: 24px;
+      background-color: $input-background;
+    }
+    .body-input__button,
+    .rest__button {
+      border: 2px solid $main-color;
+    }
+
+    .rest__button,
+    .body-input__button {
+      padding: 5px 20px;
+    }
+    .body-input__button,
+    .headers__headers-list {
+      width: fit-content;
+    }
+
+    .rest__button:hover,
+    .body-input__button:hover {
+      color: #ffffff;
+      background-color: $main-color;
+      cursor: pointer;
+    }
+    .rest__button:disabled {
+      background-color: $input-background;
+      cursor: default;
+      color: #1010104d;
+    }
+    .rest__select {
+      padding: 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 32px;
+      font-weight: 500;
+    }
+
+    .headers__add-header,
+    .variables__add-variable,
+    .headers-list__item {
+      flex-wrap: wrap;
     }
     .request__method,
     .request__endpoint,
-    .request__variables {
+    .request__variables,
+    .request__headers,
+    .request__body,
+    .headers__headers-list {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      border: 2px solid #65558f;
+      border: 2px solid $main-color;
       border-radius: 15px;
       padding: 20px;
+      width: 100%;
+    }
+    .headers__headers-list--with-border {
+      border: none;
+      background-color: $input-background;
+      border-radius: 15px;
+      width: 100%;
+    }
+    .headers__headers-list--no-border {
+      border: none;
+      padding: 0;
+    }
+    .rest__body-input {
+      height: 100%;
+      min-height: 310px;
     }
     .request__method {
       width: 100%;
@@ -61,18 +110,85 @@
       width: 100%;
       max-width: 1130px;
     }
+    .method__custom-select {
+      position: relative;
+      width: 200px;
+    }
+
     .method__select {
-      border: 2px solid #65558f;
-      border-radius: 15px;
+      width: 100%;
       padding: 20px;
+      appearance: none;
+      background-color: #ffffff;
+      border: none;
+      background-color: $input-background;
+      border-radius: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      padding-right: 20px;
       font-size: 24px;
     }
 
-    .variables__add-variable {
+    .method__custom-select::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #333;
+      pointer-events: none;
+      transition: transform 0.3s ease;
+    }
+
+    .method__select:focus + .custom-select-wrapper::after,
+    .method__custom-select:focus-within::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+    .body__top {
       display: flex;
+    }
+    .response__status,
+    .response__body {
+      display: flex;
+      flex-direction: column;
       gap: 20px;
-      align-items: center;
-      justify-content: space-between;
+    }
+    .status__window,
+    .body__window {
+      width: 100%;
+      border: 2px solid $main-color;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 24px;
+    }
+    .body__window {
+      min-height: 350px;
+    }
+  }
+  @media screen and (max-width: 870px) {
+    h1 {
+      font-size: 32px;
+      margin: 50px;
+    }
+
+    .request__method-url {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (max-width: 660px) {
+    h2 {
+      font-size: 24px;
+    }
+
+    .rest-client {
+      padding: 0 20px;
+    }
+    .rest__select {
+      font-size: 24px;
     }
   }
 }
