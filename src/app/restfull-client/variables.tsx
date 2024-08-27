@@ -2,52 +2,48 @@
 import { useState } from 'react';
 
 interface Variable {
-  key: string;
+  name: string;
   value: string;
 }
 
 export default function Variables() {
-  const [variableKey, setVariableKey] = useState('');
+  const [variableName, setVariableName] = useState('');
   const [variableValue, setVariableValue] = useState('');
   const [variables, setVariables] = useState<Variable[]>([]);
 
-  const isDisabled = variableKey.trim() === '' || variableValue.trim() === '';
+  const isDisabled = variableName.trim() === '' || variableValue.trim() === '';
 
   const handleAddVariable = () => {
-    const newVariable = { key: variableKey, value: variableValue };
+    const newVariable = { name: variableName, value: variableValue };
     setVariables([...variables, newVariable]);
-    setVariableKey('');
+    setVariableName('');
     setVariableValue('');
   };
   return (
     <div className="request__variables">
       <select id="select-variable" className="rest__select">
-        <option value="">Variables (key: value)</option>
+        <option value="">Variables (name: value)</option>
         {variables.map((variable, index) => (
           <option key={index} value={variable.value}>
-            {variable.key}: {variable.value}
+            {variable.name}: {variable.value}
           </option>
         ))}
       </select>
 
       <div className="variables__add-variable">
-        <label htmlFor="variable-key" className="rest__label">
-          Key
-        </label>
         <input
-          id="variable-key"
-          value={variableKey}
+          id="variable-name"
           type="text"
+          placeholder="Variable Name"
+          value={variableName}
           className="rest__input"
-          onChange={(item) => setVariableKey(item.target.value)}
+          onChange={(item) => setVariableName(item.target.value)}
         />
-        <label htmlFor="variable-value" className="rest__label">
-          Value
-        </label>
         <input
           id="variable-value"
-          value={variableValue}
           type="text"
+          placeholder="Variable Value"
+          value={variableValue}
           className="rest__input"
           onChange={(item) => setVariableValue(item.target.value)}
         />
@@ -57,7 +53,7 @@ export default function Variables() {
           className="rest__button"
           onClick={handleAddVariable}
         >
-          Add variable
+          Add Variable
         </button>
       </div>
       <div className="variables__add-variable"></div>
