@@ -161,20 +161,13 @@ h2 {
   flex-direction: column;
   gap: 30px;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-header {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 21px;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-header
-  .add-headers-button {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .add-headers-button {
   width: 122px;
   height: 24px;
   border: none;
@@ -189,46 +182,26 @@ h2 {
   color: #65558f;
   transition: all 0.2s ease-in-out;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-header
-  .add-headers-button:hover {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .add-headers-button:hover {
   cursor: pointer;
   background-color: #65558f;
   color: white;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-header
-  .content-toggle-button {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .content-toggle-button {
   margin-left: auto;
   align-self: flex-start;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-main {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main {
   display: flex;
   justify-content: flex-start;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-main
-  section {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main section {
   display: flex;
   flex-direction: column;
   gap: 13px;
   width: 40%;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-headers-wrapper
-  .graphiql-headers-main
-  section
-  input {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main section input {
   width: 400px;
   height: 35px !important;
   padding: 0px;
@@ -245,18 +218,11 @@ h2 {
   flex-direction: column;
   gap: 26px;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-variables-wrapper
-  .graphiql-variables-header {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-variables-wrapper .graphiql-variables-header {
   display: flex;
   justify-content: space-between;
 }
-.graphiql-page-wrapper
-  .graphiql-wrapper
-  .graphiql-variables-wrapper
-  .graphiql-variables-header
-  .content-toggle-button {
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-variables-wrapper .graphiql-variables-header .content-toggle-button {
   align-self: flex-start;
 }
 
@@ -277,18 +243,12 @@ h2 {
   flex-direction: column;
   gap: 43px;
 }
-.graphiql-response
-  .response-wrapper
-  .graphiql-response-body-wrapper
-  .graphiql-response-body {
+.graphiql-response .response-wrapper .graphiql-response-body-wrapper .graphiql-response-body {
   border: 2px solid #65558f;
   border-radius: 15px;
   height: 245px;
 }
-.graphiql-response
-  .response-wrapper
-  .graphiql-status-output-wrapper
-  .graphiql-status-output {
+.graphiql-response .response-wrapper .graphiql-status-output-wrapper .graphiql-status-output {
   background: none;
   border: 2px solid #65558f;
   border-radius: 15px;
@@ -313,11 +273,17 @@ h2 {
   display: block;
   height: 15px;
   width: 24px;
-  background-image: url('/assets/images/content-toggle-img.png');
+  background-image: url("/assets/images/content-toggle-img.png");
   background-size: 100%;
   transition: all 0.2s ease-in-out;
 }
 .content-toggle-button:hover {
   transform: scale(1.1);
   cursor: pointer;
-} /*# sourceMappingURL=main.css.map */
+}
+
+.test-mirror {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  padding: 10px;
+}/*# sourceMappingURL=main.css.map */

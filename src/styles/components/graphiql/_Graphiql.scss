@@ -181,3 +181,8 @@
     cursor: pointer;
   }
 }
+
+.test-mirror {
+  @include border-style;
+  padding: 10px;
+}
