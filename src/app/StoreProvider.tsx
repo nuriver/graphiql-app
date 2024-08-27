@@ -8,12 +8,12 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode;
 }) {
-   const [store, setStore] = useState<AppStore | null>(null);
+  const [store, setStore] = useState<AppStore | null>(null);
 
-   useEffect(() => {
-     const initialStore = makeStore();
-     setStore(initialStore);
-   }, []); 
+  useEffect(() => {
+    const initialStore = makeStore();
+    setStore(initialStore);
+  }, []);
 
   if (!store) return null;
 
