@@ -349,16 +349,22 @@ h2 {
 }
 .graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main {
   display: flex;
-  justify-content: flex-start;
-}
-.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main section {
-  display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10px;
+}
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main .graphiql-headers-name-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main .graphiql-headers-name-wrapper h4 {
   width: 40%;
 }
-.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main section input {
-  width: 400px;
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main .graphiql-headers-pairs-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-main .graphiql-headers-pairs-wrapper input {
+  width: 40%;
   height: 35px !important;
   padding: 0px;
   font-size: 20px;
@@ -436,10 +442,4 @@ h2 {
 .content-toggle-button:hover {
   transform: scale(1.1);
   cursor: pointer;
-}
-
-.test-mirror {
-  border: 2px solid #65558f;
-  border-radius: 15px;
-  padding: 10px;
 }/*# sourceMappingURL=main.css.map */

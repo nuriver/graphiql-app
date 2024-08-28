@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
 interface graphiqlState {
   endpoint: string;
@@ -10,6 +10,7 @@ const initialState = {
   endpoint: '',
   sdl: '',
   query: '',
+  headers: [{ id: nanoid(), key: '', value: '' }],
 };
 
 export const graphiqlSlice = createSlice({
@@ -26,8 +27,28 @@ export const graphiqlSlice = createSlice({
     setGraphiqlSdl: (state, action: PayloadAction<string>) => {
       state.sdl = action.payload;
     },
+    addGraphiqlHeader: (state) => {
+      state.headers.push({ id: nanoid(), key: '', value: '' });
+    },
+    updateGraphiqlHeader: (state, action) => {
+      const { id, key, value } = action.payload;
+      const header = state.headers.find((header) => header.id === id);
+      if (header) {
+        header.key = key;
+        header.value = value;
+      }
+    },
+    clearGraphiqlHeaders: (state) => {
+      state.headers = [{ id: nanoid(), key: '', value: '' }];
+    },
   },
 });
 
-export const { setGraphiqlEndpoint, setGraphiqlSdl } = graphiqlSlice.actions;
+export const {
+  setGraphiqlEndpoint,
+  setGraphiqlSdl,
+  addGraphiqlHeader,
+  updateGraphiqlHeader,
+  clearGraphiqlHeaders,
+} = graphiqlSlice.actions;
 export default graphiqlSlice.reducer;

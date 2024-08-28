@@ -86,14 +86,20 @@
       }
       .graphiql-headers-main {
         display: flex;
-        justify-content: flex-start;
-        section {
+        flex-direction: column;
+        gap: 10px;
+        .graphiql-headers-name-wrapper {
           display: flex;
-          flex-direction: column;
-          gap: 13px;
-          width: 40%;
+          gap: 10px;
+          h4 {
+            width: 40%;
+          }
+        }
+        .graphiql-headers-pairs-wrapper {
+          display: flex;
+          gap: 10px;
           input {
-            width: 400px;
+            width: 40%;
             height: 35px !important;
             padding: 0px;
             font-size: 20px;
@@ -180,9 +186,4 @@
     transform: scale(1.1);
     cursor: pointer;
   }
-}
-
-.test-mirror {
-  @include border-style;
-  padding: 10px;
 }
