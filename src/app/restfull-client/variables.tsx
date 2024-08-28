@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import isDisabled from '../../utils/isDisabled';
 
 interface Variable {
   name: string;
@@ -10,8 +11,6 @@ export default function Variables() {
   const [variableName, setVariableName] = useState('');
   const [variableValue, setVariableValue] = useState('');
   const [variables, setVariables] = useState<Variable[]>([]);
-
-  const isDisabled = variableName.trim() === '' || variableValue.trim() === '';
 
   const handleAddVariable = () => {
     const newVariable = { name: variableName, value: variableValue };
@@ -49,7 +48,7 @@ export default function Variables() {
         />
 
         <button
-          disabled={isDisabled}
+          disabled={isDisabled([variableName, variableValue])}
           className="rest__button"
           onClick={handleAddVariable}
         >

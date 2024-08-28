@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { addHeader, removeHeader } from '../../store/headersSlice';
+import { isDisabled } from '../../utils/isDisabled';
 
 const Headers: React.FC = () => {
   const [headerKey, setHeaderKey] = useState('');
   const [headerValue, setHeaderValue] = useState('');
   const headers = useSelector((state: RootState) => state.headers.headers);
   const dispatch = useDispatch<AppDispatch>();
-
-  const isDisabled = headerKey.trim() === '' || headerValue.trim() === '';
 
   const handleAddHeader = () => {
     if (headerKey && headerValue) {
@@ -45,7 +44,7 @@ const Headers: React.FC = () => {
         />
         <button
           className="rest__button"
-          disabled={isDisabled}
+          disabled={isDisabled([headerKey, headerValue])}
           onClick={handleAddHeader}
         >
           Add Header
