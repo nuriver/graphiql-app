@@ -170,7 +170,16 @@
       font-size: 24px;
     }
     .body__window {
-      min-height: 350px;
+      max-width: 100%;
+      max-height: 400px;
+      overflow: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .body__window-pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   }
   @media screen and (max-width: 870px) {

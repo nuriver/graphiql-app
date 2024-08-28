@@ -1,19 +1,27 @@
 'use client';
+import React, { useState } from 'react';
 import RequestBlock from './requestBlock';
-import '../../styles/main.scss';
-import store from '../../store/store';
-import { Provider } from 'react-redux';
 import ResponseBlock from './responseBlock';
+import '../../styles/main.scss';
+import { ResponseBody } from '../../core/types';
 
 export default function Page() {
+  const [response, setResponse] = useState<{
+    body: ResponseBody | null;
+    status: number | null;
+    statusText: string | null;
+  }>({
+    body: null,
+    status: null,
+    statusText: null,
+  });
+
   return (
-    <Provider store={store}>
-      <div className="rest-client">
-        <h1>REST Client</h1>
-        <RequestBlock />
-        <h1>Response</h1>
-        <ResponseBlock />
-      </div>
-    </Provider>
+    <div className="rest-client">
+      <h1>REST Client</h1>
+      <RequestBlock setResponse={setResponse} />
+      <h1>Response</h1>
+      <ResponseBlock response={response} />
+    </div>
   );
 }

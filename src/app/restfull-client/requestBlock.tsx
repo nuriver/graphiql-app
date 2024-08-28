@@ -1,24 +1,32 @@
 'use client';
+import React, { useState } from 'react';
 import Method from './method';
 import Endpoint from './endpoint';
 // import Variables from './variables';
 import BodyRequest from './bodyRequest';
 import Headers from './headers';
-import { useState } from 'react';
+import { RequestBlockProps, ResponseBody } from '../../core/types';
 
-export default function RequestBlock() {
+const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
   const [endpoint, setEndpoint] = useState<string>('');
   const [method, setMethod] = useState<string>('GET');
 
   const handleRequest = async () => {
     try {
-      const response = await fetch(endpoint, {
-        method,
+      const res = await fetch(endpoint, { method });
+      const data: ResponseBody = await res.json();
+      setResponse({
+        body: data,
+        status: res.status,
+        statusText: res.statusText,
       });
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error('Error:', error);
+      setResponse({
+        body: null,
+        status: null,
+        statusText: 'Error fetching data',
+      });
     }
   };
 
@@ -34,4 +42,6 @@ export default function RequestBlock() {
       </button>
     </div>
   );
-}
+};
+
+export default RequestBlock;

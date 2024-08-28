@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/main.css';
+import StoreProvider from './StoreProvider';
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
