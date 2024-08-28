@@ -8,7 +8,7 @@ export default function EndpointInput(): JSX.Element {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 
-  const onChange = (event: ChangeEvent) => {
+  const onChangeHandler = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
     const value = input.value;
     setValue(value);
@@ -29,7 +29,7 @@ export default function EndpointInput(): JSX.Element {
         className="graphiql-endpoint-input"
         id="graphiql-endpoint-input"
         placeholder="Enter your GraphQL API endpoint"
-        onChange={onChange}
+        onChange={onChangeHandler}
       />
     </div>
   );

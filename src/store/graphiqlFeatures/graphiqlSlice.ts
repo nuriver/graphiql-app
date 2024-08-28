@@ -19,9 +19,15 @@ export const graphiqlSlice = createSlice({
     setGraphiqlEndpoint: (state, action: PayloadAction<string>) => {
       state.endpoint = action.payload;
       state.sdl = `${action.payload}?sdl`;
+      if (action.payload === '') {
+        state.sdl = '';
+      }
+    },
+    setGraphiqlSdl: (state, action: PayloadAction<string>) => {
+      state.sdl = action.payload;
     },
   },
 });
 
-export const { setGraphiqlEndpoint } = graphiqlSlice.actions;
+export const { setGraphiqlEndpoint, setGraphiqlSdl } = graphiqlSlice.actions;
 export default graphiqlSlice.reducer;
