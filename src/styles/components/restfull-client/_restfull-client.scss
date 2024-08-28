@@ -29,7 +29,8 @@
     }
     .rest__input,
     .rest__button,
-    .body-input__button {
+    .body-input__button,
+    .request__send-button {
       padding: 20px;
       border-radius: 15px;
       transition: all 0.2s ease-in-out;
@@ -42,7 +43,8 @@
     }
 
     .rest__button,
-    .body-input__button {
+    .body-input__button,
+    .request__send-button {
       padding: 5px 20px;
     }
     .body-input__button,
@@ -51,12 +53,14 @@
     }
 
     .rest__button:hover,
-    .body-input__button:hover {
+    .body-input__button:hover,
+    .request__send-button:hover {
       color: #ffffff;
       background-color: $main-color;
       cursor: pointer;
     }
-    .rest__button:disabled {
+    .rest__button:disabled,
+    .request__send-button:disabled {
       background-color: $input-background;
       cursor: default;
       color: #1010104d;
@@ -166,7 +170,16 @@
       font-size: 24px;
     }
     .body__window {
-      min-height: 350px;
+      max-width: 100%;
+      max-height: 400px;
+      overflow: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .body__window-pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   }
   @media screen and (max-width: 870px) {

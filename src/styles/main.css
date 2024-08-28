@@ -59,9 +59,11 @@ h2 {
 .rest-client .rest-client__request .rest__input,
 .rest-client .rest-client__request .rest__button,
 .rest-client .rest-client__request .body-input__button,
+.rest-client .rest-client__request .request__send-button,
 .rest-client .rest-client__response .rest__input,
 .rest-client .rest-client__response .rest__button,
-.rest-client .rest-client__response .body-input__button {
+.rest-client .rest-client__response .body-input__button,
+.rest-client .rest-client__response .request__send-button {
   padding: 20px;
   border-radius: 15px;
   transition: all 0.2s ease-in-out;
@@ -76,8 +78,10 @@ h2 {
 }
 .rest-client .rest-client__request .rest__button,
 .rest-client .rest-client__request .body-input__button,
+.rest-client .rest-client__request .request__send-button,
 .rest-client .rest-client__response .rest__button,
-.rest-client .rest-client__response .body-input__button {
+.rest-client .rest-client__response .body-input__button,
+.rest-client .rest-client__response .request__send-button {
   padding: 5px 20px;
 }
 .rest-client .rest-client__request .body-input__button,
@@ -89,14 +93,18 @@ h2 {
 }
 .rest-client .rest-client__request .rest__button:hover,
 .rest-client .rest-client__request .body-input__button:hover,
+.rest-client .rest-client__request .request__send-button:hover,
 .rest-client .rest-client__response .rest__button:hover,
-.rest-client .rest-client__response .body-input__button:hover {
+.rest-client .rest-client__response .body-input__button:hover,
+.rest-client .rest-client__response .request__send-button:hover {
   color: #ffffff;
   background-color: #65558f;
   cursor: pointer;
 }
 .rest-client .rest-client__request .rest__button:disabled,
-.rest-client .rest-client__response .rest__button:disabled {
+.rest-client .rest-client__request .request__send-button:disabled,
+.rest-client .rest-client__response .rest__button:disabled,
+.rest-client .rest-client__response .request__send-button:disabled {
   background-color: rgb(239, 239, 239);
   cursor: default;
   color: rgba(16, 16, 16, 0.3019607843);
