@@ -28,11 +28,10 @@ export default function SignIn() {
         data.email,
         data.password
       );
-      console.log(user);
+      console.log(user)
       router.push('/');
       setError('');
     } catch (error) {
-      console.log(error);
       setError('who r u');
     }
   };
@@ -40,7 +39,7 @@ export default function SignIn() {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Log in</h2>
+        <h2>Sign in</h2>
         <div>
           <input placeholder="Email" {...register('email')} type="email" />
           {errors.email && <p>{errors.email.message}</p>}

@@ -35,12 +35,9 @@ export default function SignUp() {
       const user = userCredential.user;
 
       await updateProfile(user, { displayName: data.name });
-
-      console.log(user);
       setError('');
       router.push('/');
     } catch (error) {
-      console.log(error);
       setError('Ошибка при создании аккаунта, попробуйте снова.');
     }
   };

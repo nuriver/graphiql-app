@@ -18,7 +18,7 @@ export default function Main() {
     return <Loading />;
   }
 
-  if (user) {
+  if (user && user.displayName) {
     return (
       <>
         <h1>Welcome back, {user.displayName || 'User'}!</h1>
