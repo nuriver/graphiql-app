@@ -1,3 +1,5 @@
+import CodeEditor from './CodeEditor';
+
 export default function Variables(): JSX.Element {
   return (
     <div className="graphiql-variables-wrapper">
@@ -7,7 +9,7 @@ export default function Variables(): JSX.Element {
           <span></span>
         </button>
       </header>
-      <textarea name="" id=""></textarea>
+      <CodeEditor />
     </div>
   );
 }

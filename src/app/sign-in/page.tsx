@@ -33,7 +33,7 @@ export default function SignIn() {
       setError('');
     } catch (error) {
       console.log(error);
-      setError('who tf r u');
+      setError('who r u');
     }
   };
 

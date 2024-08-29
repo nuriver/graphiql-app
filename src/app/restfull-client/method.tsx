@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
 
-export default function Method() {
-  const [method, setMethod] = useState('GET');
+interface MethodProps {
+  method: string;
+  setMethod: (method: string) => void;
+}
 
+export default function Method({ method, setMethod }: MethodProps) {
   return (
     <div className="request__method">
       <h2 className="method__title">Method</h2>

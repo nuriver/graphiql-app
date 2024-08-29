@@ -1,24 +1,59 @@
+'use client';
+
+import {
+  addGraphiqlHeader,
+  updateGraphiqlHeader,
+} from '../../../store/graphiqlFeatures/graphiqlSlice';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+
 export default function Headers(): JSX.Element {
+  const headers = useAppSelector((state) => state.graphiql.headers);
+  const dispatch = useAppDispatch();
+
+  const addHeader = () => {
+    dispatch(addGraphiqlHeader());
+  };
+
+  const updateHeader = (id: string, key: string, value: string) => {
+    dispatch(updateGraphiqlHeader({ id, key, value }));
+  };
+
   return (
     <div className="graphiql-headers-wrapper">
       <header className="graphiql-headers-header">
         <h3>Headers</h3>
-        <button className="add-headers-button">add headers</button>
+        <button className="add-headers-button" onClick={addHeader}>
+          add headers
+        </button>
         <button className="content-toggle-button">
           <span></span>
         </button>
       </header>
       <main className="graphiql-headers-main">
-        <section className="graphiql-headers-key-wrapper">
+        <div className="graphiql-headers-name-wrapper">
           <h4>Header key</h4>
-          <input type="text" className="graphiql-headers-key-input" />
-          <input type="text" className="graphiql-headers-key-input" />
-        </section>
-        <section className="graphiql-headers-value-wrapper">
           <h4>Header value</h4>
-          <input type="text" className="graphiql-headers-value-input" />
-          <input type="text" className="graphiql-headers-value-input" />
-        </section>
+        </div>
+        {headers.map((header) => (
+          <div className="graphiql-headers-pairs-wrapper" key={header.id}>
+            <input
+              type="text"
+              className="graphiql-headers-key-input"
+              value={header.key}
+              onChange={(event) => {
+                updateHeader(header.id, event.target.value, header.value);
+              }}
+            />
+            <input
+              type="text"
+              className="graphiql-headers-value-input"
+              value={header.value}
+              onChange={(event) => {
+                updateHeader(header.id, header.key, event.target.value);
+              }}
+            />
+          </div>
+        ))}
       </main>
     </div>
   );
