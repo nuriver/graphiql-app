@@ -11,11 +11,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const publicRoutes = ['/sign-in', '/sign-up'];
+
   return (
     <html lang="en">
       <body className="test">
         <AuthProvider>
-          <AuthGuard>
+          <AuthGuard publicRoutes={publicRoutes}>
             <StoreProvider>
               <Header />
               {children}
