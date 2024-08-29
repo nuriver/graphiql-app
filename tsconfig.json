@@ -19,12 +19,6 @@
     ],
     "strictNullChecks": true
   },
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    }
-  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./dist/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
