@@ -3,6 +3,8 @@ import '../styles/main.css';
 import StoreProvider from './StoreProvider';
 import { AuthProvider } from '../authorization/AuthContext';
 import AuthGuard from '../authorization/AuthGuard';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function RootLayout({
   children,
@@ -14,7 +16,11 @@ export default function RootLayout({
       <body className="test">
         <AuthProvider>
           <AuthGuard>
-            <StoreProvider>{children}</StoreProvider>
+            <StoreProvider>
+              <Header />
+              {children}
+              <Footer />
+            </StoreProvider>
           </AuthGuard>
         </AuthProvider>
       </body>

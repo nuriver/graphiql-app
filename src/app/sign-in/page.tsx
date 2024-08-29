@@ -28,7 +28,7 @@ export default function SignIn() {
         data.email,
         data.password
       );
-      console.log(user)
+      console.log(user);
       router.push('/');
       setError('');
     } catch (error) {

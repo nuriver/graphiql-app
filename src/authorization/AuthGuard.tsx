@@ -10,9 +10,7 @@ interface AuthGuardProps {
   publicRoutes?: string[];
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({
-  children
-}) => {
+const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const router = useRouter();
   const { user, loading } = useAuth();
 
