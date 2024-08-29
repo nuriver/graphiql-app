@@ -474,6 +474,7 @@ h2 {
   margin-right: 20px;
   transition: color 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .main-btn:hover {
@@ -483,6 +484,68 @@ h2 {
 
 .container {
   padding: 0 100px;
+}
+
+.main-block-first {
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.un-grad {
+  color: #65558f;
+}
+
+.main-block-second {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  height: 80vh;
+  justify-content: center;
+}
+
+.main-block-second h3 {
+  margin: 20px 0;
+  font-size: 48px;
+}
+
+.main-block-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  height: 80vh;
+  justify-content: center;
+}
+
+.main-block-3 h3 {
+  margin: 20px 0;
+  font-size: 48px;
+}
+
+.about-text {
+  font-size: 24px;
+}
+
+.main-block-first {
+  height: 80vh;
+}
+
+.main-out {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .toggle-switch {
@@ -560,7 +623,9 @@ h2 {
   align-items: center;
 }
 
-header {
+.header-main {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -568,9 +633,10 @@ header {
   padding: 10px 100px;
   background-color: #65558f;
   color: white;
+  z-index: 2;
 }
 
-header button {
+.header-main button {
   background-color: transparent;
   border: none;
   color: #fff;
@@ -586,9 +652,9 @@ footer {
   padding: 10px 100px;
   background-color: #65558f;
   color: white;
-  position: fixed;
   bottom: 0;
   width: 100%;
+  margin-top: 20px;
 }
 
 footer a {
@@ -600,4 +666,104 @@ footer a {
 footer a:visited {
   text-decoration: none;
   color: white;
+}
+
+.not-found-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.not-found-cont a {
+  text-decoration: none;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 80vh;
+  width: 100%;
+}
+
+.column h2 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.password-input {
+  display: flex;
+}
+
+.input-cont {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.input-title {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: 28px;
+}
+
+.input-cont input {
+  border: 2px solid #65558f;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #EFEFEF;
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.sign-error {
+  color: rgb(145, 18, 18);
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.sign-btn {
+  padding: 0px 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 58px;
+  color: #65558f;
+  background-color: #fff;
+  border: 2px solid #65558f;
+  border-radius: 20px;
+  margin-right: 20px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 40px;
+}
+
+.sign-btn:disabled {
+  background: gainsboro;
+  color: rgb(166, 166, 166);
+  border: rgb(166, 166, 166);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.sign-btn:hover {
+  color: white;
+  background-color: #65558f;
+}
+
+.toggle-password-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #65558f;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: start;
+  margin-left: 10px;
 }/*# sourceMappingURL=main.css.map */

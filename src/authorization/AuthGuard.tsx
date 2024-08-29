@@ -10,24 +10,25 @@ interface AuthGuardProps {
   publicRoutes?: string[];
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ children, publicRoutes = [] }) => {
+const AuthGuard: React.FC<AuthGuardProps> = ({
+  children,
+  publicRoutes = [],
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { user, loading } = useAuth();
-  const isPublicRoute = publicRoutes.includes(pathname); 
+  const isPublicRoute = publicRoutes.includes(pathname);
 
   useEffect(() => {
     if (!loading) {
       if (!user && !isPublicRoute) {
         router.push('/');
-      } else if (user && isPublicRoute) {
-        router.push('/dashboard');
       }
     }
   }, [user, loading, router, isPublicRoute]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return <>{children}</>;

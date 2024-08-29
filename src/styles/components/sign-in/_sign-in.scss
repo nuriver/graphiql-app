@@ -1,0 +1,87 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 80vh;
+  width: 100%;
+}
+
+.column h2 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.password-input {
+  display: flex;
+}
+
+.input-cont {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.input-title {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: 28px;
+}
+
+.input-cont input {
+  border: 2px solid $main-color;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #efefef;
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.sign-error {
+  color: rgb(145, 18, 18);
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.sign-btn {
+  padding: 0px 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 58px;
+  color: $main-color;
+  background-color: #fff;
+  border: 2px solid $main-color;
+  border-radius: 20px;
+  margin-right: 20px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 40px;
+}
+
+.sign-btn:disabled {
+  background: gainsboro;
+  color: rgb(166, 166, 166);
+  border: rgb(166, 166, 166);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.sign-btn:hover {
+  color: white;
+  background-color: $main-color;
+}
+
+.toggle-password-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: $main-color;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: start;
+  margin-left: 10px;
+}

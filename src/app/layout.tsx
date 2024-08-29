@@ -12,7 +12,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   //ТУТ ВСЕ ЧТОБЫ БЫЛО УДОБНО РАБОТАТЬ ОСТАЛЬНЫМ ИСПРАВИТЬ ПЕРЕД ДЕПЛОЕМ
-  const publicRoutes = ['/sign-in', '/sign-up', '/graphiql-client', '/restfull-client', '/history'];
+  const publicRoutes = [
+    '/sign-in',
+    '/sign-up',
+    '/graphiql-client',
+    '/restfull-client',
+    '/history',
+  ];
 
   return (
     <html lang="en">

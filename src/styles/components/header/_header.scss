@@ -73,7 +73,9 @@
   align-items: center;
 }
 
-header {
+.header-main {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -81,9 +83,10 @@ header {
   padding: 10px 100px;
   background-color: $main-color;
   color: white;
+  z-index: 2;
 }
 
-header button {
+.header-main button {
   background-color: transparent;
   border: none;
   color: #fff;

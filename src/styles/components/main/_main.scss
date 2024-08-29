@@ -4,20 +4,83 @@
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
-  color: #65558f;
+  color: $main-color;
   background-color: #fff;
-  border: 2px solid #65558f;
+  border: 2px solid $main-color;
   border-radius: 20px;
   margin-right: 20px;
   transition: color 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .main-btn:hover {
   color: white;
-  background-color: #65558f;
+  background-color: $main-color;
 }
 
 .container {
   padding: 0 100px;
+}
+
+.main-block-first {
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.un-grad {
+  color: $main-color;
+}
+
+.main-block-second {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  border: 2px solid $main-color;
+  border-radius: 15px;
+  height: 80vh;
+  justify-content: center;
+}
+
+.main-block-second h3 {
+  margin: 20px 0;
+  font-size: 48px;
+}
+
+.main-block-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  height: 80vh;
+  justify-content: center;
+}
+
+.main-block-3 h3 {
+  margin: 20px 0;
+  font-size: 48px;
+}
+
+.about-text {
+  font-size: 24px;
+}
+
+.main-block-first {
+  height: 80vh;
+}
+
+.main-out {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
