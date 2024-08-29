@@ -27,11 +27,15 @@ export default function Main() {
   }
 
   return (
-    <>
+    <main className="container">
       <h1>Welcome!</h1>
-      <button onClick={handleSignIn}>Sign In</button>
-      <button onClick={handleSignUp}>Sign Up</button>
-    </>
+      <button className="main-btn" onClick={handleSignIn}>
+        Sign In
+      </button>
+      <button className="main-btn" onClick={handleSignUp}>
+        Sign Up
+      </button>
+    </main>
   );
 
   function handleSignIn() {

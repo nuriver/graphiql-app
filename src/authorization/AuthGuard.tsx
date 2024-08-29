@@ -1,7 +1,7 @@
 'use client';
 
 import React, { ReactNode, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../authorization/AuthContext';
 import Loading from '../app/loading';
 
@@ -10,18 +10,24 @@ interface AuthGuardProps {
   publicRoutes?: string[];
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
+const AuthGuard: React.FC<AuthGuardProps> = ({ children, publicRoutes = [] }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const { user, loading } = useAuth();
+  const isPublicRoute = publicRoutes.includes(pathname); 
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/');
+    if (!loading) {
+      if (!user && !isPublicRoute) {
+        router.push('/');
+      } else if (user && isPublicRoute) {
+        router.push('/dashboard');
+      }
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, isPublicRoute]);
 
   if (loading) {
-    return <Loading />;
+    return <Loading/>;
   }
 
   return <>{children}</>;

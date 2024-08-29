@@ -24,9 +24,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setUser(user);
       setLoading(false);
 
-      if (!user) {
-        router.push('/');
-      }
+      //ВОТ ЭТУ ШТУКУ ВЕРНУТЬ
+
+      // if (!user) {
+      //   router.push('/');
+      // }
     });
 
     return () => unsubscribe();
