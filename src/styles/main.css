@@ -125,6 +125,11 @@ h2 {
 .rest-client .rest-client__response .headers-list__item {
   flex-wrap: wrap;
 }
+.rest-client .rest-client__request .request__method-url-wrapper,
+.rest-client .rest-client__response .request__method-url-wrapper {
+  display: flex;
+  gap: 20px;
+}
 .rest-client .rest-client__request .request__method,
 .rest-client .rest-client__request .request__endpoint,
 .rest-client .rest-client__request .request__variables,
@@ -248,6 +253,11 @@ h2 {
 .rest-client .rest-client__response .body__window-pre {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+@media screen and (max-width: 925px) {
+  .rest-client .request__method-url-wrapper {
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 870px) {
   .rest-client h1 {

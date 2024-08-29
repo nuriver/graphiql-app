@@ -1,9 +1,6 @@
 'use client';
 
-interface MethodProps {
-  method: string;
-  setMethod: (method: string) => void;
-}
+import { MethodProps } from '../../core/types';
 
 export default function Method({ method, setMethod }: MethodProps) {
   return (
