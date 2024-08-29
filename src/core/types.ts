@@ -30,3 +30,26 @@ export interface RequestBlockProps {
     }>
   >;
 }
+export interface ResponseState {
+  body: any | null;
+  status: number | null;
+  statusText: string | null;
+}
+export interface BodyRequestProps {
+  body: string;
+  setBody: React.Dispatch<React.SetStateAction<string>>;
+}
+export interface EndpointProps {
+  endpoint: string;
+  setEndpoint: (url: string) => void;
+}
+
+export interface MethodProps {
+  method: string;
+  setMethod: (method: string) => void;
+}
+
+export interface Variable {
+  name: string;
+  value: string;
+}

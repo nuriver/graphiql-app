@@ -1,9 +1,6 @@
 'use client';
 
-interface EndpointProps {
-  endpoint: string;
-  setEndpoint: (url: string) => void;
-}
+import { EndpointProps } from '../../core/types';
 
 export default function Endpoint({ endpoint, setEndpoint }: EndpointProps) {
   return (
