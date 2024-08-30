@@ -23,17 +23,16 @@ export default function Main() {
     return (
       <main className="container">
         <div className="main-block-first main-logo-block">
-          <div className='column'>
-          <h1>
-            Welcome back,{' '}
-            <span className="un-grad">{user.displayName || 'User'}</span>
-          </h1>
-          <Link href="/" className="main-btn">
-        Main Page
-      </Link>
-      </div>
-          <Link href="/" className='main-logo'>
-          </Link>
+          <div className="column">
+            <h1>
+              Welcome back,{' '}
+              <span className="un-grad">{user.displayName || 'User'}</span>
+            </h1>
+            <Link href="/" className="main-btn">
+              Main Page
+            </Link>
+          </div>
+          <Link href="/" className="main-logo"></Link>
         </div>
 
         <div className="main-block-second">
@@ -77,17 +76,16 @@ export default function Main() {
 
   return (
     <main className="container main-logo-block">
-      <div className='main-out'>
-      <h1>Welcome!</h1>
-      <button className="main-btn" onClick={handleSignIn}>
-        Sign In
-      </button>
-      <button className="main-btn" onClick={handleSignUp}>
-        Sign Up
-      </button>
+      <div className="main-out">
+        <h1>Welcome!</h1>
+        <button className="main-btn" onClick={handleSignIn}>
+          Sign In
+        </button>
+        <button className="main-btn" onClick={handleSignUp}>
+          Sign Up
+        </button>
       </div>
-      <Link href="/" className='main-logo'>
-      </Link>
+      <Link href="/" className="main-logo"></Link>
     </main>
   );
 

@@ -7,11 +7,11 @@
   height: 80vh;
   width: 100%;
 
-  a{
+  a {
     align-self: flex-start;
   }
 
-  h1{
+  h1 {
     align-self: flex-start;
   }
 }
@@ -94,7 +94,7 @@
   margin-left: 10px;
 }
 
-.column-fit{
+.column-fit {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,7 +103,7 @@
   width: 100%;
   margin-top: 30px;
 
-  h2{
+  h2 {
     font-weight: 700;
     font-size: 40px;
     line-height: 48px;

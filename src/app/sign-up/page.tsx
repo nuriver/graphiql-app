@@ -30,9 +30,17 @@ export default function SignUp() {
     setFBerror('');
   };
 
-  const onSubmit = async (data: { name: string; email: string; password: string }) => {
+  const onSubmit = async (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
       const user = userCredential.user;
 
       await updateProfile(user, { displayName: data.name });
@@ -41,8 +49,13 @@ export default function SignUp() {
     } catch (error) {
       let errorMessage = error.message || 'An unknown error occurred';
 
-      errorMessage = errorMessage.replace('Firebase: ', '').replace('Error (auth/', '').replace(')', '');
-      errorMessage = errorMessage.replace(/-/g, ' ').replace(/(\b\w)/g, char => char.toUpperCase());
+      errorMessage = errorMessage
+        .replace('Firebase: ', '')
+        .replace('Error (auth/', '')
+        .replace(')', '');
+      errorMessage = errorMessage
+        .replace(/-/g, ' ')
+        .replace(/(\b\w)/g, (char) => char.toUpperCase());
 
       setFBerror(`Error: ${errorMessage}`);
     }
@@ -80,7 +93,9 @@ export default function SignUp() {
             type={showPassword ? 'text' : 'password'}
             onInput={handleInput}
           />
-          {errors.password && <p className="sign-error">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="sign-error">{errors.password.message}</p>
+          )}
           <button
             type="button"
             onClick={togglePasswordVisibility}
@@ -97,7 +112,9 @@ export default function SignUp() {
             type={showPassword ? 'text' : 'password'}
             onInput={handleInput}
           />
-          {errors.confirmPassword && <p className="sign-error">{errors.confirmPassword.message}</p>}
+          {errors.confirmPassword && (
+            <p className="sign-error">{errors.confirmPassword.message}</p>
+          )}
           <button
             type="button"
             onClick={togglePasswordVisibility}
@@ -106,8 +123,10 @@ export default function SignUp() {
             {showPassword ? 'Hide' : 'Show password'}
           </button>
         </div>
-        {fberror && <p className="fb-error">{fberror}</p>} 
-        <button className="sign-btn" type="submit" disabled={!isValid}>Sign up</button>
+        {fberror && <p className="fb-error">{fberror}</p>}
+        <button className="sign-btn" type="submit" disabled={!isValid}>
+          Sign up
+        </button>
       </form>
     </div>
   );
