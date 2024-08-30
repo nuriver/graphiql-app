@@ -83,4 +83,22 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  width: fit-content;
+}
+
+.main-logo-block{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-logo{
+  background-image: url('/assets/images/rss-rc-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 60vh;
+  height: 60vh;
+  min-width: 10vh;
+  min-height: 10vh;
 }

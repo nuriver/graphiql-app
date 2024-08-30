@@ -28,7 +28,7 @@ export default function SignIn() {
       router.push('/');
       setError('');
     } catch (error) {
-      setError('who r u');
+      setError('We do not recognize you. Try again or sign up.');
     }
   };
 
@@ -65,10 +65,10 @@ export default function SignIn() {
             <p className="sign-error">{errors.password.message}</p>
           )}
         </div>
+        {error && <p className="sign-error">{error}</p>}
         <button className="sign-btn" type="submit" disabled={!isValid}>
           Sign in
         </button>
-        {error && <p className="sign-error">{error}</p>}
       </form>
     </div>
   );

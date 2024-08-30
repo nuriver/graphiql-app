@@ -6,6 +6,14 @@
   gap: 20px;
   height: 80vh;
   width: 100%;
+
+  a{
+    align-self: flex-start;
+  }
+
+  h1{
+    align-self: flex-start;
+  }
 }
 
 .column h2 {
@@ -59,7 +67,7 @@
   transition: color 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
   text-decoration: none;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .sign-btn:disabled {
@@ -84,4 +92,24 @@
   font-size: 14px;
   align-self: start;
   margin-left: 10px;
+}
+
+.column-fit{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+
+  h2{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+.column-fit .sign-btn {
+  margin-top: 0;
 }

@@ -6,7 +6,7 @@ export default function Footer() {
     <footer>
       <div className="links">
         MADE BY
-        <a
+        <a className="hoverline"
           href="https://github.com/nuriver"
           target="_blank"
           rel="noopener noreferrer"
@@ -14,7 +14,7 @@ export default function Footer() {
           ALEXEI
         </a>
         ,
-        <a
+        <a className="hoverline"
           href="https://github.com/maryinfun"
           target="_blank"
           rel="noopener noreferrer"
@@ -22,7 +22,7 @@ export default function Footer() {
           MARIA
         </a>{' '}
         &
-        <a
+        <a className="hoverline"
           href="https://github.com/aauroraaborealisrs"
           target="_blank"
           rel="noopener noreferrer"

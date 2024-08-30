@@ -556,6 +556,25 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.main-logo-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-logo {
+  background-image: url("/assets/images/rss-rc-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 60vh;
+  height: 60vh;
+  min-width: 10vh;
+  min-height: 10vh;
 }
 
 .toggle-switch {
@@ -576,7 +595,7 @@ h1 {
   left: 0;
   width: 40px;
   height: 24px;
-  background-color: #2196f3;
+  background-color: #000000;
   border-radius: 34px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -596,7 +615,7 @@ h1 {
 }
 
 .toggle-switch .toggle-input:checked + .toggle-label {
-  background-color: #4caf50;
+  background-color: #bebebe;
 }
 
 .toggle-switch .toggle-input:checked + .toggle-label::before {
@@ -645,13 +664,47 @@ h1 {
   color: white;
   z-index: 2;
 }
-
 .header-main button {
   background-color: transparent;
   border: none;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+}
+.header-main button:nth-child(2) {
+  margin-left: 10px;
+}
+
+.header-logo {
+  background-image: url("/assets/images/rss-rc-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.hoverline {
+  display: inline-block;
+  position: relative;
+}
+
+.hoverline:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transform-origin: bottom center;
+  transition: transform 0.5s ease-out;
+}
+
+.hoverline:hover:after {
+  transform: scaleX(1);
 }
 
 footer {
@@ -699,6 +752,12 @@ footer a:visited {
   height: 80vh;
   width: 100%;
 }
+.column a {
+  align-self: flex-start;
+}
+.column h1 {
+  align-self: flex-start;
+}
 
 .column h2 {
   font-weight: 700;
@@ -726,7 +785,7 @@ footer a:visited {
   border: 2px solid #65558f;
   border-radius: 10px;
   padding: 10px;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   font-size: 16px;
   flex-grow: 1;
 }
@@ -751,7 +810,7 @@ footer a:visited {
   transition: color 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
   text-decoration: none;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .sign-btn:disabled {
@@ -776,4 +835,23 @@ footer a:visited {
   font-size: 14px;
   align-self: start;
   margin-left: 10px;
+}
+
+.column-fit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+.column-fit h2 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.column-fit .sign-btn {
+  margin-top: 0;
 }/*# sourceMappingURL=main.css.map */

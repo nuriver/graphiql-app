@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../authorization/AuthContext';
 import { auth } from '../authorization/firebase';
+import Link from 'next/link';
 
 export default function Header() {
   const [isToggled, setIsToggled] = useState(false);
@@ -34,6 +35,7 @@ export default function Header() {
 
   return (
     <header className="header-main">
+      <Link href="/" className='header-logo'></Link>
       <div className="toggle-cont">
         <div className="toggle-lang">RU</div>
         <div className="toggle-switch">
@@ -50,10 +52,10 @@ export default function Header() {
       </div>
 
       {user ? (
-        <button onClick={handleSignOut}>SIGN OUT</button>
+        <button className="hoverline" onClick={handleSignOut}>SIGN OUT</button>
       ) : (
-        <div>
-          <button onClick={handleSignIn}>SIGN IN</button>
+        <div className='header-btns'>
+          <button className="hoverline" onClick={handleSignIn}>SIGN IN</button>
           <button onClick={handleSignUp}>SIGN UP</button>
         </div>
       )}
