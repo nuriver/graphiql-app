@@ -1,11 +1,7 @@
 'use client';
 import { useState } from 'react';
 import isDisabled from '../../utils/isDisabled';
-
-interface Variable {
-  name: string;
-  value: string;
-}
+import { Variable } from '../../core/types';
 
 export default function Variables() {
   const [variableName, setVariableName] = useState('');

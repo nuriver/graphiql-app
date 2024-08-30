@@ -78,6 +78,10 @@
     .headers-list__item {
       flex-wrap: wrap;
     }
+    .request__method-url-wrapper {
+      display: flex;
+      gap: 20px;
+    }
     .request__method,
     .request__endpoint,
     .request__variables,
@@ -180,6 +184,11 @@
     .body__window-pre {
       white-space: pre-wrap;
       word-wrap: break-word;
+    }
+  }
+  @media screen and (max-width: 925px) {
+    .request__method-url-wrapper {
+      flex-direction: column;
     }
   }
   @media screen and (max-width: 870px) {

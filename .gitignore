@@ -31,3 +31,4 @@ coverage/
 next-env.d.ts
 dist
 
+graphiql-app/src/authorization/firebase.ts

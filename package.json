@@ -58,12 +58,16 @@
     "@codemirror/lang-json": "^6.0.1",
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.33.0",
+    "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.6",
     "@uiw/react-codemirror": "^4.23.0",
     "codemirror": "^6.0.1",
-    "next": "^14.2.5",
+    "firebase": "^10.13.0",
+    "next": "^14.2.7",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0",
+    "yup": "^1.4.0"
   }
 }

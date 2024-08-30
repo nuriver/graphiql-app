@@ -1,8 +1,8 @@
 'use client';
-import { useState } from 'react';
+import React from 'react';
+import { BodyRequestProps } from '../../core/types';
 
-export default function BodyRequest() {
-  const [body, setBody] = useState('');
+const BodyRequest: React.FC<BodyRequestProps> = ({ body, setBody }) => {
   return (
     <div className="request__body">
       <h2 className="body__title">Body</h2>
@@ -15,4 +15,6 @@ export default function BodyRequest() {
       <button className="body-input__button">Prettify</button>
     </div>
   );
-}
+};
+
+export default BodyRequest;
