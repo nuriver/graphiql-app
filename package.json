@@ -55,6 +55,7 @@
     "@codemirror/basic-setup": "^0.20.0",
     "@codemirror/commands": "^6.6.0",
     "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-json": "^6.0.1",
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.33.0",
     "@reduxjs/toolkit": "^2.2.6",

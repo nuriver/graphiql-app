@@ -3,12 +3,21 @@
 import { useCallback, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { useAppDispatch } from '../../../store/store';
+import { setGraphiqlQuery } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function CodeEditor() {
+function QueryCodeEditor() {
   const [value, setValue] = useState('');
-  const onChange = useCallback((value: string) => {
-    setValue(value);
-  }, []);
+  const dispatch = useAppDispatch();
+
+  const onChange = useCallback(
+    (value: string) => {
+      setValue(value);
+      dispatch(setGraphiqlQuery(value));
+    },
+    [dispatch]
+  );
+
   return (
     <CodeMirror
       value={value}
@@ -22,4 +31,4 @@ function CodeEditor() {
     />
   );
 }
-export default CodeEditor;
+export default QueryCodeEditor;

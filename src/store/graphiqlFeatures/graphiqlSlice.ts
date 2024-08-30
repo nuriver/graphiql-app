@@ -4,6 +4,13 @@ interface graphiqlState {
   endpoint: string;
   sdl: string;
   query: string;
+  headers: graphiqlHeader[];
+}
+
+interface graphiqlHeader {
+  id: string;
+  key: string;
+  value: string;
 }
 
 const initialState = {
@@ -41,6 +48,14 @@ export const graphiqlSlice = createSlice({
     clearGraphiqlHeaders: (state) => {
       state.headers = [{ id: nanoid(), key: '', value: '' }];
     },
+    setGraphiqlQuery: (state, action) => {
+      state.query = action.payload;
+      console.log(state.query);
+    },
+    setGraphiqlVariables: (state, action) => {
+      state.query = action.payload;
+      console.log(state.query);
+    },
   },
 });
 
@@ -50,5 +65,7 @@ export const {
   addGraphiqlHeader,
   updateGraphiqlHeader,
   clearGraphiqlHeaders,
+  setGraphiqlQuery,
+  setGraphiqlVariables,
 } = graphiqlSlice.actions;
 export default graphiqlSlice.reducer;

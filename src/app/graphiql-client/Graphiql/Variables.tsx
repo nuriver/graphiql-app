@@ -1,4 +1,4 @@
-import CodeEditor from './CodeEditor';
+import VariablesCodeEditor from './VariablesCodeEditor';
 
 export default function Variables(): JSX.Element {
   return (
@@ -9,7 +9,7 @@ export default function Variables(): JSX.Element {
           <span></span>
         </button>
       </header>
-      <CodeEditor />
+      <VariablesCodeEditor />
     </div>
   );
 }
