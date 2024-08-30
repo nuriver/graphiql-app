@@ -7,13 +7,11 @@ import Method from './method';
 import Headers from './headers';
 import BodyRequest from './bodyRequest';
 import { RequestBlockProps, ResponseBody } from '../../core/types';
-import { useRouter } from 'next/navigation';
 
 const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
   const [endpoint, setEndpoint] = useState<string>('');
   const [method, setMethod] = useState<string>('GET');
   const [body, setBody] = useState<string>('');
-  const router = useRouter();
 
   const headers = useAppSelector((state) => state.headers.headers);
 
@@ -29,19 +27,22 @@ const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
     });
 
     try {
-      const decodedEndpoint = atob(endpoint);
+      const encodedEndpoint = btoa(endpoint);
+      const encodedBody = body ? btoa(body) : '';
+      const path = body
+        ? `/${method}/${encodedEndpoint}/${encodedBody}`
+        : `/${method}/${encodedEndpoint}`;
 
-      const response = await fetch(
-        `${decodedEndpoint}?${queryParams.toString()}`,
-        {
-          method: method,
-          headers: { 'Content-Type': 'application/json' },
-          body:
-            method === 'POST' || method === 'PUT'
-              ? JSON.stringify(body)
-              : undefined,
-        }
-      );
+      window.history.pushState(null, '', `${path}?${queryParams.toString()}`);
+
+      const response = await fetch(endpoint + '?' + queryParams.toString(), {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
+        body:
+          method === 'POST' || method === 'PUT' || method === 'PATCH'
+            ? JSON.stringify(body)
+            : undefined,
+      });
 
       const responseBody = await response.json();
 
@@ -50,16 +51,21 @@ const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
         status: response.status,
         statusText: response.statusText,
       });
-
-      await router.push(`/endpoint?url=${decodedEndpoint}`);
     } catch (error) {
-      setResponse({
-        body: null,
-        status: null,
-        statusText: 'Error occurred',
-      });
+      if (error instanceof Error) {
+      }
+      {
+        console.error('Error occurred during fetch:', error.message);
+
+        setResponse({
+          body: null,
+          status: null,
+          statusText: 'Error occurred: ' + error.message,
+        });
+      }
     }
   };
+
   return (
     <div className="rest-client__request">
       <div className="request__method-url-wrapper">

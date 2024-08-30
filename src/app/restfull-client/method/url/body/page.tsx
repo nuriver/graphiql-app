@@ -17,8 +17,10 @@ export default function RequestHandler() {
   useEffect(() => {
     if (!method || !url) return;
 
-    const decodedUrl = atob(url as string);
-    const decodedBody = body ? JSON.parse(atob(body as string)) : undefined;
+    const decodedUrl = decodeURIComponent(url as string);
+    const decodedBody = body
+      ? JSON.parse(decodeURIComponent(body as string))
+      : undefined;
     const headers = Object.fromEntries(
       new URLSearchParams(window.location.search)
     );
