@@ -47,7 +47,7 @@ export default function SignUp() {
       setFBerror('');
       router.push('/');
     } catch (error) {
-      let errorMessage = error.message || 'An unknown error occurred';
+      let errorMessage = error.message;
 
       errorMessage = errorMessage
         .replace('Firebase: ', '')
