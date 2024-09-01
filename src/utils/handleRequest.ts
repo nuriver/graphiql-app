@@ -10,8 +10,7 @@ export const handleRequest = async ({
   console.log('handleRequest called');
 
   const queryParams = new URLSearchParams();
-
-  Object.entries(headers).forEach(([key, value]) => {
+  Object.entries(headers || {}).forEach(([key, value]) => {
     queryParams.append(
       btoa(encodeURIComponent(key)),
       btoa(encodeURIComponent(value))
@@ -39,6 +38,7 @@ export const handleRequest = async ({
       method: method,
       headers: {
         'Content-Type': 'application/json',
+        Accept: 'application/json',
         ...decodedHeaders,
       },
       body:
@@ -47,21 +47,42 @@ export const handleRequest = async ({
           : undefined,
     });
 
-    const responseBody = await response.json();
+    const responseBody = await response.text();
+
+    let parsedBody: unknown;
+
+    try {
+      parsedBody = JSON.parse(responseBody);
+    } catch (jsonError) {
+      parsedBody = responseBody;
+    }
 
     setResponse({
-      body: responseBody as ResponseBody,
+      body: parsedBody as ResponseBody,
       status: response.status,
-      statusText: response.statusText,
+      statusText: response.statusText || 'Request successful',
     });
   } catch (error) {
-    if (error instanceof Error) {
-      console.error('Error occurred during fetch:', error.message);
-      setResponse({
-        body: null,
-        status: null,
-        statusText: 'Error occurred: ' + error.message,
-      });
+    let errorMessage: string = 'Error occurred during fetch';
+    let status: number | null = null;
+    let statusText: string = '';
+
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+      errorMessage =
+        'CORS error: Access to fetch was blocked due to CORS policy. The server did not allow the request from this origin.';
+      status = 0;
+      statusText = `Error occurred: ${error.message}`;
+    } else if (error instanceof Error) {
+      errorMessage = `Error occurred: ${error.message}`;
+      status = -1;
     }
+
+    console.error(errorMessage);
+
+    setResponse({
+      body: null,
+      status: status,
+      statusText: errorMessage,
+    });
   }
 };
