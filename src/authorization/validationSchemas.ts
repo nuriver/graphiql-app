@@ -1,10 +1,13 @@
 import * as yup from 'yup';
 
+const firebaseEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export const signUpSchema = yup.object().shape({
   name: yup.string().required('Имя обязательно'),
   email: yup
     .string()
     .email('Некорректный формат email')
+    .matches(firebaseEmailRegex, 'Некорректный формат email')
     .required('Email обязателен'),
   password: yup
     .string()
@@ -26,6 +29,7 @@ export const signInSchema = yup.object().shape({
   email: yup
     .string()
     .email('Некорректный формат email')
+    .matches(firebaseEmailRegex, 'Некорректный формат email')
     .required('Email обязателен'),
   password: yup
     .string()
