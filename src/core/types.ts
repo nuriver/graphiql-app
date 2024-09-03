@@ -53,3 +53,15 @@ export interface Variable {
   name: string;
   value: string;
 }
+
+export interface HandleRequestProps {
+  endpoint: string;
+  method: string;
+  body: string;
+  headers: Record<string, string>;
+  setResponse: (response: {
+    body: ResponseBody | null;
+    status: number | null;
+    statusText: string | null;
+  }) => void;
+}

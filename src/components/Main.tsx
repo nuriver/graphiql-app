@@ -8,14 +8,18 @@ import Link from 'next/link';
 
 export default function Main() {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -26,7 +30,7 @@ export default function Main() {
           <div className="column">
             <h1>
               Welcome back,{' '}
-              <span className="un-grad">{user.displayName || 'User'}</span>
+              <span className="un-grad">{user.displayName || 'мда кринж'}</span>
             </h1>
             <Link href="/" className="main-btn">
               Main Page

@@ -38,7 +38,8 @@
       background-color: $input-background;
     }
     .body-input__button,
-    .rest__button {
+    .rest__button,
+    .request__send-button {
       border: 2px solid $main-color;
     }
 
@@ -177,7 +178,7 @@
       max-width: 100%;
       max-height: 400px;
       overflow: auto;
-      padding: 10px;
+      padding: 20px;
       box-sizing: border-box;
     }
 

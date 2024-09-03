@@ -6,8 +6,8 @@ import Status from './status';
 const ResponseBlock: React.FC<ResponseProps> = ({ response }) => {
   return (
     <div className="rest-client__response">
-      <BodyResponse body={response.body} />
       <Status status={response.status} statusText={response.statusText} />
+      <BodyResponse body={response.body} />
     </div>
   );
 };

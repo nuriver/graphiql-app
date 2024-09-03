@@ -24,8 +24,11 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
       if (!user && !isPublicRoute) {
         router.push('/');
       }
+      if (user && (pathname === '/sign-in' || pathname === '/sign-up')) {
+        router.push('/');
+      }
     }
-  }, [user, loading, router, isPublicRoute]);
+  }, [user, loading, router, isPublicRoute, pathname]);
 
   if (loading) {
     return <Loading />;
