@@ -496,6 +496,44 @@ h2 {
   color: white;
 }
 
+.graphiql-page-wrapper .rest-client__response {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  padding: 20px;
+  padding-bottom: 53px;
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+.graphiql-page-wrapper .rest-client__response h2 {
+  font-size: 32px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  margin-left: 43px;
+  margin-bottom: 16px;
+}
+.graphiql-page-wrapper .rest-client__response .response__status .status__window {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  height: 69px;
+  font-size: 24px;
+  font-weight: 400;
+  padding: 20px;
+  color: #65558f;
+}
+.graphiql-page-wrapper .rest-client__response .response__body .body__window {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  height: 245px;
+  overflow: auto;
+  padding: 20px;
+}
+.graphiql-page-wrapper .rest-client__response .response__body .body__window pre {
+  color: #65558f;
+  font-size: 20px;
+}
+
 .main-btn {
   padding: 20px 30px;
   font-style: normal;

@@ -31,10 +31,16 @@ const GraphiqlMain = () => {
     console.log(data);
   };
 
+  const response = {
+    body: null,
+    status: '200 ok',
+    statusText: null,
+  };
+
   return (
     <div className="graphiql-page-wrapper">
       <Graphiql sendClickHandler={sendClickHandler} />
-      <Response />
+      <Response response={response} />
     </div>
   );
 };
