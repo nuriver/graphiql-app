@@ -471,6 +471,29 @@ h2 {
   cursor: pointer;
 }
 
+.endpoint-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.endpoint-wrapper input {
+  width: 100% !important;
+}
+.endpoint-wrapper button {
+  width: 100px;
+  border: 2px solid #65558f;
+  background: none;
+  border-radius: 15px;
+  font-size: 20px;
+  color: #65558f;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+.endpoint-wrapper button:hover {
+  cursor: pointer;
+  background-color: #65558f;
+  color: white;
+}
+
 .main-btn {
   padding: 20px 30px;
   font-style: normal;

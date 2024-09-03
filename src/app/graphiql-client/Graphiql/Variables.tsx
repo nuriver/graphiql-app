@@ -1,6 +1,6 @@
 import VariablesCodeEditor from './VariablesCodeEditor';
 
-export default function Variables(): JSX.Element {
+export default function Variables({ updateUrl }): JSX.Element {
   return (
     <div className="graphiql-variables-wrapper">
       <header className="graphiql-variables-header">
@@ -9,7 +9,7 @@ export default function Variables(): JSX.Element {
           <span></span>
         </button>
       </header>
-      <VariablesCodeEditor />
+      <VariablesCodeEditor updateUrl={updateUrl} />
     </div>
   );
 }

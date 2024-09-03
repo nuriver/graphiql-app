@@ -6,7 +6,7 @@ import {
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 
-export default function Headers(): JSX.Element {
+export default function Headers({ updateUrl }): JSX.Element {
   const headers = useAppSelector((state) => state.graphiql.headers);
   const dispatch = useAppDispatch();
 
@@ -43,6 +43,7 @@ export default function Headers(): JSX.Element {
               onChange={(event) => {
                 updateHeader(header.id, event.target.value, header.value);
               }}
+              onBlur={updateUrl}
             />
             <input
               type="text"
@@ -51,6 +52,7 @@ export default function Headers(): JSX.Element {
               onChange={(event) => {
                 updateHeader(header.id, header.key, event.target.value);
               }}
+              onBlur={updateUrl}
             />
           </div>
         ))}

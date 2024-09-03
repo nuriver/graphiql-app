@@ -4,7 +4,10 @@ import { ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlEndpoint } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-export default function EndpointInput(): JSX.Element {
+export default function EndpointInput({
+  onClickHandler,
+  updateUrl,
+}): JSX.Element {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 
@@ -23,14 +26,18 @@ export default function EndpointInput(): JSX.Element {
       >
         Endpoint URL
       </label>
-      <input
-        value={value}
-        type="text"
-        className="graphiql-endpoint-input"
-        id="graphiql-endpoint-input"
-        placeholder="Enter your GraphQL API endpoint"
-        onChange={onChangeHandler}
-      />
+      <div className="endpoint-wrapper">
+        <input
+          value={value}
+          type="text"
+          className="graphiql-endpoint-input"
+          id="graphiql-endpoint-input"
+          placeholder="Enter your GraphQL API endpoint"
+          onChange={onChangeHandler}
+          onBlur={updateUrl}
+        />
+        <button onClick={onClickHandler}>SEND</button>
+      </div>
     </div>
   );
 }

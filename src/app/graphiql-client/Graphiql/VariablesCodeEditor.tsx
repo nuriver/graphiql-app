@@ -6,7 +6,7 @@ import { json } from '@codemirror/lang-json';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlVariables } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function VariablesCodeEditor() {
+function VariablesCodeEditor({ updateUrl }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 
@@ -28,6 +28,7 @@ function VariablesCodeEditor() {
         fontSize: '20px',
         color: '#65558F',
       }}
+      onBlur={updateUrl}
     />
   );
 }

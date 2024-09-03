@@ -4,6 +4,7 @@ interface graphiqlState {
   endpoint: string;
   sdl: string;
   query: string;
+  variables: string;
   headers: graphiqlHeader[];
 }
 
@@ -17,7 +18,9 @@ const initialState = {
   endpoint: '',
   sdl: '',
   query: '',
+  variables: {},
   headers: [{ id: nanoid(), key: '', value: '' }],
+  url: '',
 };
 
 export const graphiqlSlice = createSlice({
@@ -50,11 +53,15 @@ export const graphiqlSlice = createSlice({
     },
     setGraphiqlQuery: (state, action) => {
       state.query = action.payload;
-      console.log(state.query);
     },
     setGraphiqlVariables: (state, action) => {
       state.query = action.payload;
-      console.log(state.query);
+      if (action.payload === '') {
+        state.variables = {};
+      }
+    },
+    setGraphiqlUrl: (state, action) => {
+      state.url = action.payload;
     },
   },
 });
@@ -67,5 +74,6 @@ export const {
   clearGraphiqlHeaders,
   setGraphiqlQuery,
   setGraphiqlVariables,
+  setGraphiqlUrl,
 } = graphiqlSlice.actions;
 export default graphiqlSlice.reducer;

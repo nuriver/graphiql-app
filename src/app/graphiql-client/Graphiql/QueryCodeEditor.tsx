@@ -6,7 +6,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlQuery } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function QueryCodeEditor() {
+function QueryCodeEditor({ updateUrl }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 
@@ -28,6 +28,7 @@ function QueryCodeEditor() {
         fontSize: '20px',
         color: '#65558F',
       }}
+      onBlur={updateUrl}
     />
   );
 }

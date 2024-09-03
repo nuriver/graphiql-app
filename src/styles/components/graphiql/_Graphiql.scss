@@ -187,3 +187,26 @@
     cursor: pointer;
   }
 }
+
+.endpoint-wrapper {
+  display: flex;
+  gap: 10px;
+  input {
+    width: 100% !important;
+  }
+  button {
+    width: 100px;
+    border: 2px solid $main-color;
+    background: none;
+    border-radius: 15px;
+    font-size: 20px;
+    color: $main-color;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background-color: $main-color;
+      color: white;
+    }
+  }
+}

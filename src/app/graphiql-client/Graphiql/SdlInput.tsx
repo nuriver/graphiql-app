@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlSdl } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-export default function SdlInput(): JSX.Element {
+export default function SdlInput({ updateUrl }): JSX.Element {
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.graphiql.sdl);
   const [value, setValue] = useState(defaultValue);
@@ -31,6 +31,7 @@ export default function SdlInput(): JSX.Element {
         id="graphiql-sdl-input"
         value={value}
         onChange={onChangeHandler}
+        onBlur={updateUrl}
       />
     </div>
   );
