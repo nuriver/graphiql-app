@@ -4,7 +4,11 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlSdl } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-export default function SdlInput({ updateUrl }): JSX.Element {
+export default function SdlInput({
+  updateUrl,
+}: {
+  updateUrl: () => void;
+}): JSX.Element {
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.graphiql.sdl);
   const [value, setValue] = useState(defaultValue);

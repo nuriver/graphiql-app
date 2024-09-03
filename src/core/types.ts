@@ -65,3 +65,7 @@ export interface HandleRequestProps {
     statusText: string | null;
   }) => void;
 }
+
+export type SendClickHandler = (
+  event: React.MouseEvent<HTMLButtonElement>
+) => void;

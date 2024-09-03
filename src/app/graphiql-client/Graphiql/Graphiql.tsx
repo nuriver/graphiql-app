@@ -7,19 +7,27 @@ import Query from './Query';
 import SdlInput from './SdlInput';
 import Variables from './Variables';
 import { setGraphiqlUrl } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import { SendClickHandler } from '../../../core/types';
 
-export default function Graphiql({ sendClickHandler }): JSX.Element {
+export default function Graphiql({
+  sendClickHandler,
+}: {
+  sendClickHandler: SendClickHandler;
+}): JSX.Element {
   const dispatch = useAppDispatch();
   const endpoint = useAppSelector((state) => state.graphiql.endpoint);
   const query = useAppSelector((state) => state.graphiql.query);
   const variables = useAppSelector((state) => state.graphiql.variables);
   const headersArray = useAppSelector((state) => state.graphiql.headers);
-  const headersObject = headersArray.reduce((acc, header) => {
-    if (header.key) {
-      acc[header.key] = header.value;
-    }
-    return acc;
-  }, {});
+  const headersObject = headersArray.reduce<Record<string, string>>(
+    (acc, header) => {
+      if (header.key) {
+        acc[header.key] = header.value;
+      }
+      return acc;
+    },
+    {}
+  );
 
   const sdl = useAppSelector((state) => state.graphiql.sdl);
   const body = {

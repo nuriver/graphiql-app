@@ -27,24 +27,6 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true
   },
-  "include": [
-    "src",
-    "tests",
-    "./dist/types/**/*.ts",
-    "./next-env.d.ts",
-    "legacy/_app.tsx",
-    "legacy/_document.tsx",
-    "legacy/index.tsx",
-    "legacy/hooks",
-    "legacy/Flyout.test.tsx",
-    "tests/components/LoadingIndicator.test.tsx",
-    "legacy/Pagination.test.tsx",
-    "legacy/PlanetData.test.tsx",
-    "legacy/PlanetDetails.test.tsx",
-    "legacy/SearchItems.test.tsx",
-    "legacy/SearchItemsWrapper.test.tsx",
-    "legacy/SearchSection.test.tsx",
-    "legacy/index.test.tsx"
-  ],
-  "exclude": ["./node_modules"]
+  "exclude": ["./node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./dist/types/**/*.ts"]
 }

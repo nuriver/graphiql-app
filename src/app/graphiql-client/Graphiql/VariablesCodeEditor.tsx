@@ -6,7 +6,7 @@ import { json } from '@codemirror/lang-json';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlVariables } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function VariablesCodeEditor({ updateUrl }) {
+function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 

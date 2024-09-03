@@ -6,7 +6,11 @@ import {
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 
-export default function Headers({ updateUrl }): JSX.Element {
+export default function Headers({
+  updateUrl,
+}: {
+  updateUrl: () => void;
+}): JSX.Element {
   const headers = useAppSelector((state) => state.graphiql.headers);
   const dispatch = useAppDispatch();
 

@@ -6,7 +6,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlQuery } from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function QueryCodeEditor({ updateUrl }) {
+function QueryCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
 

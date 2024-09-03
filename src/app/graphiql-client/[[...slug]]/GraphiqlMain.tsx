@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { useAppSelector } from '../../../store/store';
 import Graphiql from '../Graphiql/Graphiql';
 import Response from '../Response/Response';
+import { ResponseState } from '../../../core/types';
 
 const getGraphiqlData = async (urlData: string) => {
   const decodedRequestData = atob(urlData);
@@ -11,7 +13,9 @@ const getGraphiqlData = async (urlData: string) => {
   const res = await fetch(requestData.endpoint, {
     method: 'POST',
     headers: {
-      ...requestData.headers,
+      //TODO change
+      'Content-Type': 'application/json',
+      ...requestData.headersObject,
     },
     body: JSON.stringify({
       query: requestData.body.query,
@@ -20,21 +24,27 @@ const getGraphiqlData = async (urlData: string) => {
   });
 
   const graphiqlData = await res.json();
-  return graphiqlData;
+
+  const response = {
+    status: res.status,
+    statusText: res.statusText,
+    body: graphiqlData,
+  };
+
+  return response;
 };
 
 const GraphiqlMain = () => {
   const encodedUrl = useAppSelector((state) => state.graphiql.url);
+  const [response, setResponse] = useState<ResponseState>({
+    body: null,
+    status: null,
+    statusText: null,
+  });
 
   const sendClickHandler = async () => {
     const data = await getGraphiqlData(encodedUrl);
-    console.log(data);
-  };
-
-  const response = {
-    body: null,
-    status: '200 ok',
-    statusText: null,
+    setResponse(data);
   };
 
   return (

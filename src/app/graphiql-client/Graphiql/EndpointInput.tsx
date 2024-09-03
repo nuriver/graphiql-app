@@ -3,10 +3,14 @@
 import { ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlEndpoint } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import { SendClickHandler } from '../../../core/types';
 
 export default function EndpointInput({
   onClickHandler,
   updateUrl,
+}: {
+  onClickHandler: SendClickHandler;
+  updateUrl: () => void;
 }): JSX.Element {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
