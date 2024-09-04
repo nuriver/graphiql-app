@@ -8,6 +8,8 @@ import SdlInput from './SdlInput';
 import Variables from './Variables';
 import { setGraphiqlUrl } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { SendClickHandler } from '../../../core/types';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Graphiql({
   sendClickHandler,
@@ -42,16 +44,27 @@ export default function Graphiql({
     sdl,
   };
 
+  const containsNonLatin1 = (str: string) => /[^\x00-\xFF]/.test(str);
+
   const requestDataString = JSON.stringify(requestData);
-  const encodedRequestData = btoa(requestDataString);
+  let encodedRequestData: string | undefined = undefined;
+  if (containsNonLatin1(requestDataString)) {
+    toast.error('Only Latin letters are allowed');
+  } else {
+    try {
+      encodedRequestData = btoa(requestDataString);
+    } catch (error) {}
+  }
 
   const updateUrl = () => {
-    dispatch(setGraphiqlUrl(encodedRequestData));
-    window.history.replaceState(
-      null,
-      '',
-      `/graphiql-client/GRAPHQL/${encodedRequestData}`
-    );
+    if (encodedRequestData) {
+      dispatch(setGraphiqlUrl(encodedRequestData));
+      window.history.replaceState(
+        null,
+        '',
+        `/graphiql-client/GRAPHQL/${encodedRequestData}`
+      );
+    }
   };
 
   return (

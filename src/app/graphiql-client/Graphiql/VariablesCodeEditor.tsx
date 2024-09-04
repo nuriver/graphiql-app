@@ -1,10 +1,11 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { KeyboardEventHandler, useCallback, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlVariables } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
@@ -12,10 +13,39 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
 
   const onChange = useCallback(
     (value: string) => {
-      setValue(value);
-      dispatch(setGraphiqlVariables(value));
+      if (/^[\x00-\x7F]*$/.test(value)) {
+        setValue(value);
+        dispatch(setGraphiqlVariables(value));
+      } else {
+        toastNonLatinError();
+      }
     },
     [dispatch]
+  );
+
+  const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      const char = event.key;
+      if (
+        [
+          'Backspace',
+          'Delete',
+          'ArrowLeft',
+          'ArrowRight',
+          'ArrowUp',
+          'ArrowDown',
+          'Tab',
+          'Enter',
+        ].includes(char)
+      ) {
+        return;
+      }
+      if (!/^[\x00-\x7F]$/.test(char)) {
+        event.preventDefault();
+        toastNonLatinError();
+      }
+    },
+    []
   );
 
   return (
@@ -29,6 +59,7 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
         color: '#65558F',
       }}
       onBlur={updateUrl}
+      onKeyDown={handleKeyDown}
     />
   );
 }

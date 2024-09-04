@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlEndpoint } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { SendClickHandler } from '../../../core/types';
+import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 export default function EndpointInput({
   onClickHandler,
@@ -18,8 +19,12 @@ export default function EndpointInput({
   const onChangeHandler = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    setValue(value);
-    dispatch(setGraphiqlEndpoint(value));
+    if (/^[\x00-\x7F]*$/.test(value)) {
+      setValue(value);
+      dispatch(setGraphiqlEndpoint(value));
+    } else {
+      toastNonLatinError();
+    }
   };
 
   return (

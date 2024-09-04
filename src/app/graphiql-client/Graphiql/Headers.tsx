@@ -5,6 +5,7 @@ import {
   updateGraphiqlHeader,
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
+import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 export default function Headers({
   updateUrl,
@@ -45,7 +46,11 @@ export default function Headers({
               className="graphiql-headers-key-input"
               value={header.key}
               onChange={(event) => {
-                updateHeader(header.id, event.target.value, header.value);
+                if (/^[\x00-\x7F]*$/.test(event.target.value)) {
+                  updateHeader(header.id, event.target.value, header.value);
+                } else {
+                  toastNonLatinError();
+                }
               }}
               onBlur={updateUrl}
             />
@@ -54,7 +59,11 @@ export default function Headers({
               className="graphiql-headers-value-input"
               value={header.value}
               onChange={(event) => {
-                updateHeader(header.id, header.key, event.target.value);
+                if (/^[\x00-\x7F]*$/.test(event.target.value)) {
+                  updateHeader(header.id, header.key, event.target.value);
+                } else {
+                  toastNonLatinError();
+                }
               }}
               onBlur={updateUrl}
             />

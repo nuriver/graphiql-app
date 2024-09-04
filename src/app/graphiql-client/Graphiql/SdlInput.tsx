@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlSdl } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 export default function SdlInput({
   updateUrl,
@@ -20,8 +21,12 @@ export default function SdlInput({
   const onChangeHandler = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    setValue(value);
-    dispatch(setGraphiqlSdl(value));
+    if (/^[\x00-\x7F]*$/.test(value)) {
+      setValue(value);
+      dispatch(setGraphiqlSdl(value));
+    } else {
+      toastNonLatinError();
+    }
   };
 
   return (
