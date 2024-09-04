@@ -5,6 +5,7 @@ import { AuthProvider } from '../authorization/AuthContext';
 import AuthGuard from '../authorization/AuthGuard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+// import ErrorBoundary from './ErrorBoundary';
 
 export default function RootLayout({
   children,
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {/* <ErrorBoundary> */}
         <AuthProvider>
           <AuthGuard publicRoutes={publicRoutes}>
             <StoreProvider>
@@ -32,6 +34,7 @@ export default function RootLayout({
             </StoreProvider>
           </AuthGuard>
         </AuthProvider>
+        {/* </ErrorBoundary> */}
       </body>
     </html>
   );

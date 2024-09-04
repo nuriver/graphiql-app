@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../authorization/AuthContext';
@@ -9,8 +9,25 @@ import Link from 'next/link';
 
 export default function Header() {
   const [isToggled, setIsToggled] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
@@ -21,7 +38,7 @@ export default function Header() {
       await signOut(auth);
       router.push('/');
     } catch (error) {
-      console.error('Error signing out: ', error);
+      console.warn('Error signing out: ', error);
     }
   };
 
@@ -34,7 +51,7 @@ export default function Header() {
   };
 
   return (
-    <header className="header-main">
+    <header className={`header-main ${isSticky ? 'sticky' : ''}`}>
       <Link href="/" className="header-logo"></Link>
       <div className="toggle-cont">
         <div className="toggle-lang">RU</div>
