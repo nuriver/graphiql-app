@@ -1,8 +1,14 @@
-export default function Documentation(): JSX.Element {
+export default function Documentation({
+  doc,
+}: {
+  doc: string | undefined;
+}): JSX.Element {
   return (
     <div className="graphiql-documentation-wrapper">
       <h3>Documentation:</h3>
-      <p className="graphiql-documentation"></p>
+      <div className="graphiql-documentation">
+        <pre>{doc}</pre>
+      </div>
     </div>
   );
 }

@@ -157,18 +157,6 @@
       }
     }
   }
-  .graphiql-documentation-wrapper {
-    h3 {
-      margin-bottom: 23px;
-    }
-    .graphiql-documentation {
-      display: block;
-      @include border-style;
-      width: 100%;
-      height: 200px;
-      padding: 12px 43px;
-    }
-  }
 }
 
 .content-toggle-button {
@@ -199,7 +187,7 @@
     border: 2px solid $main-color;
     background: none;
     border-radius: 15px;
-    font-size: 20px;
+    font-size: 15px;
     color: $main-color;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
@@ -246,8 +234,27 @@
         pre {
           color: $main-color;
           font-size: 20px;
+          white-space: pre-wrap;
         }
       }
+    }
+  }
+}
+
+.graphiql-documentation-wrapper {
+  h3 {
+    margin-bottom: 23px;
+    margin-left: 43px;
+  }
+  .graphiql-documentation {
+    @include border-style;
+    height: 345px;
+    overflow: auto;
+    padding: 20px;
+    pre {
+      color: $main-color;
+      font-size: 20px;
+      white-space: pre-wrap;
     }
   }
 }

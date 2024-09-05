@@ -13,8 +13,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Graphiql({
   sendClickHandler,
+  getSchemaHandler,
 }: {
   sendClickHandler: SendClickHandler;
+  getSchemaHandler: () => void;
 }): JSX.Element {
   const dispatch = useAppDispatch();
   const endpoint = useAppSelector((state) => state.graphiql.endpoint);
@@ -75,7 +77,7 @@ export default function Graphiql({
           onClickHandler={sendClickHandler}
           updateUrl={updateUrl}
         />
-        <SdlInput updateUrl={updateUrl} />
+        <SdlInput updateUrl={updateUrl} getSchemaHandler={getSchemaHandler} />
         <Headers updateUrl={updateUrl} />
         <Query updateUrl={updateUrl} />
         <Variables updateUrl={updateUrl} />

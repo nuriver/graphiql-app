@@ -7,8 +7,10 @@ import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 export default function SdlInput({
   updateUrl,
+  getSchemaHandler,
 }: {
   updateUrl: () => void;
+  getSchemaHandler: () => void;
 }): JSX.Element {
   const dispatch = useAppDispatch();
   const defaultValue = useAppSelector((state) => state.graphiql.sdl);
@@ -34,14 +36,17 @@ export default function SdlInput({
       <label className="graphiql-endpoint-label" htmlFor="graphiql-sdl-input">
         SDL URL
       </label>
-      <input
-        type="text"
-        className="graphiql-endpoint-input"
-        id="graphiql-sdl-input"
-        value={value}
-        onChange={onChangeHandler}
-        onBlur={updateUrl}
-      />
+      <div className="endpoint-wrapper">
+        <input
+          type="text"
+          className="graphiql-endpoint-input"
+          id="graphiql-sdl-input"
+          value={value}
+          onChange={onChangeHandler}
+          onBlur={updateUrl}
+        />
+        <button onClick={getSchemaHandler}>GET SCHEMA</button>
+      </div>
     </div>
   );
 }

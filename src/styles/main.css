@@ -444,17 +444,6 @@ h2 {
   border: 2px solid #65558f;
   border-radius: 15px;
 }
-.graphiql-response .graphiql-documentation-wrapper h3 {
-  margin-bottom: 23px;
-}
-.graphiql-response .graphiql-documentation-wrapper .graphiql-documentation {
-  display: block;
-  border: 2px solid #65558f;
-  border-radius: 15px;
-  width: 100%;
-  height: 200px;
-  padding: 12px 43px;
-}
 
 .content-toggle-button {
   border: none;
@@ -485,7 +474,7 @@ h2 {
   border: 2px solid #65558f;
   background: none;
   border-radius: 15px;
-  font-size: 20px;
+  font-size: 15px;
   color: #65558f;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
@@ -532,6 +521,24 @@ h2 {
 .graphiql-page-wrapper .rest-client__response .response__body .body__window pre {
   color: #65558f;
   font-size: 20px;
+  white-space: pre-wrap;
+}
+
+.graphiql-documentation-wrapper h3 {
+  margin-bottom: 23px;
+  margin-left: 43px;
+}
+.graphiql-documentation-wrapper .graphiql-documentation {
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  height: 345px;
+  overflow: auto;
+  padding: 20px;
+}
+.graphiql-documentation-wrapper .graphiql-documentation pre {
+  color: #65558f;
+  font-size: 20px;
+  white-space: pre-wrap;
 }
 
 .main-btn {

@@ -45,7 +45,7 @@ export default function EndpointInput({
           onChange={onChangeHandler}
           onBlur={updateUrl}
         />
-        <button onClick={onClickHandler}>SEND</button>
+        <button onClick={onClickHandler}>SEND REQUEST</button>
       </div>
     </div>
   );
