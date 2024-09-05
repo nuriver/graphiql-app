@@ -46,18 +46,20 @@ export default function SignUp() {
       await updateProfile(user, { displayName: data.name });
       setFBerror('');
       router.push('/');
-    } catch (error) {
-      let errorMessage = error.message;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        let errorMessage = error.message;
 
-      errorMessage = errorMessage
-        .replace('Firebase: ', '')
-        .replace('Error (auth/', '')
-        .replace(')', '');
-      errorMessage = errorMessage
-        .replace(/-/g, ' ')
-        .replace(/(\b\w)/g, (char) => char.toUpperCase());
+        errorMessage = errorMessage
+          .replace('Firebase: ', '')
+          .replace('Error (auth/', '')
+          .replace(')', '');
+        errorMessage = errorMessage
+          .replace(/-/g, ' ')
+          .replace(/(\b\w)/g, (char: string) => char.toUpperCase());
 
-      setFBerror(`Error: ${errorMessage}`);
+        setFBerror(`Error: ${errorMessage}`);
+      }
     }
   };
 
