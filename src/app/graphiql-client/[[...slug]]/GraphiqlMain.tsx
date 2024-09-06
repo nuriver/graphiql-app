@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../store/store';
 import Graphiql from '../Graphiql/Graphiql';
 import Response from '../Response/Response';
-import { ResponseState } from '../../../core/types';
+import { HistoryObject, ResponseState } from '../../../core/types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Documentation from '../Response/Documentation';
+import introspectionQuery from '../../../data/introspectionQuery';
+import addToHistory from '../../../utils/addToHistory';
 
 function isError(error: unknown): error is Error {
   return typeof error === 'object' && error !== null && 'message' in error;
@@ -38,6 +40,14 @@ const getGraphiqlData = async (urlData: string) => {
       statusText: res.statusText,
       body: graphiqlData,
     };
+
+    const historyObject: HistoryObject = {
+      method: 'GRAPHQL',
+      endpoint: requestData.endpoint,
+      url: urlData,
+    };
+
+    addToHistory(historyObject);
 
     return response;
   } catch (error) {
@@ -81,79 +91,7 @@ const GraphiqlMain = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: `
-  query IntrospectionQuery {
-    __schema {
-      queryType {
-        name
-      }
-      mutationType {
-        name
-      }
-      subscriptionType {
-        name
-      }
-      types {
-        ...FullType
-      }
-      directives {
-        name
-        description
-        args {
-          ...InputValue
-        }
-        locations
-      }
-    }
-  }
-
-  fragment FullType on __Type {
-    kind
-    name
-    fields(includeDeprecated: true) {
-      name
-      args {
-        ...InputValue
-      }
-      type {
-        ...TypeRef
-      }
-      isDeprecated
-      deprecationReason
-    }
-    interfaces {
-      ...TypeRef
-    }
-    possibleTypes {
-      ...TypeRef
-    }
-  }
-
-  fragment InputValue on __InputValue {
-    name
-    type {
-      ...TypeRef
-    }
-    defaultValue
-  }
-
-  fragment TypeRef on __Type {
-    kind
-    name
-    ofType {
-      kind
-      name
-      ofType {
-        kind
-        name
-        ofType {
-          kind
-          name
-        }
-      }
-    }
-  }
-`,
+          query: introspectionQuery,
         }),
       });
 

@@ -69,3 +69,9 @@ export interface HandleRequestProps {
 export type SendClickHandler = (
   event: React.MouseEvent<HTMLButtonElement>
 ) => void;
+
+export interface HistoryObject {
+  method: string;
+  endpoint: string;
+  url: string;
+}
