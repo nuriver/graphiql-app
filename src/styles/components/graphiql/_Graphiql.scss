@@ -60,25 +60,6 @@
         align-items: center;
         justify-content: flex-start;
         gap: 21px;
-        .add-headers-button {
-          width: 122px;
-          height: 24px;
-          border: none;
-          background: none;
-          @include border-style;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 15px;
-          font-weight: 500;
-          color: $main-color;
-          transition: all 0.2s ease-in-out;
-          &:hover {
-            cursor: pointer;
-            background-color: $main-color;
-            color: white;
-          }
-        }
         .content-toggle-button {
           margin-left: auto;
           align-self: flex-start;
@@ -117,6 +98,13 @@
       flex-direction: column;
       gap: 26px;
     }
+
+    .graphiql-query-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 21px;
+    }
     .graphiql-variables-wrapper {
       .graphiql-variables-header {
         display: flex;
@@ -125,6 +113,26 @@
           align-self: flex-start;
         }
       }
+    }
+  }
+  .add-headers-button,
+  .prettify-button {
+    width: 122px;
+    height: 24px;
+    border: none;
+    background: none;
+    @include border-style;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: $main-color;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background-color: $main-color;
+      color: white;
     }
   }
 }

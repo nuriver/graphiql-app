@@ -51,7 +51,7 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   return (
     <CodeMirror
       value={value}
-      height="100px"
+      height="200px"
       extensions={[json()]}
       onChange={onChange}
       style={{

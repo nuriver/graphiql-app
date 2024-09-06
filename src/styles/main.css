@@ -352,26 +352,6 @@ h2 {
   justify-content: flex-start;
   gap: 21px;
 }
-.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .add-headers-button {
-  width: 122px;
-  height: 24px;
-  border: none;
-  background: none;
-  border: 2px solid #65558f;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 500;
-  color: #65558f;
-  transition: all 0.2s ease-in-out;
-}
-.graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .add-headers-button:hover {
-  cursor: pointer;
-  background-color: #65558f;
-  color: white;
-}
 .graphiql-page-wrapper .graphiql-wrapper .graphiql-headers-wrapper .graphiql-headers-header .content-toggle-button {
   margin-left: auto;
   align-self: flex-start;
@@ -409,12 +389,40 @@ h2 {
   flex-direction: column;
   gap: 26px;
 }
+.graphiql-page-wrapper .graphiql-wrapper .graphiql-query-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 21px;
+}
 .graphiql-page-wrapper .graphiql-wrapper .graphiql-variables-wrapper .graphiql-variables-header {
   display: flex;
   justify-content: space-between;
 }
 .graphiql-page-wrapper .graphiql-wrapper .graphiql-variables-wrapper .graphiql-variables-header .content-toggle-button {
   align-self: flex-start;
+}
+.graphiql-page-wrapper .add-headers-button,
+.graphiql-page-wrapper .prettify-button {
+  width: 122px;
+  height: 24px;
+  border: none;
+  background: none;
+  border: 2px solid #65558f;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #65558f;
+  transition: all 0.2s ease-in-out;
+}
+.graphiql-page-wrapper .add-headers-button:hover,
+.graphiql-page-wrapper .prettify-button:hover {
+  cursor: pointer;
+  background-color: #65558f;
+  color: white;
 }
 
 .graphiql-response {

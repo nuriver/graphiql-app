@@ -1,14 +1,26 @@
 'use client';
 
-import { KeyboardEventHandler, useCallback, useState } from 'react';
+import {
+  Dispatch,
+  KeyboardEventHandler,
+  SetStateAction,
+  useCallback,
+} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlQuery } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import toastNonLatinError from '../../../utils/toastNonLatinError';
 
-function QueryCodeEditor({ updateUrl }: { updateUrl: () => void }) {
-  const [value, setValue] = useState('');
+function QueryCodeEditor({
+  updateUrl,
+  value,
+  setValue,
+}: {
+  updateUrl: () => void;
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+}) {
   const dispatch = useAppDispatch();
 
   const onChange = useCallback(
@@ -20,7 +32,7 @@ function QueryCodeEditor({ updateUrl }: { updateUrl: () => void }) {
         toastNonLatinError();
       }
     },
-    [dispatch]
+    [dispatch, setValue]
   );
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -36,7 +48,12 @@ function QueryCodeEditor({ updateUrl }: { updateUrl: () => void }) {
           'ArrowDown',
           'Tab',
           'Enter',
-        ].includes(char)
+          'Shift',
+          'Control',
+          'Alt',
+          'Meta',
+        ].includes(char) ||
+        /[\{\}\[\]\(\)]/.test(char)
       ) {
         return;
       }
@@ -52,7 +69,7 @@ function QueryCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   return (
     <CodeMirror
       value={value}
-      height="100px"
+      height="200px"
       extensions={[json()]}
       onChange={onChange}
       style={{
