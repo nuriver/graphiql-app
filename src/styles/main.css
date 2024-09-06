@@ -424,6 +424,10 @@ h2 {
   background-color: #65558f;
   color: white;
 }
+.graphiql-page-wrapper .add-headers-button:disabled,
+.graphiql-page-wrapper .prettify-button:disabled {
+  pointer-events: none;
+}
 
 .graphiql-response {
   display: flex;
@@ -547,6 +551,11 @@ h2 {
   color: #65558f;
   font-size: 20px;
   white-space: pre-wrap;
+}
+
+.graphql-hidden-content {
+  height: 80px;
+  overflow: hidden;
 }
 
 .main-btn {

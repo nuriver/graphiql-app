@@ -1,5 +1,6 @@
 'use client';
 
+import { MouseEventHandler, useRef } from 'react';
 import {
   addGraphiqlHeader,
   updateGraphiqlHeader,
@@ -14,6 +15,8 @@ export default function Headers({
 }): JSX.Element {
   const headers = useAppSelector((state) => state.graphiql.headers);
   const dispatch = useAppDispatch();
+  const headersRef = useRef<HTMLDivElement>(null);
+  const addHeaderRef = useRef<HTMLButtonElement>(null);
 
   const addHeader = () => {
     dispatch(addGraphiqlHeader());
@@ -23,14 +26,33 @@ export default function Headers({
     dispatch(updateGraphiqlHeader({ id, key, value }));
   };
 
+  const contentToggle: MouseEventHandler<HTMLButtonElement> = () => {
+    if (headersRef.current && addHeaderRef.current) {
+      if (headersRef.current.classList.contains('graphql-hidden-content')) {
+        headersRef.current.classList.remove('graphql-hidden-content');
+        addHeaderRef.current.disabled = false;
+      } else {
+        headersRef.current.classList.add('graphql-hidden-content');
+        addHeaderRef.current.disabled = true;
+      }
+    }
+  };
+
   return (
-    <div className="graphiql-headers-wrapper">
+    <div
+      className="graphiql-headers-wrapper graphql-hidden-content"
+      ref={headersRef}
+    >
       <header className="graphiql-headers-header">
         <h3>Headers</h3>
-        <button className="add-headers-button" onClick={addHeader}>
+        <button
+          className="add-headers-button"
+          onClick={addHeader}
+          ref={addHeaderRef}
+        >
           add headers
         </button>
-        <button className="content-toggle-button">
+        <button className="content-toggle-button" onClick={contentToggle}>
           <span></span>
         </button>
       </header>
