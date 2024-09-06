@@ -61,11 +61,7 @@ export default function Graphiql({
   const updateUrl = () => {
     if (encodedRequestData) {
       dispatch(setGraphiqlUrl(encodedRequestData));
-      window.history.replaceState(
-        null,
-        '',
-        `/graphiql-client/GRAPHQL/${encodedRequestData}`
-      );
+      window.history.replaceState(null, '', `/GRAPHQL/${encodedRequestData}`);
     }
   };
 
