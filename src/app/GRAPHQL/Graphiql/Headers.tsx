@@ -49,6 +49,7 @@ export default function Headers({
           className="add-headers-button"
           onClick={addHeader}
           ref={addHeaderRef}
+          disabled={true}
         >
           add headers
         </button>

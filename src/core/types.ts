@@ -75,3 +75,18 @@ export interface HistoryObject {
   endpoint: string;
   url: string;
 }
+
+export interface GraphiqlState {
+  endpoint: string;
+  sdl: string;
+  query: string;
+  variables: string;
+  headers: GraphiqlHeader[];
+  url?: string;
+}
+
+export interface GraphiqlHeader {
+  id: string;
+  key: string;
+  value: string;
+}

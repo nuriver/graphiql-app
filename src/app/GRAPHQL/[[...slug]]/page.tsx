@@ -1,9 +1,14 @@
 import GraphiqlMain from './GraphiqlMain';
 
 export default function Page({ params }: { params: { slug?: string[] } }) {
-  const slug = params.slug;
-  // const mySlug = slug[0]
+  const slug = params.slug as string[];
+  let requestData;
+  if (slug) {
+    const decodedRequestDataString = atob(slug[0]);
+    requestData = JSON.parse(decodedRequestDataString);
+  } else {
+    requestData = null;
+  }
 
-  console.log(slug);
-  return <GraphiqlMain />;
+  return <GraphiqlMain requestData={requestData} />;
 }

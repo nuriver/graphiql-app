@@ -1,15 +1,24 @@
 'use client';
 
-import { KeyboardEventHandler, useCallback, useState } from 'react';
+import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import { useAppDispatch } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlVariables } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import toastNonLatinError from '../../../utils/toastNonLatinError';
 
 function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
+  const variables = useAppSelector((state) => state.graphiql.variables);
+
+  useEffect(() => {
+    if (variables !== '{}') {
+      setValue(variables);
+    } else {
+      setValue('');
+    }
+  }, [variables]);
 
   const onChange = useCallback(
     (value: string) => {
@@ -36,10 +45,16 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
           'ArrowDown',
           'Tab',
           'Enter',
-        ].includes(char)
+          'Shift',
+          'Control',
+          'Alt',
+          'Meta',
+        ].includes(char) ||
+        /[\{\}\[\]\(\)]/.test(char)
       ) {
         return;
       }
+
       if (!/^[\x00-\x7F]$/.test(char)) {
         event.preventDefault();
         toastNonLatinError();

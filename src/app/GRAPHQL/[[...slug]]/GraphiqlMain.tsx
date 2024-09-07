@@ -1,70 +1,36 @@
 'use client';
 
-import { useState } from 'react';
-import { useAppSelector } from '../../../store/store';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import Graphiql from '../Graphiql/Graphiql';
 import Response from '../Response/Response';
-import { HistoryObject, ResponseState } from '../../../core/types';
+import { GraphiqlState, ResponseState } from '../../../core/types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Documentation from '../Response/Documentation';
 import introspectionQuery from '../../../data/introspectionQuery';
-import addToHistory from '../../../utils/addToHistory';
+import getGraphiqlData from '../../../utils/getGraphqlData';
+import {
+  resetGraphiqlStore,
+  setGraphiqlStore,
+} from '../../../store/graphiqlFeatures/graphiqlSlice';
 
-function isError(error: unknown): error is Error {
-  return typeof error === 'object' && error !== null && 'message' in error;
-}
+const GraphiqlMain = ({
+  requestData,
+}: {
+  requestData: GraphiqlState | null;
+}) => {
+  const dispatch = useAppDispatch();
 
-const getGraphiqlData = async (urlData: string) => {
-  try {
-    const decodedRequestData = atob(urlData);
-    const requestData = JSON.parse(decodedRequestData);
-
-    const res = await fetch(requestData.endpoint, {
-      method: 'POST',
-      headers: {
-        //TODO change
-        'Content-Type': 'application/json',
-        ...requestData.headersObject,
-      },
-      body: JSON.stringify({
-        query: requestData.body.query,
-        variables: requestData.body.variables,
-      }),
-    });
-
-    const graphiqlData = await res.json();
-
-    const response = {
-      status: res.status,
-      statusText: res.statusText,
-      body: graphiqlData,
-    };
-
-    const historyObject: HistoryObject = {
-      method: 'GRAPHQL',
-      endpoint: requestData.endpoint,
-      url: urlData,
-    };
-
-    addToHistory(historyObject);
-
-    return response;
-  } catch (error) {
-    if (isError(error)) {
-      toast.error(
-        <div>
-          <div>
-            <b>Please fill in correctly all necessary information.</b>
-          </div>
-        </div>
-      );
+  useEffect(() => {
+    if (!requestData) {
+      dispatch(resetGraphiqlStore());
+    } else {
+      dispatch(setGraphiqlStore(requestData));
     }
-  }
-};
+  }, [dispatch, requestData]);
 
-const GraphiqlMain = () => {
-  const encodedUrl = useAppSelector((state) => state.graphiql.url);
+  const encodedUrl = useAppSelector((state) => state.graphiql.url) as string;
   const sdlUrl = useAppSelector((state) => state.graphiql.sdl);
   const [response, setResponse] = useState<ResponseState>({
     body: null,

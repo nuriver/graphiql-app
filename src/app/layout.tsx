@@ -16,7 +16,7 @@ export default function RootLayout({
   const publicRoutes = [
     '/sign-in',
     '/sign-up',
-    '/graphiql-client',
+    '/GRAPHQL',
     '/restfull-client',
     '/history',
   ];

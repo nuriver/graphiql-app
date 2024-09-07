@@ -7,7 +7,7 @@ import Query from './Query';
 import SdlInput from './SdlInput';
 import Variables from './Variables';
 import { setGraphiqlUrl } from '../../../store/graphiqlFeatures/graphiqlSlice';
-import { SendClickHandler } from '../../../core/types';
+import { GraphiqlState, SendClickHandler } from '../../../core/types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,45 +23,31 @@ export default function Graphiql({
   const query = useAppSelector((state) => state.graphiql.query);
   const variables = useAppSelector((state) => state.graphiql.variables);
   const headersArray = useAppSelector((state) => state.graphiql.headers);
-  const headersObject = headersArray.reduce<Record<string, string>>(
-    (acc, header) => {
-      if (header.key) {
-        acc[header.key] = header.value;
-      }
-      return acc;
-    },
-    {}
-  );
-
   const sdl = useAppSelector((state) => state.graphiql.sdl);
-  const body = {
+
+  const requestData: GraphiqlState = {
     query,
     variables,
-  };
-
-  const requestData = {
-    body,
     endpoint,
-    headersObject,
+    headers: headersArray,
     sdl,
   };
 
   const containsNonLatin1 = (str: string) => /[^\x00-\xFF]/.test(str);
 
   const requestDataString = JSON.stringify(requestData);
-  let encodedRequestData: string | undefined = undefined;
+  let finalRequestData: string;
   if (containsNonLatin1(requestDataString)) {
     toast.error('Only Latin letters are allowed');
   } else {
-    try {
-      encodedRequestData = btoa(requestDataString);
-    } catch (error) {}
+    const encodedRequestData = btoa(requestDataString);
+    finalRequestData = encodedRequestData.replace(/=+$/, '');
   }
 
   const updateUrl = () => {
-    if (encodedRequestData) {
-      dispatch(setGraphiqlUrl(encodedRequestData));
-      window.history.replaceState(null, '', `/GRAPHQL/${encodedRequestData}`);
+    if (finalRequestData) {
+      dispatch(setGraphiqlUrl(finalRequestData));
+      window.history.replaceState(null, '', `/GRAPHQL/${finalRequestData}`);
     }
   };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../store/store';
 import QueryCodeEditor from './QueryCodeEditor';
 import gqlPrettier from 'graphql-prettier';
@@ -13,6 +13,10 @@ export default function Query({
 }): JSX.Element {
   const [value, setValue] = useState('');
   const query = useAppSelector((state) => state.graphiql.query);
+
+  useEffect(() => {
+    setValue(query);
+  }, [query]);
 
   const prettifyHandler = () => {
     try {
