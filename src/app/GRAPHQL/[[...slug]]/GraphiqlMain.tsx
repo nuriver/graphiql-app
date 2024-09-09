@@ -17,8 +17,10 @@ import {
 
 const GraphiqlMain = ({
   requestData,
+  isRedirected,
 }: {
   requestData: GraphiqlState | null;
+  isRedirected: boolean;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -79,6 +81,7 @@ const GraphiqlMain = ({
       <Graphiql
         sendClickHandler={sendClickHandler}
         getSchemaHandler={getSchemaHandler}
+        isRedirected={isRedirected}
       />
       <Response response={response} />
       {doc ? <Documentation doc={doc} /> : null}
