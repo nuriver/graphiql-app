@@ -1,9 +1,7 @@
-import React from 'react';
-
-export default function loading() {
+export default function Loading() {
   return (
     <div className="center">
-      <div className="loader"></div>
+      <div className="loader" role="status"></div>
     </div>
   );
 }
