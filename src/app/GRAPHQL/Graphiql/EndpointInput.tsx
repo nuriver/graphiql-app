@@ -9,9 +9,11 @@ import toastNonLatinError from '../../../utils/toastNonLatinError';
 export default function EndpointInput({
   onClickHandler,
   updateUrl,
+  isRedirected,
 }: {
   onClickHandler: SendClickHandler;
   updateUrl: () => void;
+  isRedirected: boolean;
 }): JSX.Element {
   const initialValue = useAppSelector((state) => state.graphiql.endpoint);
   const [value, setValue] = useState('');
@@ -23,10 +25,10 @@ export default function EndpointInput({
   }, [initialValue]);
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && isRedirected) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [isRedirected]);
 
   const onChangeHandler = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
