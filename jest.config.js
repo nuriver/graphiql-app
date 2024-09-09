@@ -6,7 +6,18 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['app/**/*.{ts,tsx}', '!app/**/*.d.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/node_modules/**',
+    '!src/**/test-utils/**',
+    '!src/**/types/**',
+    '!src/app/layout.tsx',
+    '!src/app/loading.tsx',
+    '!src/app/not-found.tsx',
+    '!src/app/page.tsx',
+    '!src/app/authorization/firebase.ts',
+  ],
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
