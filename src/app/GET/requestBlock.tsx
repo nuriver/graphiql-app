@@ -1,21 +1,22 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import Endpoint from './endpoint';
 import Method from './method';
 import Headers from './headers';
 import BodyRequest from './bodyRequest';
 import { RequestBlockProps } from '../../core/types';
 import { handleRequest } from '../../utils/handleRequest';
+import isDisabled from '../../utils/isDisabled';
 
 const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
   const [endpoint, setEndpoint] = useState<string>('');
   const [method, setMethod] = useState<string>('GET');
   const [body, setBody] = useState<string>('');
 
-  const headers = useAppSelector((state) => state.headers.headers);
-
+  const headers = useAppSelector((state) => state.restful.headers);
+  const dispatch = useAppDispatch();
   const handleClick = () => {
     handleRequest({
       endpoint,
@@ -25,6 +26,7 @@ const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
         headers.map((header) => [header.headerKey, header.headerValue])
       ),
       setResponse,
+      dispatch,
     });
   };
 
@@ -36,7 +38,11 @@ const RequestBlock: React.FC<RequestBlockProps> = ({ setResponse }) => {
       </div>
       <Headers />
       <BodyRequest body={body} setBody={setBody} />
-      <button onClick={handleClick} className="request__send-button">
+      <button
+        onClick={handleClick}
+        disabled={isDisabled([endpoint])}
+        className="request__send-button"
+      >
         Send Request
       </button>
     </div>

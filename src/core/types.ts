@@ -1,3 +1,6 @@
+import { HeadersState, RestfulHeader } from '../store/restfulSlice';
+import { AppDispatch } from '../store/store';
+
 export interface ResponseBody {
   id: number;
   name: string;
@@ -64,8 +67,16 @@ export interface HandleRequestProps {
     status: number | null;
     statusText: string | null;
   }) => void;
+  dispatch: AppDispatch;
 }
-
+export interface RestfulState {
+  method: string;
+  endpoint: string;
+  body: string;
+  variables: string;
+  headers: RestfulHeader[];
+  url?: string;
+}
 export type SendClickHandler = (
   event: React.MouseEvent<HTMLButtonElement>
 ) => void;
