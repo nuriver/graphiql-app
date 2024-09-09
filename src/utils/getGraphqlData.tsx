@@ -58,7 +58,7 @@ const getGraphiqlData = async (urlData: string) => {
       toast.error(
         <div>
           <div>
-            <b>Please fill in correctly all necessary request data.</b>
+            <p>Please fill in correctly all necessary request data.</p>
           </div>
         </div>
       );
