@@ -37,31 +37,35 @@ function QueryCodeEditor({
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (event) => {
-      const char = event.key;
+      const isModifierKey = event.ctrlKey || event.metaKey || event.altKey;
+      const allowedKeys = [
+        'Backspace',
+        'Delete',
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowUp',
+        'ArrowDown',
+        'Tab',
+        'Enter',
+        'Escape',
+        'Shift',
+      ];
+
       if (
-        [
-          'Backspace',
-          'Delete',
-          'ArrowLeft',
-          'ArrowRight',
-          'ArrowUp',
-          'ArrowDown',
-          'Tab',
-          'Enter',
-          'Shift',
-          'Control',
-          'Alt',
-          'Meta',
-        ].includes(char) ||
-        /[\{\}\[\]\(\)]/.test(char)
+        isModifierKey ||
+        allowedKeys.includes(event.key) ||
+        /[\{\}\[\]\(\)]/.test(event.key)
       ) {
         return;
       }
 
-      if (!/^[\x00-\x7F]$/.test(char)) {
-        event.preventDefault();
-        toastNonLatinError();
+      if (/^[\x00-\x7F]$/.test(event.key)) {
+        return;
       }
+
+      event.preventDefault();
+
+      toastNonLatinError();
     },
     []
   );

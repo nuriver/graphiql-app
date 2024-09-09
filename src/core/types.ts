@@ -1,3 +1,5 @@
+import Variables from '../app/restfull-client/variables';
+
 export interface ResponseBody {
   id: number;
   name: string;

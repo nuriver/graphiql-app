@@ -7,9 +7,7 @@ import HistoryRequests from './HistoryRequests';
 const HistoryPage = () => {
   const requests = getRequestHistory();
   return (
-    <>
-      {!requests ? <HistoryRequests requests={requests} /> : <HistoryEmpty />}
-    </>
+    <>{requests ? <HistoryRequests requests={requests} /> : <HistoryEmpty />}</>
   );
 };
 
