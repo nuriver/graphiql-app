@@ -16,6 +16,7 @@ interface MyRestProps {
     method: string;
     body: string;
     headers: Record<string, string>;
+    MyRestProps: boolean;
   } | null;
 }
 
@@ -24,7 +25,6 @@ export default function MyRest({ requestData }: MyRestProps) {
   // const encodedUrl = useAppSelector((state) => state.restful.url);
   const response = useAppSelector((state) => state.restful.response);
 
-  // Provide a default response object to avoid passing undefined or null
   const defaultResponse: ResponseState = {
     body: null,
     status: null,
@@ -32,24 +32,42 @@ export default function MyRest({ requestData }: MyRestProps) {
   };
 
   useEffect(() => {
-    if (requestData) {
+    if (!requestData) {
+      console.log('No requestData found, resetting store...');
+      //   const restfulState: RestfulState = {
+      //     endpoint: requestData.endpoint,
+      //     method: requestData.method || 'GET',
+      //     body: requestData.body || '',
+      //     headers: Object.entries(requestData.headers || {}).map(
+      //       ([key, value]) => ({ headerKey: key, headerValue: value })
+      //     ),
+      //     response: null,
+      //     url: '',
+      //     variables: '',
+      //   };
+      dispatch(resetRestfulStore());
+
+      //   dispatch(setRestfulStore(restfulState));
+    } else {
+      const headersArray = Object.entries(requestData.headers || {}).map(
+        ([key, value]) => ({ headerKey: key, headerValue: value })
+      );
       console.log('Loading requestData into store...');
+
       const restfulState: RestfulState = {
         endpoint: requestData.endpoint,
         method: requestData.method || 'GET',
         body: requestData.body || '',
-        headers: Object.entries(requestData.headers || {}).map(
-          ([key, value]) => ({ headerKey: key, headerValue: value })
-        ),
+        headers: headersArray,
         response: null,
         url: '',
         variables: '',
       };
 
+      // Dispatch the restfulState
       dispatch(setRestfulStore(restfulState));
-    } else {
-      console.log('No requestData found, resetting store...');
-      dispatch(resetRestfulStore());
+      //
+      //   dispatch(resetRestfulStore());
     }
   }, [dispatch, requestData]);
   const responseToConsole = useAppSelector((state) => state.restful.response);
@@ -60,7 +78,6 @@ export default function MyRest({ requestData }: MyRestProps) {
       <RequestBlock />
       <h1>Response</h1>
       <ResponseBlock response={response || defaultResponse} />{' '}
-      {/* Pass default response if undefined */}
     </div>
   );
 }

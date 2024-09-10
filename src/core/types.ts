@@ -1,4 +1,4 @@
-import { HeadersState, RestfulHeader } from '../store/restfulSlice';
+import { RestfulHeader } from '../store/restfulSlice';
 import { AppDispatch } from '../store/store';
 
 export interface ResponseBody {
@@ -50,6 +50,7 @@ export interface EndpointProps {
 export interface MethodProps {
   method: string;
   setMethod: (method: string) => void;
+  updateUrl: () => void;
 }
 
 export interface Variable {
@@ -62,11 +63,6 @@ export interface HandleRequestProps {
   method: string;
   body: string;
   headers: Record<string, string>;
-  // setResponse: (response: {
-  //   body: ResponseBody | null;
-  //   status: number | null;
-  //   statusText: string | null;
-  // }) => void;
   dispatch: AppDispatch;
 }
 export interface RestfulState {

@@ -8,7 +8,7 @@ export default function Status({ status, statusText }: StatusProps) {
       <h2 className="status__title">Status</h2>
       <div className="status__window">
         {status !== null ? status : ''}{' '}
-        {statusText !== null ? `Status Text: ${statusText}` : ''}
+        {statusText !== null ? `${statusText}` : ''}
       </div>
     </div>
   );

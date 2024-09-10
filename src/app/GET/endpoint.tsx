@@ -8,7 +8,7 @@ import { setRestfulEndpoint } from '../../store/restfulSlice';
 interface EndpointProps {
   endpoint: string;
   setEndpoint: (endpoint: string) => void;
-  updateUrl: () => void; // Добавляем тип для функции updateUrl
+  updateUrl: () => void;
 }
 
 export default function Endpoint({
@@ -19,17 +19,14 @@ export default function Endpoint({
   const initialEndpoint = useAppSelector((state) => state.restful.endpoint);
   const dispatch = useAppDispatch();
 
-  // Устанавливаем начальный endpoint из Redux
   useEffect(() => {
     setEndpoint(initialEndpoint);
   }, [initialEndpoint, setEndpoint]);
 
-  // Обработка изменения input
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
     const endpoint = input.value;
 
-    // Проверка на валидные символы
     if (/^[\x00-\x7F]*$/.test(endpoint)) {
       setEndpoint(endpoint);
       dispatch(setRestfulEndpoint(endpoint));
