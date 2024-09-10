@@ -14,6 +14,7 @@ import {
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { getGraphiqlData, getGraphiqlSchema } from '../../actions';
 import addToHistory from '../../../utils/addToHistory';
+import Loading from '../../loading';
 
 const GraphiqlMain = ({
   requestData,
@@ -23,6 +24,7 @@ const GraphiqlMain = ({
   isRedirected: boolean;
 }) => {
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!requestData) {
@@ -34,16 +36,17 @@ const GraphiqlMain = ({
 
   const encodedUrl = useAppSelector((state) => state.graphiql.url) as string;
   const sdlUrl = useAppSelector((state) => state.graphiql.sdl);
-  const [response, setResponse] = useState<ResponseState>({
+  const initialResponse = {
     body: null,
     status: null,
     statusText: null,
-  });
+  };
+  const [response, setResponse] = useState<ResponseState>(initialResponse);
   const [doc, setDoc] = useState<string | undefined>(undefined);
 
   const sendClickHandler = async () => {
     setDoc(undefined);
-
+    setIsLoading(true);
     const result = await getGraphiqlData(encodedUrl);
     if (result.success) {
       if (result.data && result.history) {
@@ -52,10 +55,13 @@ const GraphiqlMain = ({
       }
     } else {
       toast.error(result.error);
+      setResponse(initialResponse);
     }
+    setIsLoading(false);
   };
 
   const getSchemaHandler = async () => {
+    setIsLoading(true);
     setDoc(undefined);
 
     const result = await getGraphiqlSchema(sdlUrl);
@@ -64,10 +70,12 @@ const GraphiqlMain = ({
     } else {
       toast.error('Please enter valid SDL endpoint');
     }
+    setIsLoading(false);
   };
 
   return (
     <div className="graphiql-page-wrapper">
+      {isLoading && <Loading />}
       <ToastContainer />
       <Graphiql
         sendClickHandler={sendClickHandler}
