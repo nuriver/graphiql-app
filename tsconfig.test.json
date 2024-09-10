@@ -2,7 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "types": ["jest"],
+    "types": ["jest", "@testing-library/jest-dom"],
     "noUnusedLocals": false
   },
   "include": ["./src", "./test/**/*", "./next-env.d.ts"]

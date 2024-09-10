@@ -62,7 +62,7 @@ export const graphiqlSlice = createSlice({
       };
     },
     setGraphiqlStore: (state, action: PayloadAction<GraphiqlState>) => {
-      return action.payload;
+      return { ...state, ...action.payload };
     },
   },
 });
