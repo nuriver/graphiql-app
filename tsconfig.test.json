@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["jest"],
+    "noUnusedLocals": false
+  },
+  "include": ["./src", "./test/**/*", "./next-env.d.ts"]
+}

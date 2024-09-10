@@ -14,9 +14,11 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Graphiql({
   sendClickHandler,
   getSchemaHandler,
+  isRedirected,
 }: {
   sendClickHandler: SendClickHandler;
   getSchemaHandler: () => void;
+  isRedirected: boolean;
 }): JSX.Element {
   const dispatch = useAppDispatch();
   const endpoint = useAppSelector((state) => state.graphiql.endpoint);
@@ -42,7 +44,6 @@ export default function Graphiql({
   } else {
     const encodedRequestData = btoa(requestDataString);
     finalRequestData = encodedRequestData.replace(/=+$/, '');
-    console.log(atob(finalRequestData));
   }
 
   const updateUrl = () => {
@@ -59,6 +60,7 @@ export default function Graphiql({
         <EndpointInput
           onClickHandler={sendClickHandler}
           updateUrl={updateUrl}
+          isRedirected={isRedirected}
         />
         <SdlInput updateUrl={updateUrl} getSchemaHandler={getSchemaHandler} />
         <Headers updateUrl={updateUrl} />

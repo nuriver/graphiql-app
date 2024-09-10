@@ -90,6 +90,10 @@ export default function Main() {
         </button>
       </div>
       <Link href="/" className="main-logo"></Link>
+
+      <div className="center">
+        <div className="loader" role="status"></div>
+      </div>
     </main>
   );
 

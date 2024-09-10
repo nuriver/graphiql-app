@@ -8,19 +8,23 @@ import { GraphiqlState, ResponseState } from '../../../core/types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Documentation from '../Response/Documentation';
-import introspectionQuery from '../../../data/introspectionQuery';
-import getGraphiqlData from '../../../utils/getGraphqlData';
 import {
   resetGraphiqlStore,
   setGraphiqlStore,
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import { getGraphiqlData, getGraphiqlSchema } from '../../actions';
+import addToHistory from '../../../utils/addToHistory';
+import Loading from '../../loading';
 
 const GraphiqlMain = ({
   requestData,
+  isRedirected,
 }: {
   requestData: GraphiqlState | null;
+  isRedirected: boolean;
 }) => {
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!requestData) {
@@ -32,53 +36,51 @@ const GraphiqlMain = ({
 
   const encodedUrl = useAppSelector((state) => state.graphiql.url) as string;
   const sdlUrl = useAppSelector((state) => state.graphiql.sdl);
-  const [response, setResponse] = useState<ResponseState>({
+  const initialResponse = {
     body: null,
     status: null,
     statusText: null,
-  });
+  };
+  const [response, setResponse] = useState<ResponseState>(initialResponse);
   const [doc, setDoc] = useState<string | undefined>(undefined);
 
   const sendClickHandler = async () => {
     setDoc(undefined);
-
-    const data = await getGraphiqlData(encodedUrl);
-    if (data) {
-      setResponse(data);
+    setIsLoading(true);
+    const result = await getGraphiqlData(encodedUrl);
+    if (result.success) {
+      if (result.data && result.history) {
+        addToHistory(result.history);
+        setResponse(result.data);
+      }
+    } else {
+      toast.error(result.error);
+      setResponse(initialResponse);
     }
+    setIsLoading(false);
   };
 
   const getSchemaHandler = async () => {
+    setIsLoading(true);
     setDoc(undefined);
-    try {
-      const res = await fetch(sdlUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query: introspectionQuery,
-        }),
-      });
 
-      if (res.status !== 200) {
-        toast.error('Please enter valid SDL endpoint');
-      } else {
-        const schema = await res.json();
-        const schemaJson = JSON.stringify(schema, null, 2);
-        setDoc(schemaJson);
-      }
-    } catch (error) {
+    const result = await getGraphiqlSchema(sdlUrl);
+    if (result.success) {
+      setDoc(result.data);
+    } else {
       toast.error('Please enter valid SDL endpoint');
     }
+    setIsLoading(false);
   };
 
   return (
     <div className="graphiql-page-wrapper">
+      {isLoading && <Loading />}
       <ToastContainer />
       <Graphiql
         sendClickHandler={sendClickHandler}
         getSchemaHandler={getSchemaHandler}
+        isRedirected={isRedirected}
       />
       <Response response={response} />
       {doc ? <Documentation doc={doc} /> : null}
