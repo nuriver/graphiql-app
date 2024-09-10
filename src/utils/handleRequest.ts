@@ -1,15 +1,23 @@
 import { HandleRequestProps, ResponseBody } from '../core/types';
+import { setRestfulUrl, setResponse } from '../store/restfulSlice';
 
 export const handleRequest = async ({
   endpoint,
   method,
   body,
   headers,
-  setResponse,
+  dispatch,
 }: HandleRequestProps) => {
-  console.log('handleRequest called');
-
   const queryParams = new URLSearchParams();
+  const safeAtob = (str: string) => {
+    try {
+      return atob(str);
+    } catch (e) {
+      console.error('Failed to decode Base64:', e);
+      return null;
+    }
+  };
+
   Object.entries(headers || {}).forEach(([key, value]) => {
     queryParams.append(
       btoa(encodeURIComponent(key)),
@@ -18,6 +26,13 @@ export const handleRequest = async ({
   });
 
   try {
+    try {
+      new URL(endpoint);
+    } catch (error) {
+      console.error('Invalid endpoint URL:', error);
+      return;
+    }
+
     const encodedEndpoint = btoa(endpoint);
     const encodedBody = body ? btoa(JSON.stringify(body)) : '';
 
@@ -25,12 +40,14 @@ export const handleRequest = async ({
       ? `/${method}/${encodedEndpoint}/${encodedBody}`
       : `/${method}/${encodedEndpoint}`;
 
+    console.log('path:', path);
+    dispatch(setRestfulUrl(path));
     window.history.pushState(null, '', `${path}?${queryParams.toString()}`);
 
     const decodedHeaders = Object.fromEntries(
       Array.from(queryParams.entries()).map(([key, value]) => [
-        decodeURIComponent(atob(key)),
-        decodeURIComponent(atob(value)),
+        decodeURIComponent(safeAtob(key) || ''),
+        decodeURIComponent(safeAtob(value) || ''),
       ])
     );
 
@@ -42,13 +59,12 @@ export const handleRequest = async ({
         ...decodedHeaders,
       },
       body:
-        method === 'POST' || method === 'PUT' || method === 'PATCH'
+        body && (method === 'POST' || method === 'PUT' || method === 'PATCH')
           ? JSON.stringify(body)
           : undefined,
     });
 
     const responseBody = await response.text();
-
     let parsedBody: unknown;
 
     try {
@@ -57,11 +73,13 @@ export const handleRequest = async ({
       parsedBody = responseBody;
     }
 
-    setResponse({
-      body: parsedBody as ResponseBody,
-      status: response.status,
-      statusText: response.statusText || 'Request successful',
-    });
+    dispatch(
+      setResponse({
+        body: parsedBody as ResponseBody,
+        status: response.status,
+        statusText: response.statusText,
+      })
+    );
   } catch (error) {
     let errorMessage: string = 'Error occurred during fetch';
     let status: number | null = null;
@@ -77,12 +95,12 @@ export const handleRequest = async ({
       status = -1;
     }
 
-    console.error(errorMessage);
-
-    setResponse({
-      body: null,
-      status: status,
-      statusText: errorMessage,
-    });
+    dispatch(
+      setResponse({
+        body: null,
+        status: status || 500,
+        statusText: errorMessage,
+      })
+    );
   }
 };

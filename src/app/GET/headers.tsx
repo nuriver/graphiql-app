@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
-import { addHeader, removeHeader } from '../../store/headersSlice';
+import { addHeader, removeHeader } from '../../store/restfulSlice';
 import { isDisabled } from '../../utils/isDisabled';
 
 const Headers: React.FC = () => {
   const [headerKey, setHeaderKey] = useState('');
   const [headerValue, setHeaderValue] = useState('');
-  const headers = useSelector((state: RootState) => state.headers.headers);
+  const headers = useSelector((state: RootState) => state.restful.headers);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleAddHeader = () => {

@@ -1,5 +1,5 @@
 import { ResponseProps } from '../../../core/types';
-import ResponseBlock from '../../restfull-client/responseBlock';
+import ResponseBlock from '../../GET/responseBlock';
 
 const Response: React.FC<ResponseProps> = ({ response }) => {
   return (

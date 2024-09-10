@@ -1,4 +1,5 @@
-import Variables from '../app/restfull-client/variables';
+import { RestfulHeader } from '../store/restfulSlice';
+import { AppDispatch } from '../store/store';
 
 export interface ResponseBody {
   id: number;
@@ -33,7 +34,7 @@ export interface RequestBlockProps {
   >;
 }
 export interface ResponseState {
-  body: any | null;
+  body: ResponseBody | null;
   status: number | null;
   statusText: string | null;
 }
@@ -49,6 +50,7 @@ export interface EndpointProps {
 export interface MethodProps {
   method: string;
   setMethod: (method: string) => void;
+  updateUrl: () => void;
 }
 
 export interface Variable {
@@ -61,13 +63,17 @@ export interface HandleRequestProps {
   method: string;
   body: string;
   headers: Record<string, string>;
-  setResponse: (response: {
-    body: ResponseBody | null;
-    status: number | null;
-    statusText: string | null;
-  }) => void;
+  dispatch: AppDispatch;
 }
-
+export interface RestfulState {
+  method: string;
+  endpoint: string;
+  body: string;
+  headers: RestfulHeader[];
+  variables?: string;
+  url?: string;
+  response?: ResponseState | null;
+}
 export type SendClickHandler = (
   event: React.MouseEvent<HTMLButtonElement>
 ) => void;
