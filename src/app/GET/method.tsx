@@ -15,8 +15,7 @@ export default function Method({ method, setMethod }: MethodProps) {
   const onChangeHandler = (event: ChangeEvent) => {
     const select = event.target as HTMLSelectElement;
     const method = select.value;
-//ЧТО ЗДЕСЬ ХОТЕЛА?
-    // setMethod(method);
+    setMethod(method);
     dispatch(setRestfulMethod(method));
   };
 

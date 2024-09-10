@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import restfulReducer from './restfulSlice';
 import graphiqlReducer from './graphiqlFeatures/graphiqlSlice';
+import restfulReducer from './restfulSlice';
 
 const rootReducer = combineReducers({
   restful: restfulReducer,

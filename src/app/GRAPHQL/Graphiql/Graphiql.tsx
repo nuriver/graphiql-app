@@ -42,6 +42,7 @@ export default function Graphiql({
   } else {
     const encodedRequestData = btoa(requestDataString);
     finalRequestData = encodedRequestData.replace(/=+$/, '');
+    console.log(atob(finalRequestData));
   }
 
   const updateUrl = () => {

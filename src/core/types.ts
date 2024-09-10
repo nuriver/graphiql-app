@@ -34,7 +34,7 @@ export interface RequestBlockProps {
   >;
 }
 export interface ResponseState {
-  body: any | null;
+  body: ResponseBody | null;
   status: number | null;
   statusText: string | null;
 }
@@ -62,20 +62,21 @@ export interface HandleRequestProps {
   method: string;
   body: string;
   headers: Record<string, string>;
-  setResponse: (response: {
-    body: ResponseBody | null;
-    status: number | null;
-    statusText: string | null;
-  }) => void;
+  // setResponse: (response: {
+  //   body: ResponseBody | null;
+  //   status: number | null;
+  //   statusText: string | null;
+  // }) => void;
   dispatch: AppDispatch;
 }
 export interface RestfulState {
   method: string;
   endpoint: string;
   body: string;
-  variables: string;
   headers: RestfulHeader[];
+  variables?: string;
   url?: string;
+  response?: ResponseState | null;
 }
 export type SendClickHandler = (
   event: React.MouseEvent<HTMLButtonElement>

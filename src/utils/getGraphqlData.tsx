@@ -21,6 +21,10 @@ const getGraphiqlData = async (urlData: string) => {
       {}
     );
 
+    let variables = requestData.variables;
+    if (variables === '') {
+      variables = '{}';
+    }
     const res = await fetch(requestData.endpoint, {
       method: 'POST',
       headers: {
@@ -28,7 +32,7 @@ const getGraphiqlData = async (urlData: string) => {
       },
       body: JSON.stringify({
         query: requestData.query,
-        variables: requestData.variables,
+        variables: JSON.parse(variables),
       }),
     });
 
@@ -54,7 +58,7 @@ const getGraphiqlData = async (urlData: string) => {
       toast.error(
         <div>
           <div>
-            <b>Please fill in correctly all necessary request data.</b>
+            <p>Please fill in correctly all necessary request data.</p>
           </div>
         </div>
       );

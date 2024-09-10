@@ -1,9 +1,9 @@
 import MyRest from './MyRest';
 
-export default function Page({ params }: { params: { slug?: string[] } }) {
-  const slug = params.slug as string[];
+export default function Page({ params }: { params: { data?: string[] } }) {
+  const slug = params.data as string[];
   let requestData;
-  if (slug) {
+  if (requestData) {
     const decodedRequestDataString = atob(slug[0]);
     requestData = JSON.parse(decodedRequestDataString);
   } else {

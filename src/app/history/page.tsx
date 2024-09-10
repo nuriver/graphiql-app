@@ -1,3 +1,5 @@
+import HistoryPage from './History';
+
 export default function Page() {
-  return <h1>Hello, history route!</h1>;
+  return <HistoryPage />;
 }

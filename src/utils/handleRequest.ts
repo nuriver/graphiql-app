@@ -1,12 +1,11 @@
 import { HandleRequestProps, ResponseBody } from '../core/types';
-import { setRestfulUrl } from '../store/restfulSlice';
+import { setRestfulUrl, setResponse } from '../store/restfulSlice';
 
 export const handleRequest = async ({
   endpoint,
   method,
   body,
   headers,
-  setResponse,
   dispatch,
 }: HandleRequestProps) => {
   const queryParams = new URLSearchParams();
@@ -40,6 +39,7 @@ export const handleRequest = async ({
     const path = body
       ? `/${method}/${encodedEndpoint}/${encodedBody}`
       : `/${method}/${encodedEndpoint}`;
+
     console.log('path:', path);
     dispatch(setRestfulUrl(path));
     window.history.pushState(null, '', `${path}?${queryParams.toString()}`);
@@ -65,7 +65,6 @@ export const handleRequest = async ({
     });
 
     const responseBody = await response.text();
-
     let parsedBody: unknown;
 
     try {
@@ -74,11 +73,13 @@ export const handleRequest = async ({
       parsedBody = responseBody;
     }
 
-    setResponse({
-      body: parsedBody as ResponseBody,
-      status: response.status,
-      statusText: response.statusText,
-    });
+    dispatch(
+      setResponse({
+        body: parsedBody as ResponseBody,
+        status: response.status,
+        statusText: response.statusText,
+      })
+    );
   } catch (error) {
     let errorMessage: string = 'Error occurred during fetch';
     let status: number | null = null;
@@ -94,10 +95,12 @@ export const handleRequest = async ({
       status = -1;
     }
 
-    setResponse({
-      body: null,
-      status: status || 500,
-      statusText: errorMessage,
-    });
+    dispatch(
+      setResponse({
+        body: null,
+        status: status || 500,
+        statusText: errorMessage,
+      })
+    );
   }
 };

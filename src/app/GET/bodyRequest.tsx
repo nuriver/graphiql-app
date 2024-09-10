@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { BodyRequestProps } from '../../core/types';
 import { handlePrettify } from '../../utils/handlePrettify';
+// import { useAppDispatch } from '../../store/store';
 
 const BodyRequest: React.FC<BodyRequestProps> = ({ body, setBody }) => {
   const [formattedBody, setFormattedBody] = useState<string>(body);

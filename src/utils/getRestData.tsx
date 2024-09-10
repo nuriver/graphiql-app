@@ -21,7 +21,7 @@ const getRestData = async (urlString: string) => {
       {}
     );
     const result = await fetch(requestData.endpoint, {
-      method: requestData.method,
+      method: 'POST',
       headers: {
         ...headersObject,
       },
