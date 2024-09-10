@@ -8,12 +8,12 @@ import { GraphiqlState, ResponseState } from '../../../core/types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Documentation from '../Response/Documentation';
-import introspectionQuery from '../../../data/introspectionQuery';
-import getGraphiqlData from '../../../utils/getGraphqlData';
 import {
   resetGraphiqlStore,
   setGraphiqlStore,
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
+import { getGraphiqlData, getGraphiqlSchema } from '../../actions';
+import addToHistory from '../../../utils/addToHistory';
 
 const GraphiqlMain = ({
   requestData,
@@ -44,33 +44,24 @@ const GraphiqlMain = ({
   const sendClickHandler = async () => {
     setDoc(undefined);
 
-    const data = await getGraphiqlData(encodedUrl);
-    if (data) {
-      setResponse(data);
+    const result = await getGraphiqlData(encodedUrl);
+    if (result.success) {
+      if (result.data && result.history) {
+        addToHistory(result.history);
+        setResponse(result.data);
+      }
+    } else {
+      toast.error(result.error);
     }
   };
 
   const getSchemaHandler = async () => {
     setDoc(undefined);
-    try {
-      const res = await fetch(sdlUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query: introspectionQuery,
-        }),
-      });
 
-      if (res.status !== 200) {
-        toast.error('Please enter valid SDL endpoint');
-      } else {
-        const schema = await res.json();
-        const schemaJson = JSON.stringify(schema, null, 2);
-        setDoc(schemaJson);
-      }
-    } catch (error) {
+    const result = await getGraphiqlSchema(sdlUrl);
+    if (result.success) {
+      setDoc(result.data);
+    } else {
       toast.error('Please enter valid SDL endpoint');
     }
   };
