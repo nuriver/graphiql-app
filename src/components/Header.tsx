@@ -6,10 +6,12 @@ import { signOut } from 'firebase/auth';
 import { useAuth } from '../authorization/AuthContext';
 import { auth } from '../authorization/firebase';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
-  const [isToggled, setIsToggled] = useState(false);
+  const { i18n } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
+  const [isToggled, setIsToggled] = useState(i18n.language === 'en'); // Начальное состояние зависит от текущего языка
   const router = useRouter();
   const { user } = useAuth();
 
@@ -29,7 +31,13 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    setIsToggled(i18n.language === 'en');
+  }, [i18n.language]);
+
   const handleToggle = () => {
+    const newLang = !isToggled ? 'en' : 'ru';
+    i18n.changeLanguage(newLang);
     setIsToggled(!isToggled);
   };
 
@@ -70,14 +78,14 @@ export default function Header() {
 
       {user ? (
         <button className="hoverline" onClick={handleSignOut}>
-          SIGN OUT
+          {i18n.t('SIGN OUT')}
         </button>
       ) : (
         <div className="header-btns">
           <button className="hoverline" onClick={handleSignIn}>
-            SIGN IN
+            {i18n.t('SIGN IN')}
           </button>
-          <button onClick={handleSignUp}>SIGN UP</button>
+          <button onClick={handleSignUp}>{i18n.t('SIGN UP')}</button>
         </div>
       )}
     </header>

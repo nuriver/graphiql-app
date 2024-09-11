@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../authorization/AuthContext';
 import Loading from '../app/loading';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 export default function Main() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { user } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(t('sign_in'));
   useEffect(() => {
     setIsMounted(true);
     setTimeout(() => {
@@ -29,50 +31,35 @@ export default function Main() {
         <div className="main-block-first main-logo-block">
           <div className="column">
             <h1>
-              Welcome back,{' '}
-              <span className="un-grad">{user.displayName || 'мда кринж'}</span>
+              {t('welcome')},{' '}
+              <span className="un-grad">
+                {user.displayName || t('default_user')}
+              </span>
             </h1>
             <Link href="/" className="main-btn">
-              Main Page
+              {t('main_page')}
             </Link>
           </div>
           <Link href="/" className="main-logo"></Link>
         </div>
 
         <div className="main-block-second">
-          <h3>How we can help you today?</h3>
+          <h3>{t('help')}</h3>
           <div className="main-buttons">
             <Link className="main-btn" href="/restfull-client">
-              REST Client
+              {t('rest_client')}
             </Link>
             <Link className="main-btn" href="/graphiql-client">
-              GraphiQL Client
+              {t('graphiql_client')}
             </Link>
             <Link className="main-btn" href="/history">
-              History
+              {t('history')}
             </Link>
           </div>
         </div>
         <div className="main-block-3">
-          <h3>About</h3>
-          <div className="about-text">
-            We are Alexei, Maria, and Kate, a passionate team of developers who
-            met during the Frontend course at RS School in May 2024. Since then,
-            we&apos;ve been working together seamlessly, continuing to develop
-            our skills and collaborate on exciting projects. After successfully
-            completing the Frontend course, we were inspired to dive even deeper
-            into the world of web development. Together, we enrolled in the
-            React course, eager to push our boundaries and explore new
-            possibilities. During this course, we successfully completed an
-            intriguing project &mdash; a client for REST and GraphQL APIs
-            &mdash; that challenged us to innovate and grow as developers. This
-            project not only showcased our technical skills but also our shared
-            passion for creating solutions that make a difference. The
-            experience was incredible, and we&apos;re deeply grateful to RS
-            School for providing us with the opportunity to learn so much and
-            connect with amazing people (all for free!). We&apos;re excited to
-            see where this journey takes us next!
-          </div>
+          <h3>{t('about')}</h3>
+          <div className="about-text">{t('about_text')}</div>
         </div>
       </main>
     );
@@ -81,12 +68,12 @@ export default function Main() {
   return (
     <main className="container main-logo-block">
       <div className="main-out">
-        <h1>Welcome!</h1>
+        <h1> {t('welcome')}!</h1>
         <button className="main-btn" onClick={handleSignIn}>
-          Sign In
+          {t('main_sign_in')}
         </button>
         <button className="main-btn" onClick={handleSignUp}>
-          Sign Up
+          {t('main_sign_up')}
         </button>
       </div>
       <Link href="/" className="main-logo"></Link>

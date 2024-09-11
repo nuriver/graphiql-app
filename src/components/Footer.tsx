@@ -1,17 +1,22 @@
+'use client';
+
+import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer>
       <div className="links">
-        MADE BY
+        {t('footer_made_by')}
         <a
           className="hoverline"
           href="https://github.com/nuriver"
           target="_blank"
           rel="noopener noreferrer"
         >
-          ALEXEI
+          {t('footer_alexei')}
         </a>
         ,
         <a
@@ -20,16 +25,16 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          MARIA
+          {t('footer_maria')}
         </a>{' '}
-        &
+        &amp;
         <a
           className="hoverline"
           href="https://github.com/aauroraaborealisrs"
           target="_blank"
           rel="noopener noreferrer"
         >
-          KATE
+          {t('footer_kate')}
         </a>
       </div>
 

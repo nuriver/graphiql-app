@@ -3,7 +3,7 @@ import MyRest from './MyRest';
 export default function Page({ params }: { params: { data?: string[] } }) {
   const slug = params.data as string[];
   let requestData;
-  let isRedirected;
+  // let isRedirected;
 
   if (slug) {
     const decodedRequestDataString = atob(slug[0]);
@@ -24,10 +24,10 @@ export default function Page({ params }: { params: { data?: string[] } }) {
 
     // const decodedRequestDataString = atob(slug[0]);
     // requestData = JSON.parse(decodedRequestDataString);
-    isRedirected = true;
+    // isRedirected = true;
   } else {
     requestData = null;
-    isRedirected = false;
+    // isRedirected = false;
   }
 
   return <MyRest requestData={requestData} />;

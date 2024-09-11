@@ -1,0 +1,19 @@
+{
+  "welcome": "Welcome",
+  "sign_in": "SIGN IN",
+  "sign_up": "SIGN UP",
+  "main_sign_in": "Sign in",
+  "main_sign_up": "Sign out",
+  "sign_out": "SIGN OUT",
+  "footer_made_by": "MADE BY",
+  "footer_alexei": "ALEXEI",
+  "footer_maria": "MARIA",
+  "footer_kate": "KATE",
+  "email": "email",
+  "password": "password",
+  "showPassword": "show password",
+  "main_page": "main page",
+  "help": "How we can help you today?",
+  "about": "About",
+  "about_text": "We are Alexei, Maria, and Kate, a passionate team of developers who met during the Frontend course at RS School in May 2024. Since then, we've been working together seamlessly, continuing to develop our skills and collaborate on exciting projects. After successfully completing the Frontend course, we were inspired to dive even deeper into the world of web development. Together, we enrolled in the React course, eager to push our boundaries and explore new possibilities. During this course, we successfully completed an intriguing project — a client for REST and GraphQL APIs — that challenged us to innovate and grow as developers. This project not only showcased our technical skills but also our shared passion for creating solutions that make a difference. The experience was incredible, and we're deeply grateful to RS School for providing us with the opportunity to learn so much and connect with amazing people (all for free!). We're excited to see where this journey takes us next!"
+}
