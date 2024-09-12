@@ -30,20 +30,3 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 export const useAppStore = useStore.withTypes<AppStore>();
-
-// import { configureStore } from '@reduxjs/toolkit';
-// import headersReducer from './headersSlice';
-// import type { HeadersState } from './headersSlice';
-
-// const store = configureStore({
-//   reducer: {
-//     headers: headersReducer,
-//   },
-// });
-
-// export type RootState = {
-//   headers: HeadersState;
-// };
-// export type AppDispatch = typeof store.dispatch;
-
-// export default store;

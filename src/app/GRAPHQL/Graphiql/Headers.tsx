@@ -42,6 +42,7 @@ export default function Headers({
     <div
       className="graphiql-headers-wrapper graphql-hidden-content"
       ref={headersRef}
+      data-testid="HeadersWrapper"
     >
       <header className="graphiql-headers-header">
         <h3>Headers</h3>
@@ -53,7 +54,11 @@ export default function Headers({
         >
           add headers
         </button>
-        <button className="content-toggle-button" onClick={contentToggle}>
+        <button
+          className="content-toggle-button"
+          role="toggle"
+          onClick={contentToggle}
+        >
           <span></span>
         </button>
       </header>
@@ -67,6 +72,7 @@ export default function Headers({
             <input
               type="text"
               className="graphiql-headers-key-input"
+              placeholder="header key"
               value={header.key}
               onChange={(event) => {
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {
@@ -80,6 +86,7 @@ export default function Headers({
             <input
               type="text"
               className="graphiql-headers-value-input"
+              placeholder="header value"
               value={header.value}
               onChange={(event) => {
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {

@@ -50,7 +50,7 @@ const RestfulSlice = createSlice({
       return initialState;
     },
     setRestfulStore(state, action: PayloadAction<RestfulState>) {
-      return action.payload;
+      return { ...state, ...action.payload };
     },
     setResponse(state, action: PayloadAction<ResponseState>) {
       state.response = action.payload;
