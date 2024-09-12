@@ -7,8 +7,10 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../authorization/firebase';
 import { signUpSchema } from '../../authorization/validationSchemas';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function SignUp() {
+  const { i18n } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -66,11 +68,11 @@ export default function SignUp() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)} className="column-fit">
-        <h2>Sign Up</h2>
+        <h2>{i18n.t('sign_up')}</h2>
         <div className="input-cont">
-          <p className="input-title">Name</p>
+          <p className="input-title">{i18n.t('name')}</p>
           <input
-            placeholder="Name"
+            placeholder={i18n.t('name')}
             {...register('name')}
             type="text"
             onInput={handleInput}
@@ -78,9 +80,9 @@ export default function SignUp() {
           {errors.name && <p className="sign-error">{errors.name.message}</p>}
         </div>
         <div className="input-cont">
-          <p className="input-title">Email</p>
+          <p className="input-title">{i18n.t('email')}</p>
           <input
-            placeholder="Email"
+            placeholder={i18n.t('email')}
             {...register('email')}
             type="email"
             onInput={handleInput}
@@ -88,9 +90,9 @@ export default function SignUp() {
           {errors.email && <p className="sign-error">{errors.email.message}</p>}
         </div>
         <div className="input-cont">
-          <p className="input-title">Password</p>
+          <p className="input-title">{i18n.t('password')}</p>
           <input
-            placeholder="Password"
+            placeholder={i18n.t('password')}
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
             onInput={handleInput}
@@ -103,13 +105,13 @@ export default function SignUp() {
             onClick={togglePasswordVisibility}
             className="toggle-password-btn"
           >
-            {showPassword ? 'Hide' : 'Show password'}
+            {showPassword ? i18n.t('hide_password') : i18n.t('show_password')}
           </button>
         </div>
         <div className="input-cont">
-          <p className="input-title">Confirm Password</p>
+          <p className="input-title">{i18n.t('confirm_password')}</p>
           <input
-            placeholder="Confirm Password"
+            placeholder={i18n.t('confirm_password')}
             {...register('confirmPassword')}
             type={showPassword ? 'text' : 'password'}
             onInput={handleInput}
@@ -122,12 +124,12 @@ export default function SignUp() {
             onClick={togglePasswordVisibility}
             className="toggle-password-btn"
           >
-            {showPassword ? 'Hide' : 'Show password'}
+            {showPassword ? i18n.t('hide_password') : i18n.t('show_password')}
           </button>
         </div>
         {fberror && <p className="fb-error">{fberror}</p>}
         <button className="sign-btn" type="submit" disabled={!isValid}>
-          Sign up
+          {i18n.t('sign_up')}
         </button>
       </form>
     </div>

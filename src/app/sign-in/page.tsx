@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../authorization/firebase';
 import { signInSchema } from '../../authorization/validationSchemas';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function SignIn() {
   const {
@@ -17,7 +18,7 @@ export default function SignIn() {
     resolver: yupResolver(signInSchema),
     mode: 'onChange',
   });
-
+  const { i18n } = useTranslation();
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function SignIn() {
       router.push('/');
       setError('');
     } catch (error) {
-      setError('We do not recognize you. Try again or sign up.');
+      setError(i18n.t('error_message'));
     }
   };
 
@@ -39,17 +40,21 @@ export default function SignIn() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)} className="column">
-        <h2>Sign in</h2>
+        <h2>{i18n.t('sign_in')}</h2>
         <div className="input-cont">
-          <p className="input-title">Email</p>
-          <input placeholder="Email" {...register('email')} type="email" />
+          <p className="input-title">{i18n.t('email')}</p>
+          <input
+            placeholder={i18n.t('email')}
+            {...register('email')}
+            type="email"
+          />
           {errors.email && <p className="sign-error">{errors.email.message}</p>}
         </div>
         <div className="input-cont">
-          <p className="input-title">Password</p>
+          <p className="input-title">{i18n.t('password')}</p>
           <div className="password-input">
             <input
-              placeholder="Password"
+              placeholder={i18n.t('password')}
               {...register('password')}
               type={showPassword ? 'text' : 'password'}
             />
@@ -59,7 +64,7 @@ export default function SignIn() {
             onClick={togglePasswordVisibility}
             className="toggle-password-btn"
           >
-            {showPassword ? 'Hide' : 'Show password'}
+            {showPassword ? i18n.t('hide_password') : i18n.t('show_password')}
           </button>
           {errors.password && (
             <p className="sign-error">{errors.password.message}</p>
@@ -67,7 +72,7 @@ export default function SignIn() {
         </div>
         {error && <p className="sign-error">{error}</p>}
         <button className="sign-btn" type="submit" disabled={!isValid}>
-          Sign in
+          {i18n.t('sign_in')}
         </button>
       </form>
     </div>

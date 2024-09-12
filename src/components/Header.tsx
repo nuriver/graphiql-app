@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 export default function Header() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
   const [isToggled, setIsToggled] = useState(i18n.language === 'en'); // Начальное состояние зависит от текущего языка
   const router = useRouter();
@@ -78,14 +78,14 @@ export default function Header() {
 
       {user ? (
         <button className="hoverline" onClick={handleSignOut}>
-          {i18n.t('SIGN OUT')}
+          {t('sign_out')}
         </button>
       ) : (
         <div className="header-btns">
           <button className="hoverline" onClick={handleSignIn}>
-            {i18n.t('SIGN IN')}
+            {t('sign_in')}
           </button>
-          <button onClick={handleSignUp}>{i18n.t('SIGN UP')}</button>
+          <button onClick={handleSignUp}>{t('sign_up')}</button>
         </div>
       )}
     </header>
