@@ -8,7 +8,7 @@ const HistoryEmpty = () => {
         <span>It&#39;s empty here. Try:</span>
       </p>
       <div className="client-links-wrapper">
-        <Link className="client-link" href={'/restfull-client'}>
+        <Link className="client-link" href={'/GET'}>
           REST Client
         </Link>
         <Link className="client-link" href={'/GRAPHQL'}>

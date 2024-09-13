@@ -47,10 +47,10 @@ export default function Main() {
         <div className="main-block-second">
           <h3>{t('help')}</h3>
           <div className="main-buttons">
-            <Link className="main-btn" href="/restfull-client">
+            <Link className="main-btn" href="/GET">
               {t('rest_client')}
             </Link>
-            <Link className="main-btn" href="/graphiql-client">
+            <Link className="main-btn" href="/GRAPHQL">
               {t('graphiql_client')}
             </Link>
             <Link className="main-btn" href="/history">
