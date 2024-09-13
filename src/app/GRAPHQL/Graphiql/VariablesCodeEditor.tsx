@@ -5,11 +5,13 @@ import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlVariables } from '../../../store/graphiqlFeatures/graphiqlSlice';
-import toastNonLatinError from '../../../utils/toastNonLatinError';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const variables = useAppSelector((state) => state.graphiql.variables);
 
   useEffect(() => {
@@ -26,10 +28,10 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
         setValue(value);
         dispatch(setGraphiqlVariables(value));
       } else {
-        toastNonLatinError();
+        toast.error(t('latin_warning'));
       }
     },
-    [dispatch]
+    [dispatch, t]
   );
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -62,9 +64,9 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
 
       event.preventDefault();
 
-      toastNonLatinError();
+      toast.error(t('latin_warning'));
     },
-    []
+    [t]
   );
 
   return (

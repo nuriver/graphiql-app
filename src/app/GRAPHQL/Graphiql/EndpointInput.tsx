@@ -4,9 +4,9 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlEndpoint } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { SendClickHandler } from '../../../core/types';
-import toastNonLatinError from '../../../utils/toastNonLatinError';
 import '../../../../i18n';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export default function EndpointInput({
   onClickHandler,
@@ -40,7 +40,7 @@ export default function EndpointInput({
       setValue(value);
       dispatch(setGraphiqlEndpoint(value));
     } else {
-      toastNonLatinError();
+      toast.error(t('latin_warning'));
     }
   };
 

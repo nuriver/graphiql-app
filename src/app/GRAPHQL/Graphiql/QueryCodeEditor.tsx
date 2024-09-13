@@ -10,7 +10,8 @@ import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { useAppDispatch } from '../../../store/store';
 import { setGraphiqlQuery } from '../../../store/graphiqlFeatures/graphiqlSlice';
-import toastNonLatinError from '../../../utils/toastNonLatinError';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 function QueryCodeEditor({
   updateUrl,
@@ -22,6 +23,7 @@ function QueryCodeEditor({
   setValue: Dispatch<SetStateAction<string>>;
 }) {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const onChange = useCallback(
     (value: string) => {
@@ -29,10 +31,10 @@ function QueryCodeEditor({
         setValue(value);
         dispatch(setGraphiqlQuery(value));
       } else {
-        toastNonLatinError();
+        toast.error(t('latin_warning'));
       }
     },
-    [dispatch, setValue]
+    [dispatch, setValue, t]
   );
 
   const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -65,9 +67,9 @@ function QueryCodeEditor({
 
       event.preventDefault();
 
-      toastNonLatinError();
+      toast.error(t('latin_warning'));
     },
-    []
+    [t]
   );
 
   return (

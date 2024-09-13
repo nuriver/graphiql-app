@@ -10,6 +10,7 @@ import { setGraphiqlUrl } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { GraphiqlState, SendClickHandler } from '../../../core/types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 export default function Graphiql({
   sendClickHandler,
@@ -20,6 +21,7 @@ export default function Graphiql({
   getSchemaHandler: () => void;
   isRedirected: boolean;
 }): JSX.Element {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const endpoint = useAppSelector((state) => state.graphiql.endpoint);
   const query = useAppSelector((state) => state.graphiql.query);
@@ -40,7 +42,7 @@ export default function Graphiql({
   const requestDataString = JSON.stringify(requestData);
   let finalRequestData: string;
   if (containsNonLatin1(requestDataString)) {
-    toast.error('Only Latin letters are allowed');
+    toast.error(t('latin_warning'));
   } else {
     const encodedRequestData = btoa(requestDataString);
     finalRequestData = encodedRequestData.replace(/=+$/, '');

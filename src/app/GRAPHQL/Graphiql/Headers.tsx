@@ -6,9 +6,9 @@ import {
   updateGraphiqlHeader,
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import toastNonLatinError from '../../../utils/toastNonLatinError';
 import '../../../../i18n';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export default function Headers({
   updateUrl,
@@ -81,7 +81,7 @@ export default function Headers({
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {
                   updateHeader(header.id, event.target.value, header.value);
                 } else {
-                  toastNonLatinError();
+                  toast.error(t('latin_warning'));
                 }
               }}
               onBlur={updateUrl}
@@ -95,7 +95,7 @@ export default function Headers({
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {
                   updateHeader(header.id, header.key, event.target.value);
                 } else {
-                  toastNonLatinError();
+                  toast.error(t('latin_warning'));
                 }
               }}
               onBlur={updateUrl}
@@ -103,6 +103,7 @@ export default function Headers({
           </div>
         ))}
       </main>
+      <p className="header-note">{t('headers_note')}</p>
     </div>
   );
 }

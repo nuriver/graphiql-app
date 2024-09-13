@@ -3,9 +3,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlSdl } from '../../../store/graphiqlFeatures/graphiqlSlice';
-import toastNonLatinError from '../../../utils/toastNonLatinError';
 import '../../../../i18n';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 export default function SdlInput({
   updateUrl,
@@ -30,7 +30,7 @@ export default function SdlInput({
       setValue(value);
       dispatch(setGraphiqlSdl(value));
     } else {
-      toastNonLatinError();
+      toast.error(t('latin_warning'));
     }
   };
 

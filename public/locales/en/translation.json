@@ -37,6 +37,7 @@
   "body": "Body",
   "revert": "Revert",
   "prettify": "Prettify",
+  "endpoint": "Endpoint URL",
   "method": "Method",
   "headers": "Headers",
   "header_key": "Header Key",
@@ -50,5 +51,9 @@
   "query": "Query",
   "variables": "Variables",
   "send_request_graph": "SEND REQUEST",
-  "get_schema": "GET SCHEMA"
+  "get_schema": "GET SCHEMA",
+  "latin_warning": "Only Latin letters are allowed",
+  "sdl_warning": "Please enter valid SDL endpoint",
+  "result_warning": "Please fill in correctly all necessary request data",
+  "headers_note": "*Please add at least a 'Content-Type: application/json' header for a successful request."
 }

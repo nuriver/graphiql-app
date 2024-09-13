@@ -22,7 +22,7 @@ h2 {
 .loader {
   width: 50px;
   aspect-ratio: 1;
-  --_c:no-repeat radial-gradient(farthest-side, #65558f 92%,#0000);
+  --_c: no-repeat radial-gradient(farthest-side, #65558f 92%, #0000);
   background: var(--_c) top, var(--_c) left, var(--_c) right, var(--_c) bottom;
   background-size: 12px 12px;
   animation: l7 1s infinite;
@@ -428,10 +428,12 @@ h2 {
 }
 .graphiql-page-wrapper .add-headers-button,
 .graphiql-page-wrapper .prettify-button {
-  width: 122px;
+  width: -moz-fit-content;
+  width: fit-content;
   height: 24px;
   border: none;
   background: none;
+  padding: 10px;
   border: 2px solid #65558f;
   border-radius: 15px;
   display: flex;
@@ -506,13 +508,15 @@ h2 {
   width: 100% !important;
 }
 .endpoint-wrapper button {
-  width: 100px;
+  width: -moz-fit-content;
+  width: fit-content;
   border: 2px solid #65558f;
   background: none;
   border-radius: 15px;
   font-size: 15px;
   color: #65558f;
   font-weight: 500;
+  padding: 5px;
   transition: all 0.2s ease-in-out;
 }
 .endpoint-wrapper button:hover {
@@ -580,6 +584,11 @@ h2 {
 .graphql-hidden-content {
   height: 80px;
   overflow: hidden;
+}
+
+.header-note {
+  color: #65558f;
+  padding-left: 5px;
 }
 
 .main-btn {

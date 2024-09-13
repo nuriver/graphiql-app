@@ -15,6 +15,7 @@ import {
 import { getGraphiqlData, getGraphiqlSchema } from '../../actions';
 import addToHistory from '../../../utils/addToHistory';
 import Loading from '../../loading';
+import { useTranslation } from 'react-i18next';
 
 const GraphiqlMain = ({
   requestData,
@@ -25,6 +26,7 @@ const GraphiqlMain = ({
 }) => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!requestData) {
@@ -54,7 +56,7 @@ const GraphiqlMain = ({
         setResponse(result.data);
       }
     } else {
-      toast.error(result.error);
+      toast.error(t('result_warning'));
       setResponse(initialResponse);
     }
     setIsLoading(false);
@@ -68,7 +70,7 @@ const GraphiqlMain = ({
     if (result.success) {
       setDoc(result.data);
     } else {
-      toast.error('Please enter valid SDL endpoint');
+      toast.error(t('sdl_warning'));
     }
     setIsLoading(false);
   };
