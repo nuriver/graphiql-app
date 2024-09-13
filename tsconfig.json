@@ -26,6 +26,12 @@
     ],
     "types": ["jest"]
   },
-  "include": ["./src", "./dist/types/**/*.ts", "./next-env.d.ts", "test/**/*"],
+  "include": [
+    "./src",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts",
+    "test/**/*",
+    "i18n.ts"
+  ],
   "exclude": ["./node_modules"]
 }

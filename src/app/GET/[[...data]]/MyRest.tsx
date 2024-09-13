@@ -9,6 +9,8 @@ import {
   setRestfulStore,
 } from '../../../store/restfulSlice';
 import { ResponseState, RestfulState } from '../../../core/types'; // Ensure correct path
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 interface MyRestProps {
   requestData: {
@@ -24,6 +26,7 @@ export default function MyRest({ requestData }: MyRestProps) {
   const dispatch = useAppDispatch();
   // const encodedUrl = useAppSelector((state) => state.restful.url);
   const response = useAppSelector((state) => state.restful.response);
+  const { t } = useTranslation();
 
   const defaultResponse: ResponseState = {
     body: null,
@@ -76,7 +79,7 @@ export default function MyRest({ requestData }: MyRestProps) {
     <div className="rest-client">
       <h1>REST Client</h1>
       <RequestBlock />
-      <h1>Response</h1>
+      <h1>{t('response')}</h1>
       <ResponseBlock response={response || defaultResponse} />{' '}
     </div>
   );

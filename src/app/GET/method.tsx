@@ -4,6 +4,8 @@ import { ChangeEvent, useEffect } from 'react';
 import { MethodProps } from '../../core/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setRestfulMethod } from '../../store/restfulSlice';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Method({ method, setMethod, updateUrl }: MethodProps) {
   const initialMethod = useAppSelector((state) => state.restful.method);
@@ -11,6 +13,7 @@ export default function Method({ method, setMethod, updateUrl }: MethodProps) {
   useEffect(() => {
     setMethod(initialMethod);
   }, [initialMethod, setMethod]);
+  const { t } = useTranslation();
 
   const onChangeHandler = (event: ChangeEvent) => {
     const select = event.target as HTMLSelectElement;
@@ -21,7 +24,7 @@ export default function Method({ method, setMethod, updateUrl }: MethodProps) {
 
   return (
     <div className="request__method">
-      <h2 className="method__title">Method</h2>
+      <h2 className="method__title">{t('method')}</h2>
       <div className="method__custom-select">
         <select
           value={method}

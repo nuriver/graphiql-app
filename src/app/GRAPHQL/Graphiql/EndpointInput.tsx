@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlEndpoint } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { SendClickHandler } from '../../../core/types';
 import toastNonLatinError from '../../../utils/toastNonLatinError';
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function EndpointInput({
   onClickHandler,
@@ -19,6 +21,7 @@ export default function EndpointInput({
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setValue(initialValue);
@@ -47,7 +50,7 @@ export default function EndpointInput({
         className="graphiql-endpoint-label"
         htmlFor="graphiql-endpoint-input"
       >
-        Endpoint URL
+        {t('endpoint')}
       </label>
       <div className="endpoint-wrapper">
         <input
@@ -55,12 +58,12 @@ export default function EndpointInput({
           type="text"
           className="graphiql-endpoint-input"
           id="graphiql-endpoint-input"
-          placeholder="Enter your GraphQL API endpoint"
+          placeholder={t('endpoint_placeholder')}
           onChange={onChangeHandler}
           onBlur={updateUrl}
           ref={inputRef}
         />
-        <button onClick={onClickHandler}>SEND REQUEST</button>
+        <button onClick={onClickHandler}>{t('send_request_graph')}</button>
       </div>
     </div>
   );

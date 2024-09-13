@@ -4,6 +4,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setGraphiqlSdl } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import toastNonLatinError from '../../../utils/toastNonLatinError';
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function SdlInput({
   updateUrl,
@@ -19,6 +21,7 @@ export default function SdlInput({
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
+  const { t } = useTranslation();
 
   const onChangeHandler = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
@@ -45,7 +48,7 @@ export default function SdlInput({
           onChange={onChangeHandler}
           onBlur={updateUrl}
         />
-        <button onClick={getSchemaHandler}>GET SCHEMA</button>
+        <button onClick={getSchemaHandler}>{t('get_schema')}</button>
       </div>
     </div>
   );

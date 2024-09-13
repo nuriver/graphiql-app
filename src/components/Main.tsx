@@ -6,6 +6,7 @@ import { useAuth } from '../authorization/AuthContext';
 import Loading from '../app/loading';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import '../../i18n';
 
 export default function Main() {
   const { t } = useTranslation();
