@@ -1,8 +1,8 @@
 'use client';
 
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuth } from '../authorization/AuthContext';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import Loading from '../app/loading';
 
 interface AuthGuardProps {
@@ -16,22 +16,39 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, loading } = useAuth();
+  const auth = getAuth();
+
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   const isPublicRoute = publicRoutes.includes(pathname);
 
   useEffect(() => {
-    if (!loading) {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+      setIsAuthChecked(true);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
+  useEffect(() => {
+    if (isAuthChecked && !loading) {
       if (!user && !isPublicRoute) {
         router.push('/');
-      }
-      if (user && (pathname === '/sign-in' || pathname === '/sign-up')) {
+      } else if (user && (pathname === '/sign-in' || pathname === '/sign-up')) {
         router.push('/');
       }
     }
-  }, [user, loading, router, isPublicRoute, pathname]);
+  }, [user, loading, router, isPublicRoute, pathname, isAuthChecked]);
 
-  if (loading) {
+  if (loading || !isAuthChecked) {
     return <Loading />;
+  }
+
+  if (!user && !isPublicRoute) {
+    router.push('/');
   }
 
   return <>{children}</>;
