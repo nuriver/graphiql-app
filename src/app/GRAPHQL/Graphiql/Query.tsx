@@ -5,6 +5,8 @@ import { useAppSelector } from '../../../store/store';
 import QueryCodeEditor from './QueryCodeEditor';
 import gqlPrettier from 'graphql-prettier';
 import { toast } from 'react-toastify';
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Query({
   updateUrl,
@@ -13,6 +15,7 @@ export default function Query({
 }): JSX.Element {
   const [value, setValue] = useState('');
   const query = useAppSelector((state) => state.graphiql.query);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setValue(query);
@@ -30,9 +33,9 @@ export default function Query({
   return (
     <div className="graphiql-query-wrapper">
       <div className="graphiql-query-header">
-        <h3>Query</h3>
+        <h3>{t('query')}</h3>
         <button className="prettify-button" onClick={prettifyHandler}>
-          prettify
+          {t('prettify')}
         </button>
       </div>
       <QueryCodeEditor

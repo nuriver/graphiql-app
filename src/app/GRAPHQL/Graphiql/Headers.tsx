@@ -7,6 +7,8 @@ import {
 } from '../../../store/graphiqlFeatures/graphiqlSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import toastNonLatinError from '../../../utils/toastNonLatinError';
+import '../../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Headers({
   updateUrl,
@@ -17,6 +19,7 @@ export default function Headers({
   const dispatch = useAppDispatch();
   const headersRef = useRef<HTMLDivElement>(null);
   const addHeaderRef = useRef<HTMLButtonElement>(null);
+  const { t } = useTranslation();
 
   const addHeader = () => {
     dispatch(addGraphiqlHeader());
@@ -45,14 +48,14 @@ export default function Headers({
       data-testid="HeadersWrapper"
     >
       <header className="graphiql-headers-header">
-        <h3>Headers</h3>
+        <h3>{t('headers')}</h3>
         <button
           className="add-headers-button"
           onClick={addHeader}
           ref={addHeaderRef}
           disabled={true}
         >
-          add headers
+          {t('add_header')}
         </button>
         <button
           className="content-toggle-button"
@@ -64,15 +67,15 @@ export default function Headers({
       </header>
       <main className="graphiql-headers-main">
         <div className="graphiql-headers-name-wrapper">
-          <h4>Header key</h4>
-          <h4>Header value</h4>
+          <h4>{t('header_key')}</h4>
+          <h4>{t('header_value')}</h4>
         </div>
         {headers.map((header) => (
           <div className="graphiql-headers-pairs-wrapper" key={header.id}>
             <input
               type="text"
               className="graphiql-headers-key-input"
-              placeholder="header key"
+              placeholder={t('header_key')}
               value={header.key}
               onChange={(event) => {
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {
@@ -86,7 +89,7 @@ export default function Headers({
             <input
               type="text"
               className="graphiql-headers-value-input"
-              placeholder="header value"
+              placeholder={t('header_value')}
               value={header.value}
               onChange={(event) => {
                 if (/^[\x00-\x7F]*$/.test(event.target.value)) {

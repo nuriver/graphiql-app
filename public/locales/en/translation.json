@@ -36,5 +36,19 @@
   "go_back_home": "Go back to home page",
   "body": "Body",
   "revert": "Revert",
-  "prettify": "Prettify"
+  "prettify": "Prettify",
+  "method": "Method",
+  "headers": "Headers",
+  "header_key": "Header Key",
+  "header_value": "Header value",
+  "add_header": "Add header",
+  "remove_header": "Remove",
+  "status": "Status",
+  "send_request": "Send request",
+  "response": "Response",
+  "endpoint_placeholder": "Enter your GraphQL API endpoint",
+  "query": "Query",
+  "variables": "Variables",
+  "send_request_graph": "SEND REQUEST",
+  "get_schema": "GET SCHEMA"
 }

@@ -4,6 +4,8 @@ import { ChangeEvent, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/store';
 import toastNonLatinError from '../../utils/toastNonLatinError';
 import { setRestfulEndpoint } from '../../store/restfulSlice';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 interface EndpointProps {
   endpoint: string;
@@ -18,6 +20,7 @@ export default function Endpoint({
 }: EndpointProps) {
   const initialEndpoint = useAppSelector((state) => state.restful.endpoint);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setEndpoint(initialEndpoint);
@@ -41,7 +44,7 @@ export default function Endpoint({
 
   return (
     <div className="request__endpoint">
-      <h2 className="endpoint__title">Endpoint URL</h2>
+      <h2 className="endpoint__title">{t('endpoint')}</h2>
       <input
         value={endpointSaved}
         type="text"

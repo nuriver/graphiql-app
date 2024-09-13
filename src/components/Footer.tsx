@@ -2,6 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
+import '../../i18n';
 
 export default function Footer() {
   const { t } = useTranslation();

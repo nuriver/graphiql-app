@@ -11,12 +11,14 @@ import isDisabled from '../../utils/isDisabled';
 import { RestfulState } from '../../core/types';
 import { toast } from 'react-toastify';
 import { setRestfulUrl } from '../../store/restfulSlice';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const RequestBlock: React.FC = () => {
   const [endpoint, setEndpoint] = useState<string>('');
   const [method, setMethod] = useState<string>('GET');
   const [body, setBody] = useState<string>('');
-
+  const { t } = useTranslation();
   const headers = useAppSelector((state) => state.restful.headers);
   const dispatch = useAppDispatch();
 
@@ -74,7 +76,7 @@ const RequestBlock: React.FC = () => {
         disabled={isDisabled([endpoint])}
         className="request__send-button"
       >
-        Send Request
+        {t('send_request')}
       </button>
     </div>
   );

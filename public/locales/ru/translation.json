@@ -36,5 +36,20 @@
   "go_back_home": "Вернуться на главную страницу",
   "body": "Тело",
   "revert": "Вернуть",
-  "prettify": "Форматировать"
+  "prettify": "Форматировать",
+  "endpoint": "Конечная точка URL",
+  "method": "Метод",
+  "headers": "Заголовки",
+  "header_key": "Ключ заголовка",
+  "header_value": "Значение заголовка",
+  "add_header": "Добавить заголовок",
+  "remove_header": "Удалить",
+  "status": "Статус",
+  "send_request": "Отправить запрос",
+  "response": "Ответ",
+  "endpoint_placeholder": "Введите конечную точку GraphQL API",
+  "query": "Запрос",
+  "variables": "Переменные",
+  "send_request_graph": "ОТПРАВИТЬ ЗАПРОС",
+  "get_schema": "ПОЛУЧИТЬ СХЕМУ"
 }

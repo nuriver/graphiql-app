@@ -8,9 +8,10 @@ import { auth } from '../../authorization/firebase';
 import { signUpSchema } from '../../authorization/validationSchemas';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import '../../../i18n';
 
 export default function SignUp() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -68,7 +69,7 @@ export default function SignUp() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)} className="column-fit">
-        <h2>{i18n.t('sign_up')}</h2>
+        <h2>{t('sign_up')}</h2>
         <div className="input-cont">
           <p className="input-title">{i18n.t('name')}</p>
           <input

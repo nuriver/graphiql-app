@@ -5,12 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { addHeader, removeHeader } from '../../store/restfulSlice';
 import { isDisabled } from '../../utils/isDisabled';
+import '../../../i18n';
+import { useTranslation } from 'react-i18next';
 
 const Headers: React.FC = () => {
   const [headerKey, setHeaderKey] = useState('');
   const [headerValue, setHeaderValue] = useState('');
   const headers = useSelector((state: RootState) => state.restful.headers);
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
 
   const handleAddHeader = () => {
     if (headerKey && headerValue) {
@@ -26,19 +29,19 @@ const Headers: React.FC = () => {
 
   return (
     <div className="request__headers">
-      <h2>Headers</h2>
+      <h2>{t('headers')}</h2>
       <div className="headers__add-header">
         <input
           className="rest__input"
           type="text"
-          placeholder="Header Key"
+          placeholder={t('header_key')}
           value={headerKey}
           onChange={(e) => setHeaderKey(e.target.value)}
         />
         <input
           className="rest__input"
           type="text"
-          placeholder="Header Value"
+          placeholder={t('header_value')}
           value={headerValue}
           onChange={(e) => setHeaderValue(e.target.value)}
         />
@@ -47,7 +50,7 @@ const Headers: React.FC = () => {
           disabled={isDisabled([headerKey, headerValue])}
           onClick={handleAddHeader}
         >
-          Add Header
+          {t('add_header')}
         </button>
       </div>
       <div
@@ -66,7 +69,7 @@ const Headers: React.FC = () => {
               className="rest__button"
               onClick={() => handleRemoveHeader(index)}
             >
-              Remove
+              {t('remove_header')}
             </button>
           </div>
         ))}
