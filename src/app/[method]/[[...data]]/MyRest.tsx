@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import RequestBlock from '../requestBlock';
 import ResponseBlock from '../responseBlock';
 import '../../../styles/main.scss';
@@ -8,9 +8,12 @@ import {
   resetRestfulStore,
   setRestfulStore,
 } from '../../../store/restfulSlice';
-import { ResponseState, RestfulState } from '../../../core/types'; // Ensure correct path
+import { ResponseState, RestfulState } from '../../../core/types';
 import '../../../../i18n';
 import { useTranslation } from 'react-i18next';
+import getRestData from '../../../utils/getRestData';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface MyRestProps {
   requestData: {
@@ -24,33 +27,20 @@ interface MyRestProps {
 
 export default function MyRest({ requestData }: MyRestProps) {
   const dispatch = useAppDispatch();
-  // const encodedUrl = useAppSelector((state) => state.restful.url);
-  const response = useAppSelector((state) => state.restful.response);
+  const encodedUrl = useAppSelector((state) => state.restful.url);
+  // const response = useAppSelector((state) => state.restful.response);
   const { t } = useTranslation();
-
   const defaultResponse: ResponseState = {
     body: null,
     status: null,
     statusText: null,
   };
+  const [response, setResponse] = useState(defaultResponse);
 
   useEffect(() => {
     if (!requestData) {
       console.log('No requestData found, resetting store...');
-      //   const restfulState: RestfulState = {
-      //     endpoint: requestData.endpoint,
-      //     method: requestData.method || 'GET',
-      //     body: requestData.body || '',
-      //     headers: Object.entries(requestData.headers || {}).map(
-      //       ([key, value]) => ({ headerKey: key, headerValue: value })
-      //     ),
-      //     response: null,
-      //     url: '',
-      //     variables: '',
-      //   };
       dispatch(resetRestfulStore());
-
-      //   dispatch(setRestfulStore(restfulState));
     } else {
       const headersArray = Object.entries(requestData.headers || {}).map(
         ([key, value]) => ({ headerKey: key, headerValue: value })
@@ -69,18 +59,31 @@ export default function MyRest({ requestData }: MyRestProps) {
 
       // Dispatch the restfulState
       dispatch(setRestfulStore(restfulState));
-      //
-      //   dispatch(resetRestfulStore());
     }
   }, [dispatch, requestData]);
+
+  const requestHandler = async () => {
+    if (encodedUrl) {
+      const response = await getRestData(encodedUrl);
+      console.log(response);
+      if (response) {
+        console.log(response);
+        setResponse(response);
+      } else {
+        toast.error(t('result_warning'));
+      }
+    }
+  };
+
   const responseToConsole = useAppSelector((state) => state.restful.response);
   console.log('Response in MyRest:', responseToConsole);
   return (
     <div className="rest-client">
+      <ToastContainer />
       <h1>REST Client</h1>
-      <RequestBlock />
+      <RequestBlock requestHandler={requestHandler} />
       <h1>{t('response')}</h1>
-      <ResponseBlock response={response || defaultResponse} />{' '}
+      <ResponseBlock response={response} />{' '}
     </div>
   );
 }

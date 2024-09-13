@@ -1,5 +1,5 @@
 import { ResponseProps } from '../../../core/types';
-import ResponseBlock from '../../GET/responseBlock';
+import ResponseBlock from '../../[method]/responseBlock';
 import '../../../../i18n';
 import { useTranslation } from 'react-i18next';
 
