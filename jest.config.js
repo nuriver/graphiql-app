@@ -17,6 +17,8 @@ module.exports = {
     '!src/app/not-found.tsx',
     '!src/app/page.tsx',
     '!src/app/authorization/firebase.ts',
+    '!src/store/graphiqlFeatures/graphiqlSlice.ts',
+    '!src/store/restfulSlice.ts',
   ],
   transform: {
     '^.+\\.(ts|tsx)$': [

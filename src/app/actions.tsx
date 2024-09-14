@@ -99,7 +99,12 @@ export const getGraphiqlSchema = async (sdlUrl: string) => {
 
 export const getRestData = async (urlString: string) => {
   try {
-    const decodedRequestData = atob(urlString);
+    let decodedRequestData;
+    try {
+      decodedRequestData = atob(urlString);
+    } catch (err) {
+      throw new Error('Invalid base64 string');
+    }
     const requestData: RestfulState = JSON.parse(decodedRequestData);
     const receivedHeaders = requestData.headers;
     const headersObject = receivedHeaders.reduce<Record<string, string>>(
@@ -117,7 +122,7 @@ export const getRestData = async (urlString: string) => {
       try {
         JSON.parse(body);
       } catch (err) {
-        throw new Error();
+        throw new Error('Invalid JSON body');
       }
     }
 

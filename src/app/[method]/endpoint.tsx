@@ -2,11 +2,11 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/store';
-import toastNonLatinError from '../../utils/toastNonLatinError';
 import { setRestfulEndpoint } from '../../store/restfulSlice';
 import '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import { usePathname } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function Endpoint({ updateUrl }: { updateUrl: () => void }) {
   const initialEndpoint = useAppSelector((state) => state.restful.endpoint);
@@ -29,7 +29,7 @@ export default function Endpoint({ updateUrl }: { updateUrl: () => void }) {
       setValue(endpoint);
       dispatch(setRestfulEndpoint(endpoint));
     } else {
-      toastNonLatinError();
+      toast.error(t('latin_warning'));
     }
   };
 
