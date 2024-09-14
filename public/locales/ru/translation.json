@@ -55,5 +55,6 @@
   "latin_warning": "Используйте только латинские буквы",
   "sdl_warning": "Пожалуйста, введите валидый URL для SDL",
   "result_warning": "Пожалуйста, заполните правильно все необходимые данные",
-  "headers_note": "*Для успешного запроса необходимо добавить хотя бы один заголовок 'Content-Type: application/json'."
+  "headers_note": "*Для успешного запроса необходимо добавить хотя бы один заголовок 'Content-Type: application/json'.",
+  "json_warning": "Невалидный JSON"
 }

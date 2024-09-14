@@ -4,7 +4,6 @@ import BodyResponse from './bodyResponse';
 import Status from './status';
 
 const ResponseBlock: React.FC<ResponseProps> = ({ response }) => {
-  console.log('Response in ResponseBlock:', response);
   return (
     <div className="rest-client__response">
       <Status status={response.status} statusText={response.statusText} />

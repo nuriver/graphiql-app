@@ -1,19 +1,19 @@
 import MyRest from './MyRest';
 
-export default function Page({ params }: { params: { slug?: string[] } }) {
-  const slug = params.slug as string[];
+export default function Page({
+  params,
+}: {
+  params: { method?: string; data: string[] };
+}) {
+  const data = params.data as string[];
+
   let requestData;
-  // let isRedirected;
 
-  console.log('im here');
-
-  if (slug) {
-    const decodedRequestDataString = atob(slug[0]);
+  if (data) {
+    const decodedRequestDataString = atob(data[0]);
     requestData = JSON.parse(decodedRequestDataString);
-    // isRedirected = true;
   } else {
     requestData = null;
-    // isRedirected = false;
   }
 
   return <MyRest requestData={requestData} />;

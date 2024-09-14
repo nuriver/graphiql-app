@@ -6,12 +6,16 @@ import toastNonLatinError from '../../utils/toastNonLatinError';
 import { setRestfulEndpoint } from '../../store/restfulSlice';
 import '../../../i18n';
 import { useTranslation } from 'react-i18next';
+import { usePathname } from 'next/navigation';
 
 export default function Endpoint({ updateUrl }: { updateUrl: () => void }) {
   const initialEndpoint = useAppSelector((state) => state.restful.endpoint);
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const splitPath = pathname.split('/');
+  const isFocused = splitPath[2] ? true : false;
 
   useEffect(() => {
     setValue(initialEndpoint);
@@ -38,6 +42,7 @@ export default function Endpoint({ updateUrl }: { updateUrl: () => void }) {
         className="rest__input"
         onChange={onChangeHandler}
         onBlur={updateUrl}
+        autoFocus={isFocused}
       />
     </div>
   );

@@ -34,7 +34,6 @@ export const graphiqlSlice = createSlice({
         header.key = key;
         header.value = value;
       }
-      console.log(state.headers);
     },
     clearGraphiqlHeaders: (state) => {
       state.headers = [{ id: nanoid(), key: '', value: '' }];

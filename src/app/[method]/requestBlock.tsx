@@ -37,7 +37,6 @@ const RequestBlock = ({ requestHandler }: { requestHandler: () => void }) => {
   } else {
     const encodedRequestData = btoa(requestDataString);
     finalRequestData = encodedRequestData.replace(/=+$/, '');
-    console.log(atob(finalRequestData));
   }
 
   const updateUrl = () => {
@@ -53,8 +52,8 @@ const RequestBlock = ({ requestHandler }: { requestHandler: () => void }) => {
         <Method updateUrl={updateUrl} />
         <Endpoint updateUrl={updateUrl} />
       </div>
-      <Headers />
-      <BodyRequest />
+      <Headers updateUrl={updateUrl} />
+      <BodyRequest updateUrl={updateUrl} />
       <button
         onClick={requestHandler}
         disabled={isDisabled([endpoint])}

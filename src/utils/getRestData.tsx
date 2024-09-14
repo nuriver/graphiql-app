@@ -12,8 +12,8 @@ const getRestData = async (urlString: string) => {
     const receivedHeaders = requestData.headers;
     const headersObject = receivedHeaders.reduce<Record<string, string>>(
       (acc, header) => {
-        if (header.headerKey) {
-          acc[header.headerKey] = header.headerValue;
+        if (header.key) {
+          acc[header.key] = header.value;
         }
         return acc;
       },
@@ -49,7 +49,7 @@ const getRestData = async (urlString: string) => {
     addToHistory(historyRestObject);
     return response;
   } catch (error) {
-    return;
+    return { error: error };
   }
 };
 
