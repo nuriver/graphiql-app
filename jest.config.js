@@ -15,8 +15,10 @@ module.exports = {
     '!src/app/layout.tsx',
     '!src/app/loading.tsx',
     '!src/app/not-found.tsx',
+    '!src/app/ErrorBoundary.tsx',
     '!src/app/page.tsx',
     '!src/app/authorization/firebase.ts',
+    '!src/app/authorization/validationSchemas.ts',
   ],
   transform: {
     '^.+\\.(ts|tsx)$': [
