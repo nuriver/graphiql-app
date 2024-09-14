@@ -11,18 +11,14 @@ import '../../i18n';
 export default function Main() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  console.log(t('sign_in'));
+
   useEffect(() => {
     setIsMounted(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <Loading />;
   }
 
@@ -34,6 +30,7 @@ export default function Main() {
             <h1>
               {t('welcome')},{' '}
               <span className="un-grad">
+                {' '}
                 {user.displayName || t('default_user')}
               </span>
             </h1>
@@ -69,7 +66,7 @@ export default function Main() {
   return (
     <main className="container main-logo-block">
       <div className="main-out">
-        <h1> {t('welcome')}!</h1>
+        <h1>{t('welcome')}!</h1>
         <button className="main-btn" onClick={handleSignIn}>
           {t('main_sign_in')}
         </button>
@@ -78,10 +75,6 @@ export default function Main() {
         </button>
       </div>
       <Link href="/" className="main-logo"></Link>
-
-      <div className="center">
-        <div className="loader" role="status"></div>
-      </div>
     </main>
   );
 

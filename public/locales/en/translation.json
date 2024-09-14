@@ -3,7 +3,7 @@
   "sign_in": "SIGN IN",
   "sign_up": "SIGN UP",
   "main_sign_in": "Sign in",
-  "main_sign_up": "Sign out",
+  "main_sign_up": "Sign up",
   "sign_out": "SIGN OUT",
   "footer_made_by": "MADE BY",
   "footer_alexei": "ALEXEI",
@@ -17,7 +17,7 @@
   "help": "How we can help you today?",
   "about": "About",
   "about_text": "We are Alexei, Maria, and Kate, a passionate team of developers who met during the Frontend course at RS School in May 2024. Since then, we've been working together seamlessly, continuing to develop our skills and collaborate on exciting projects. After successfully completing the Frontend course, we were inspired to dive even deeper into the world of web development. Together, we enrolled in the React course, eager to push our boundaries and explore new possibilities. During this course, we successfully completed an intriguing project — a client for REST and GraphQL APIs — that challenged us to innovate and grow as developers. This project not only showcased our technical skills but also our shared passion for creating solutions that make a difference. The experience was incredible, and we're deeply grateful to RS School for providing us with the opportunity to learn so much and connect with amazing people (all for free!). We're excited to see where this journey takes us next!",
-  "default_user": "Yeah, cringe",
+  "default_user": "user",
   "error_message": "We do not recognize you. Try again or sign up.",
   "name": "name",
   "name_required": "Name is required",
@@ -29,7 +29,7 @@
   "password_letter_required": "Password must contain at least one letter",
   "password_digit_required": "Password must contain at least one digit",
   "password_special_char_required": "Password must contain at least one special character",
-  "confirm_password": "Confirm password is required",
+  "confirm_password": "password confirmation is required",
   "passwords_must_match": "Passwords must match",
   "not_found_title": "404: Page Not Found",
   "not_found_description": "Sorry, the page you're looking for doesn't exist.",
@@ -57,4 +57,9 @@
   "result_warning": "Please fill in correctly all necessary request data",
   "headers_note": "*Please add at least a 'Content-Type: application/json' header for a successful request.",
   "json_warning": "Invalid JSON"
+  "error_warning": "Something went wrong!",
+  "error_proposal": "Try again",
+  "not_found": "404: Page Not Found",
+  "not_found_warning": "Sorry, the page you're looking for doesn't exist.",
+  "go_back": "Go back to home page"
 }

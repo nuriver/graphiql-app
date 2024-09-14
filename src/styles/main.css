@@ -40,7 +40,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgb(255, 255, 255);
 }
 
 .rest-client {
@@ -706,6 +706,7 @@ h2 {
   transition: color 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
   text-decoration: none;
+  margin-top: 20px;
 }
 
 .main-btn:hover {
