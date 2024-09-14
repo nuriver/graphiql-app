@@ -1,4 +1,3 @@
-import { RestfulHeader } from '../store/restfulSlice';
 import { AppDispatch } from '../store/store';
 
 export interface ResponseBody {
@@ -64,6 +63,15 @@ export interface HandleRequestProps {
   body: string;
   headers: Record<string, string>;
   dispatch: AppDispatch;
+}
+export interface RestfulHeader {
+  id: string;
+  key: string;
+  value: string;
+}
+
+export interface HeadersState {
+  headers: RestfulHeader[];
 }
 export interface RestfulState {
   method: string;

@@ -1,6 +1,6 @@
 'use server';
 
-import { GraphiqlState, HistoryObject } from '../core/types';
+import { GraphiqlState, HistoryObject, RestfulState } from '../core/types';
 import introspectionQuery from '../data/introspectionQuery';
 
 function isError(error: unknown): error is Error {
@@ -93,6 +93,77 @@ export const getGraphiqlSchema = async (sdlUrl: string) => {
       error: isError(error)
         ? 'Please enter valid SDL endpoint'
         : 'Unknown error',
+    };
+  }
+};
+
+export const getRestData = async (urlString: string) => {
+  try {
+    const decodedRequestData = atob(urlString);
+    const requestData: RestfulState = JSON.parse(decodedRequestData);
+    const receivedHeaders = requestData.headers;
+    const headersObject = receivedHeaders.reduce<Record<string, string>>(
+      (acc, header) => {
+        if (header.key) {
+          acc[header.key] = header.value;
+        }
+        return acc;
+      },
+      {}
+    );
+    const body = requestData.body;
+    const method = requestData.method;
+    if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+      try {
+        JSON.parse(body);
+      } catch (err) {
+        throw new Error();
+      }
+    }
+
+    const result = await fetch(requestData.endpoint, {
+      method: requestData.method,
+      headers: {
+        ...headersObject,
+      },
+      body:
+        body && (method === 'POST' || method === 'PUT' || method === 'PATCH')
+          ? body
+          : undefined,
+    });
+
+    const contentType = result.headers.get('Content-Type') || '';
+    let restfulData;
+
+    if (result.status >= 200 && result.status < 300) {
+      if (contentType.includes('application/json')) {
+        restfulData = await result.json();
+      } else {
+        restfulData = await result.text();
+      }
+    } else if (result.status === 204) {
+      restfulData = '';
+    }
+
+    const historyRestObject: HistoryObject = {
+      method: method,
+      endpoint: requestData.endpoint,
+      url: urlString,
+    };
+
+    return {
+      success: true,
+      data: {
+        status: result.status,
+        statusText: result.statusText,
+        body: restfulData,
+      },
+      history: historyRestObject,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: isError(error) ? error.message : 'Unknown error',
     };
   }
 };

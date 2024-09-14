@@ -56,6 +56,7 @@
   "sdl_warning": "Please enter valid SDL endpoint",
   "result_warning": "Please fill in correctly all necessary request data",
   "headers_note": "*Please add at least a 'Content-Type: application/json' header for a successful request.",
+  "json_warning": "Invalid JSON"
   "error_warning": "Something went wrong!",
   "error_proposal": "Try again",
   "not_found": "404: Page Not Found",

@@ -31,9 +31,9 @@ h2 {
 }
 
 .center {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  position: fixed; /* Changed to fixed to ensure it stays in view */
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;

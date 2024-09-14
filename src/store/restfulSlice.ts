@@ -1,18 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RestfulState, ResponseState } from '../core/types';
-export interface RestfulHeader {
-  headerKey: string;
-  headerValue: string;
-}
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { RestfulState, ResponseState, RestfulHeader } from '../core/types';
 
-export interface HeadersState {
-  headers: RestfulHeader[];
-}
 const initialState: RestfulState = {
   method: 'GET',
   endpoint: '',
   body: '',
-  headers: [],
+  headers: [{ id: nanoid(), key: '', value: '' }],
   variables: '',
   url: '',
   response: null,
@@ -25,10 +18,21 @@ const RestfulSlice = createSlice({
     addHeader(state, action) {
       state.headers.push(action.payload);
     },
+    addRestfulHeader: (state) => {
+      state.headers.push({ id: nanoid(), key: '', value: '' });
+    },
     removeHeader(state, action: PayloadAction<number>) {
       state.headers = state.headers.filter(
         (_, index) => index !== action.payload
       );
+    },
+    updateRestfulHeader: (state, action: PayloadAction<RestfulHeader>) => {
+      const { id, key, value } = action.payload;
+      const header = state.headers.find((header) => header.id === id);
+      if (header) {
+        header.key = key;
+        header.value = value;
+      }
     },
     setRestfulMethod(state, action: PayloadAction<string>) {
       state.method = action.payload;
@@ -69,6 +73,8 @@ export const {
   resetRestfulStore,
   setRestfulStore,
   setResponse,
+  addRestfulHeader,
+  updateRestfulHeader,
 } = RestfulSlice.actions;
 
 export default RestfulSlice.reducer;
