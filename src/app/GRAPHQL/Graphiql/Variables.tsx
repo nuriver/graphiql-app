@@ -25,10 +25,15 @@ export default function Variables({
     <div
       className="graphiql-variables-wrapper graphql-hidden-content"
       ref={variablesRef}
+      role="region"
     >
       <header className="graphiql-variables-header">
         <h3>{t('variables')}</h3>
-        <button className="content-toggle-button" onClick={contentToggle}>
+        <button
+          className="content-toggle-button"
+          role="toggle"
+          onClick={contentToggle}
+        >
           <span></span>
         </button>
       </header>

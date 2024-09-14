@@ -17,7 +17,7 @@ describe('Headers Component', () => {
       </Provider>
     );
 
-    const addButton = screen.getByText(/add headers/i);
+    const addButton = screen.getByText(/add header/i);
     expect(addButton).toBeDisabled();
     expect(screen.getByText('Headers')).toBeInTheDocument();
   });
@@ -32,7 +32,7 @@ describe('Headers Component', () => {
     const toggleButton = screen.getByRole('toggle');
     fireEvent.click(toggleButton);
 
-    const addButton = screen.getByText(/add headers/i);
+    const addButton = screen.getByText(/add header/i);
     fireEvent.click(addButton);
 
     const newHeaderKeyInput = screen.getByPlaceholderText(/header key/i);
@@ -65,7 +65,7 @@ describe('Headers Component', () => {
 
     const headersWrapper = screen.getByTestId('HeadersWrapper');
     const toggleButton = screen.getByRole('toggle');
-    const addButton = screen.getByText(/add headers/i);
+    const addButton = screen.getByText(/add header/i);
 
     expect(headersWrapper).toHaveClass('graphql-hidden-content');
     expect(addButton).toBeDisabled();

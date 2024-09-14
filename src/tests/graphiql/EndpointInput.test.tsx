@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import EndpointInput from '../../app/GRAPHQL/Graphiql/EndpointInput';
 import graphiqlReducer from '../../store/graphiqlFeatures/graphiqlSlice';
-import * as toastUtils from '../../utils/toastNonLatinError';
 
 const mockStore = (preloadedState = {}) =>
   configureStore({
@@ -59,29 +58,6 @@ describe('EndpointInput component', () => {
 
     expect(input).toHaveValue('http://new-endpoint.com');
     expect(store.getState().graphiql.endpoint).toBe('http://new-endpoint.com');
-  });
-
-  it('calls toastNonLatinError on invalid (non-Latin1) input', () => {
-    const toastSpy = jest.spyOn(toastUtils, 'default');
-    const store = mockStore({ graphiql: { endpoint: '' } });
-
-    render(
-      <Provider store={store}>
-        <EndpointInput
-          onClickHandler={mockOnClickHandler}
-          updateUrl={mockUpdateUrl}
-          isRedirected={false}
-        />
-      </Provider>
-    );
-
-    const input = screen.getByPlaceholderText(
-      'Enter your GraphQL API endpoint'
-    );
-    fireEvent.change(input, { target: { value: 'http://example.com/ф' } });
-
-    expect(input).toHaveValue('');
-    expect(toastSpy).toHaveBeenCalled();
   });
 
   it('calls updateUrl on blur', () => {

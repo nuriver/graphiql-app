@@ -5,6 +5,7 @@ import {
   KeyboardEventHandler,
   SetStateAction,
   useCallback,
+  useRef,
 } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
@@ -24,6 +25,7 @@ function QueryCodeEditor({
 }) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const codeMirrorRef = useRef(null);
 
   const onChange = useCallback(
     (value: string) => {
@@ -74,6 +76,7 @@ function QueryCodeEditor({
 
   return (
     <CodeMirror
+      role="editor"
       value={value}
       height="200px"
       extensions={[json()]}
@@ -84,6 +87,7 @@ function QueryCodeEditor({
       }}
       onBlur={updateUrl}
       onKeyDown={handleKeyDown}
+      ref={codeMirrorRef}
     />
   );
 }

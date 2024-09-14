@@ -81,6 +81,7 @@ function VariablesCodeEditor({ updateUrl }: { updateUrl: () => void }) {
       }}
       onBlur={updateUrl}
       onKeyDown={handleKeyDown}
+      role="editor"
     />
   );
 }
