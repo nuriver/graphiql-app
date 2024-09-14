@@ -61,5 +61,8 @@
   "error_proposal": "Try again",
   "not_found": "404: Page Not Found",
   "not_found_warning": "Sorry, the page you're looking for doesn't exist.",
-  "go_back": "Go back to home page"
+  "go_back": "Go back to home page",
+  "history": "History Requests",
+  "history_no_requests": "You haven't executed any requests",
+  "history_proposal": "It's empty here. Try:"
 }
