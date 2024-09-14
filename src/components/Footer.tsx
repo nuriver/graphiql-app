@@ -3,10 +3,16 @@
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import '../../i18n';
+import { useEffect } from 'react';
 
 export default function Footer() {
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+      i18n.changeLanguage(savedLang);
+    }
+  }, [i18n]);
   return (
     <footer>
       <div className="links">

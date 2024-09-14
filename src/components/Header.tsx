@@ -32,12 +32,17 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setIsToggled(i18n.language === 'en');
-  }, [i18n.language]);
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+      i18n.changeLanguage(savedLang);
+      setIsToggled(savedLang === 'en');
+    }
+  }, [i18n]);
 
   const handleToggle = () => {
     const newLang = !isToggled ? 'en' : 'ru';
     i18n.changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
     setIsToggled(!isToggled);
   };
 
@@ -49,7 +54,7 @@ export default function Header() {
       console.warn('Error signing out: ', error);
     }
   };
-
+  console.log('CHANGE LANG');
   const handleSignIn = () => {
     router.push('/sign-in');
   };
