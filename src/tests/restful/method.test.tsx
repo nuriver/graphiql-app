@@ -18,7 +18,7 @@ const mockUpdateUrl = jest.fn();
 describe('Method component', () => {
   it('renders with initial value from Redux store', () => {
     const store = mockStore({
-      restful: { method: 'POST' }, // Initial method value
+      restful: { method: 'POST' },
     });
 
     render(
@@ -44,8 +44,6 @@ describe('Method component', () => {
     fireEvent.change(select, { target: { value: 'PUT' } });
 
     expect(select).toHaveValue('PUT');
-    // Mock store doesn't directly show dispatch results, so this is a conceptual test
-    // You would need to check if the action is dispatched in a real implementation
   });
 
   it('calls updateUrl on blur', () => {

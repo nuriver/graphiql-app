@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { useAuth } from '../../authorization/AuthContext';
 import { useRouter } from 'next/navigation';
 import i18n from '../../../i18n';
-import { act } from 'react'; 
+import { act } from 'react';
 
 jest.mock('../../authorization/AuthContext', () => ({
   useAuth: jest.fn(),
@@ -26,12 +26,12 @@ describe('Main component', () => {
     });
 
     i18n.changeLanguage('en');
-    jest.useFakeTimers(); 
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
     jest.clearAllTimers();
-    jest.useRealTimers(); 
+    jest.useRealTimers();
   });
 
   test('renders loading state when loading is true', async () => {
@@ -61,7 +61,6 @@ describe('Main component', () => {
       </I18nextProvider>
     );
 
-    
     await act(async () => {
       jest.runAllTimers();
     });
@@ -84,7 +83,6 @@ describe('Main component', () => {
       </I18nextProvider>
     );
 
-    
     await act(async () => {
       jest.runAllTimers();
     });
@@ -106,7 +104,6 @@ describe('Main component', () => {
       </I18nextProvider>
     );
 
-    
     await act(async () => {
       jest.runAllTimers();
     });
@@ -129,7 +126,6 @@ describe('Main component', () => {
       </I18nextProvider>
     );
 
-    
     await act(async () => {
       jest.runAllTimers();
     });

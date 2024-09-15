@@ -11,19 +11,18 @@ export default function Main() {
   const router = useRouter();
   const { user, loading } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
-  const [renderingDelay, setRenderingDelay] = useState(true); 
+  const [renderingDelay, setRenderingDelay] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
-    
+
     const delayTimeout = setTimeout(() => {
       setRenderingDelay(false);
-    }, 300); 
+    }, 300);
 
-    return () => clearTimeout(delayTimeout); 
+    return () => clearTimeout(delayTimeout);
   }, []);
 
-  
   if (loading || renderingDelay) {
     return <Loading />;
   }
