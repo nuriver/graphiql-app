@@ -9,7 +9,7 @@ function isError(error: unknown): error is Error {
 
 export const getGraphiqlData = async (urlData: string) => {
   try {
-    const decodedRequestData = atob(urlData);
+    const decodedRequestData = atob(decodeURIComponent(urlData));
     const requestData: GraphiqlState = JSON.parse(decodedRequestData);
     const headersArray = requestData.headers;
     const headersObject = headersArray.reduce<Record<string, string>>(
@@ -23,6 +23,7 @@ export const getGraphiqlData = async (urlData: string) => {
     );
 
     let variables = requestData.variables;
+
     if (variables === '') {
       variables = '{}';
     }
@@ -37,7 +38,18 @@ export const getGraphiqlData = async (urlData: string) => {
       }),
     });
 
-    const graphiqlData = await res.json();
+    const contentType = res.headers.get('Content-Type') || '';
+    let graphiqlData;
+
+    if (res.status >= 200 && res.status < 300) {
+      if (contentType.includes('application/json')) {
+        graphiqlData = await res.json();
+      } else {
+        graphiqlData = await res.text();
+      }
+    } else if (res.status === 204) {
+      graphiqlData = '';
+    }
 
     const historyObject: HistoryObject = {
       method: 'GRAPHQL',
@@ -57,9 +69,7 @@ export const getGraphiqlData = async (urlData: string) => {
   } catch (error) {
     return {
       success: false,
-      error: isError(error)
-        ? 'Please fill in correctly all necessary request data.'
-        : 'Unknown error',
+      error: isError(error) ? error.message : 'Unknown error',
     };
   }
 };

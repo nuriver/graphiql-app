@@ -43,9 +43,6 @@ export const graphiqlSlice = createSlice({
     },
     setGraphiqlVariables: (state, action: PayloadAction<string>) => {
       state.variables = action.payload;
-      if (action.payload === '') {
-        state.variables = '{}';
-      }
     },
     setGraphiqlUrl: (state, action: PayloadAction<string>) => {
       state.url = action.payload;

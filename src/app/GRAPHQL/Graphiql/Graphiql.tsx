@@ -44,7 +44,7 @@ export default function Graphiql({
   if (containsNonLatin1(requestDataString)) {
     toast.error(t('latin_warning'));
   } else {
-    const encodedRequestData = btoa(requestDataString);
+    const encodedRequestData = encodeURIComponent(btoa(requestDataString));
     finalRequestData = encodedRequestData.replace(/=+$/, '');
   }
 

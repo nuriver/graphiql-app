@@ -67,6 +67,7 @@ const GraphiqlMain = ({
     setDoc(undefined);
 
     const result = await getGraphiqlSchema(sdlUrl);
+
     if (result.success) {
       setDoc(result.data);
     } else {
