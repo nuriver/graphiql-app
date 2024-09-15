@@ -103,3 +103,10 @@ h1 {
   min-width: 10vh;
   min-height: 10vh;
 }
+
+@media (max-width: 1500px) {
+  .main-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}

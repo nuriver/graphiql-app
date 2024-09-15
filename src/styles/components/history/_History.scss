@@ -47,6 +47,10 @@
     flex-wrap: wrap;
     gap: 0;
     margin-bottom: 60px;
+    min-height: 50vh;
+  }
+  .history-empty-heading span {
+    text-align: center;
   }
   .client-links-wrapper {
     display: flex;

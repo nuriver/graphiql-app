@@ -34,9 +34,9 @@ h2 {
   }
 }
 .center {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  position: fixed; /* Changed to fixed to ensure it stays in view */
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -799,6 +799,12 @@ h1 {
   min-height: 10vh;
 }
 
+@media (max-width: 1500px) {
+  .main-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -1189,6 +1195,10 @@ footer a:visited {
   flex-wrap: wrap;
   gap: 0;
   margin-bottom: 60px;
+  min-height: 50vh;
+}
+.history-wrapper .history-empty-heading span {
+  text-align: center;
 }
 .history-wrapper .client-links-wrapper {
   display: flex;
