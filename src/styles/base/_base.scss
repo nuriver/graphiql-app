@@ -29,13 +29,14 @@ h2 {
     transform: rotate(0.5turn);
   }
 }
-
 .center {
-  position: fixed; /* Changed to fixed to ensure it stays in view */
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 255, 255, 1);
+  background-color: rgb(255, 255, 255, 0.6);
 }
