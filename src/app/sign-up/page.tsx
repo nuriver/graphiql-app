@@ -5,13 +5,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../authorization/firebase';
-import { signUpSchema } from '../../authorization/validationSchemas';
+import { signUpSchemaYup } from '../../authorization/validationSchemas';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import '../../../i18n';
 
 export default function SignUp() {
   const { t, i18n } = useTranslation();
+  const signUpSchema = signUpSchemaYup(t);
   const {
     register,
     handleSubmit,

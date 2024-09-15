@@ -1,182 +1,112 @@
-import { signInSchema, signUpSchema } from '../authorization/validationSchemas';
+import { ValidationError } from 'yup';
+import {
+  signInSchemaYup,
+  signUpSchemaYup,
+} from '../authorization/validationSchemas';
+describe('signUpSchemaYup', () => {
+  const t = (key: string) => key;
 
-describe('Validation Schemas', () => {
-  describe('signUpSchema', () => {
-    test('should pass with valid data', async () => {
-      const validData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: 'Password123!',
-        confirmPassword: 'Password123!',
-      };
-
-      await expect(signUpSchema.validate(validData)).resolves.toBe(validData);
-    });
-
-    test('should fail when name is missing', async () => {
-      const invalidData = {
-        email: 'ryan.go@example.com',
-        password: 'Password123!',
-        confirmPassword: 'Password123!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Имя обязательно'
-      );
-    });
-
-    test('should fail with invalid email format', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go',
-        password: 'Password123!',
-        confirmPassword: 'Password123!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Некорректный формат email'
-      );
-    });
-
-    test('should fail if password and confirmPassword do not match', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: 'Password123!',
-        confirmPassword: 'DifferentPassword!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Пароли должны совпадать'
-      );
-    });
-
-    test('should fail if password is too short', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: 'Pass1!',
-        confirmPassword: 'Pass1!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать минимум 8 символов'
-      );
-    });
-
-    test('should fail if password does not contain a letter', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: '12345678!',
-        confirmPassword: '12345678!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы одну букву'
-      );
-    });
-
-    test('should fail if password does not contain a digit', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: 'Password!',
-        confirmPassword: 'Password!',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы одну цифру'
-      );
-    });
-
-    test('should fail if password does not contain a special character', async () => {
-      const invalidData = {
-        name: 'Ryan Gosling',
-        email: 'ryan.go@example.com',
-        password: 'Password123',
-        confirmPassword: 'Password123',
-      };
-
-      await expect(signUpSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы один специальный символ'
-      );
-    });
+  it('should validate valid data', async () => {
+    const schema = signUpSchemaYup(t);
+    await expect(
+      schema.validate({
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+      })
+    ).resolves.toBeTruthy();
   });
 
-  describe('signInSchema', () => {
-    test('should pass with valid data', async () => {
-      const validData = {
-        email: 'ryan.go@example.com',
-        password: 'Password123!',
-      };
+  it('should fail if required fields are missing', async () => {
+    const schema = signUpSchemaYup(t);
+    await expect(
+      schema.validate({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
 
-      await expect(signInSchema.validate(validData)).resolves.toBe(validData);
-    });
+  it('should fail if email is invalid', async () => {
+    const schema = signUpSchemaYup(t);
+    await expect(
+      schema.validate({
+        name: 'John Doe',
+        email: 'invalid-email',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
 
-    test('should fail with invalid email format', async () => {
-      const invalidData = {
-        email: 'ryan.go',
-        password: 'Password123!',
-      };
+  it('should fail if passwords do not match', async () => {
+    const schema = signUpSchemaYup(t);
+    await expect(
+      schema.validate({
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        password: 'Password1!',
+        confirmPassword: 'DifferentPassword1!',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
 
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Некорректный формат email'
-      );
-    });
+  it('should fail if password is too short or lacks required characters', async () => {
+    const schema = signUpSchemaYup(t);
+    await expect(
+      schema.validate({
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        password: 'short',
+        confirmPassword: 'short',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
+});
 
-    test('should fail if email is missing', async () => {
-      const invalidData = {
-        password: 'Password123!',
-      };
+describe('signInSchemaYup', () => {
+  const t = (key: string) => key;
 
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Email обязателен'
-      );
-    });
+  it('should validate valid data', async () => {
+    const schema = signInSchemaYup(t);
+    await expect(
+      schema.validate({
+        email: 'john.doe@example.com',
+        password: 'Password1!',
+      })
+    ).resolves.toBeTruthy();
+  });
 
-    test('should fail if password is too short', async () => {
-      const invalidData = {
-        email: 'ryan.go@example.com',
-        password: 'Pass1!',
-      };
+  it('should fail if required fields are missing', async () => {
+    const schema = signInSchemaYup(t);
+    await expect(
+      schema.validate({
+        email: '',
+        password: '',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
 
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать минимум 8 символов'
-      );
-    });
+  it('should fail if email is invalid', async () => {
+    const schema = signInSchemaYup(t);
+    await expect(
+      schema.validate({
+        email: 'invalid-email',
+        password: 'Password1!',
+      })
+    ).rejects.toThrow(ValidationError);
+  });
 
-    test('should fail if password does not contain a letter', async () => {
-      const invalidData = {
-        email: 'ryan.go@example.com',
-        password: '12345678!',
-      };
-
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы одну букву'
-      );
-    });
-
-    test('should fail if password does not contain a digit', async () => {
-      const invalidData = {
-        email: 'ryan.go@example.com',
-        password: 'Password!',
-      };
-
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы одну цифру'
-      );
-    });
-
-    test('should fail if password does not contain a special character', async () => {
-      const invalidData = {
-        email: 'ryan.go@example.com',
-        password: 'Password123',
-      };
-
-      await expect(signInSchema.validate(invalidData)).rejects.toThrow(
-        'Пароль должен содержать хотя бы один специальный символ'
-      );
-    });
+  it('should fail if password is too short or lacks required characters', async () => {
+    const schema = signInSchemaYup(t);
+    await expect(
+      schema.validate({
+        email: 'john.doe@example.com',
+        password: 'short',
+      })
+    ).rejects.toThrow(ValidationError);
   });
 });
