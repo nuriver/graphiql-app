@@ -21,6 +21,7 @@ export default function RootLayout({
           <AuthProvider>
             <AuthGuard publicRoutes={publicRoutes}>
               <StoreProvider>
+                <link rel="icon" href="./favicon.ico" />
                 <Header />
                 {children}
                 <Footer />

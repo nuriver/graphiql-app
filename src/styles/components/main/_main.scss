@@ -1,8 +1,8 @@
 .main-btn {
-  padding: 20px 30px;
+  padding: 10px 20px;
   font-style: normal;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 38px;
   line-height: 58px;
   color: $main-color;
   background-color: #fff;
@@ -43,17 +43,19 @@ h1 {
 .main-block-second {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   align-items: center;
   border: 2px solid $main-color;
   border-radius: 15px;
-  height: 80vh;
   justify-content: center;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .main-block-second h3 {
   margin: 20px 0;
   font-size: 48px;
+  align-self: center;
 }
 
 .main-block-3 {
@@ -63,6 +65,7 @@ h1 {
   align-items: center;
   height: 80vh;
   justify-content: center;
+  margin-bottom: 60px;
 }
 
 .main-block-3 h3 {

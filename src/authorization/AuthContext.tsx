@@ -23,12 +23,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
-
-      //ВОТ ЭТУ ШТУКУ ВЕРНУТЬ
-
-      // if (!user) {
-      //   router.push('/');
-      // }
     });
 
     return () => unsubscribe();
