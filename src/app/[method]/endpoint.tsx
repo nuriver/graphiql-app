@@ -13,7 +13,7 @@ export default function Endpoint({ updateUrl }: { updateUrl: () => void }) {
   const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
   const splitPath = pathname.split('/');
   const isFocused = splitPath[2] ? true : false;
 
