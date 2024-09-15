@@ -64,5 +64,7 @@
   "go_back": "Go back to home page",
   "history": "History Requests",
   "history_no_requests": "You haven't executed any requests",
-  "history_proposal": "It's empty here. Try:"
+  "history_proposal": "It's empty here. Try:",
+  "error_boundary_message": "Oops, something went wrong!",
+  "error_boundary_proposal": "Do not worry! Our ErrorBoundary successfully caught the error. All you need to do is click the button below to continue."
 }

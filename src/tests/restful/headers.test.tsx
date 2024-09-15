@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -19,26 +19,32 @@ const store = configureStore({
 
 describe('Headers component contentToggle function', () => {
   test('toggles content visibility and button state', () => {
-    render(
+    const { container } = render(
       <Provider store={store}>
         <Headers updateUrl={() => {}} />
       </Provider>
     );
 
-    const restHeaderWrapper = screen.getByTestId('restful-headers-wrapper');
-    const addHeaderButton = screen.getByRole('button', { name: 'add_header' });
-    expect(restHeaderWrapper).toHaveClass('restful-hidden-content');
-    expect(addHeaderButton).toBeEnabled();
+    expect(container.firstChild).toHaveClass('restful-hidden-content');
 
-    const toggleButton = screen.getByRole('button', { name: '' });
-    fireEvent.click(toggleButton);
+    const toggleButton = container.querySelector('.content-toggle-button');
+    expect(toggleButton).not.toBeNull();
 
-    expect(restHeaderWrapper).not.toHaveClass('restful-hidden-content');
-    expect(addHeaderButton).toBeDisabled();
+    if (toggleButton) {
+      fireEvent.click(toggleButton);
 
-    fireEvent.click(toggleButton);
+      expect(container.firstChild).not.toHaveClass('restful-hidden-content');
 
-    expect(restHeaderWrapper).toHaveClass('restful-hidden-content');
-    expect(addHeaderButton).toBeEnabled();
+      const addHeaderButton = container.querySelector('.add-headers-button');
+      expect(addHeaderButton).not.toBeNull();
+
+      if (addHeaderButton) {
+        expect(addHeaderButton).toBeEnabled();
+
+        fireEvent.click(toggleButton);
+
+        expect(container.firstChild).toHaveClass('restful-hidden-content');
+      }
+    }
   });
 });

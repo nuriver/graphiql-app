@@ -45,10 +45,10 @@ export default function Main() {
           <h3>{t('help')}</h3>
           <div className="main-buttons">
             <Link className="main-btn" href="/GET">
-              {t('rest_client')}
+              REST Client
             </Link>
             <Link className="main-btn" href="/GRAPHQL">
-              {t('graphiql_client')}
+              GraphiQL Client
             </Link>
             <Link className="main-btn" href="/history">
               {t('history')}
