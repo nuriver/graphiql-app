@@ -111,7 +111,7 @@ export const getRestData = async (urlString: string) => {
   try {
     let decodedRequestData;
     try {
-      decodedRequestData = atob(urlString);
+      decodedRequestData = atob(decodeURIComponent(urlString));
     } catch (err) {
       throw new Error('Invalid base64 string');
     }

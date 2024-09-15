@@ -35,7 +35,7 @@ const RequestBlock = ({ requestHandler }: { requestHandler: () => void }) => {
   if (containsNonLatin1(requestDataString)) {
     toast.error('Only Latin letters are allowed');
   } else {
-    const encodedRequestData = btoa(requestDataString);
+    const encodedRequestData = encodeURIComponent(btoa(requestDataString));
     finalRequestData = encodedRequestData.replace(/=+$/, '');
   }
 

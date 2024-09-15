@@ -16,7 +16,7 @@ export default function Page({
   let requestData;
 
   if (data) {
-    const decodedRequestDataString = atob(data[0]);
+    const decodedRequestDataString = atob(decodeURIComponent(data[0]));
     requestData = JSON.parse(decodedRequestDataString);
   } else {
     requestData = null;
