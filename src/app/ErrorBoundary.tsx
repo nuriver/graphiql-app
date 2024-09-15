@@ -1,8 +1,9 @@
 'use client';
 
 import { Component, ReactNode } from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
-interface ErrorBoundaryProps {
+interface ErrorBoundaryProps extends WithTranslation {
   children: ReactNode;
 }
 
@@ -26,18 +27,17 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   };
 
   render() {
+    const { t } = this.props;
+
     if (this.state.hasError) {
       return (
         <>
           {this.props.children}
           <div className="error-popup">
             <div className="error-popup-content">
-              <h2>Oops, something went wrong!</h2>
-              <p>
-                Do not worry! Our ErrorBoundary successfully caught the error.
-                All you need to do is click the button below to continue.
-              </p>
-              <button onClick={this.handleRetry}>Try Again</button>
+              <h2>{t('error_boundary_message')}</h2>
+              <p>{t('error_boundary_proposal')}</p>
+              <button onClick={this.handleRetry}>{t('error_proposal')}</button>
             </div>
           </div>
         </>
@@ -48,4 +48,4 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 }
 
-export default ErrorBoundary;
+export default withTranslation()(ErrorBoundary);

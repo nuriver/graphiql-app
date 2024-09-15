@@ -20,7 +20,7 @@ jest.mock('react-toastify', () => ({
 }));
 
 jest.mock('../../utils/handlePrettify', () => ({
-  handlePrettify: jest.fn(),
+  handlePrettify: jest.fn(() => ['{}', true]),
 }));
 
 const renderComponent = (initialBody: string = '') => {
@@ -54,11 +54,9 @@ describe('BodyRequest', () => {
     const textArea = screen.getByRole('textbox');
     expect(textArea).toBeInTheDocument();
 
-    // Check text area change
     fireEvent.change(textArea, { target: { value: '{"newKey": "newValue"}' } });
     expect(textArea).toHaveValue('{"newKey": "newValue"}');
 
-    // Check button click
     const button = screen.getByRole('button');
     fireEvent.click(button);
 
