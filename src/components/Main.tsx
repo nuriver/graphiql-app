@@ -1,5 +1,3 @@
-'use client';
-
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../authorization/AuthContext';
@@ -13,13 +11,19 @@ export default function Main() {
   const router = useRouter();
   const { user, loading } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
+  const [renderingDelay, setRenderingDelay] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
-    setTimeout(() => {}, 300);
+
+    const delayTimeout = setTimeout(() => {
+      setRenderingDelay(false);
+    }, 300);
+
+    return () => clearTimeout(delayTimeout);
   }, []);
 
-  if (loading) {
+  if (loading || renderingDelay) {
     return <Loading />;
   }
 
@@ -31,7 +35,6 @@ export default function Main() {
             <h1>
               {t('welcome')},{' '}
               <span className="un-grad">
-                {' '}
                 {user.displayName || t('default_user')}
               </span>
             </h1>

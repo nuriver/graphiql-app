@@ -4,6 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { useAuth } from '../../authorization/AuthContext';
 import { useRouter } from 'next/navigation';
 import i18n from '../../../i18n';
+import { act } from 'react';
 
 jest.mock('../../authorization/AuthContext', () => ({
   useAuth: jest.fn(),
@@ -25,9 +26,15 @@ describe('Main component', () => {
     });
 
     i18n.changeLanguage('en');
+    jest.useFakeTimers();
   });
 
-  test('renders loading state when loading is true', () => {
+  afterEach(() => {
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  test('renders loading state when loading is true', async () => {
     (useAuth as jest.Mock).mockReturnValue({
       user: null,
       loading: true,
@@ -42,9 +49,9 @@ describe('Main component', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  test('renders content for authenticated user', () => {
+  test('renders content for authenticated user after delay', async () => {
     (useAuth as jest.Mock).mockReturnValue({
-      user: { displayName: 'John Doe' },
+      user: { displayName: 'Ryan Gosling' },
       loading: false,
     });
 
@@ -54,13 +61,17 @@ describe('Main component', () => {
       </I18nextProvider>
     );
 
+    await act(async () => {
+      jest.runAllTimers();
+    });
+
     expect(screen.getByText(/welcome/i)).toBeInTheDocument();
-    expect(screen.getByText(/john doe/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ryan Gosling/i)).toBeInTheDocument();
     expect(screen.getByText(/main page/i)).toBeInTheDocument();
     expect(screen.getByText(/help/i)).toBeInTheDocument();
   });
 
-  test('renders content for unauthenticated user', () => {
+  test('renders content for unauthenticated user after delay', async () => {
     (useAuth as jest.Mock).mockReturnValue({
       user: null,
       loading: false,
@@ -71,13 +82,17 @@ describe('Main component', () => {
         <Main />
       </I18nextProvider>
     );
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
 
     expect(screen.getByText(/welcome/i)).toBeInTheDocument();
     expect(screen.getByText(/sign in/i)).toBeInTheDocument();
     expect(screen.getByText(/sign up/i)).toBeInTheDocument();
   });
 
-  test('redirects to sign-in page when Sign In button is clicked', () => {
+  test('redirects to sign-in page when Sign In button is clicked', async () => {
     (useAuth as jest.Mock).mockReturnValue({
       user: null,
       loading: false,
@@ -88,6 +103,10 @@ describe('Main component', () => {
         <Main />
       </I18nextProvider>
     );
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
 
     const signInButton = screen.getByText(/sign in/i);
     fireEvent.click(signInButton);
@@ -95,7 +114,7 @@ describe('Main component', () => {
     expect(mockRouterPush).toHaveBeenCalledWith('/sign-in');
   });
 
-  test('redirects to sign-up page when Sign Up button is clicked', () => {
+  test('redirects to sign-up page when Sign Up button is clicked', async () => {
     (useAuth as jest.Mock).mockReturnValue({
       user: null,
       loading: false,
@@ -106,6 +125,10 @@ describe('Main component', () => {
         <Main />
       </I18nextProvider>
     );
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
 
     const signUpButton = screen.getByText(/sign up/i);
     fireEvent.click(signUpButton);

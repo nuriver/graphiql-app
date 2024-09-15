@@ -13,7 +13,6 @@ jest.mock('react-toastify', () => ({
   },
 }));
 
-// Mock usePathname hook
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
 }));
@@ -31,12 +30,12 @@ const mockUpdateUrl = jest.fn();
 describe('Endpoint component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    (usePathname as jest.Mock).mockReturnValue('/some/path'); // Mock pathname for all tests
+    (usePathname as jest.Mock).mockReturnValue('/some/path');
   });
 
   it('renders with initial value from Redux store', () => {
     const store = mockStore({
-      restful: { endpoint: 'http://example.com/api' }, // Initial endpoint value
+      restful: { endpoint: 'http://test.com/api' },
     });
 
     render(
@@ -46,7 +45,7 @@ describe('Endpoint component', () => {
     );
 
     const input = screen.getByRole('textbox');
-    expect(input).toHaveValue('http://example.com/api');
+    expect(input).toHaveValue('http://test.com/api');
   });
 
   it('dispatches setRestfulEndpoint on valid input change', () => {
@@ -59,16 +58,17 @@ describe('Endpoint component', () => {
     );
 
     const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'http://new-endpoint.com' } });
+    fireEvent.change(input, {
+      target: { value: 'http://change-endpoint.com' },
+    });
 
-    expect(input).toHaveValue('http://new-endpoint.com');
-    // You would need to verify that the action is dispatched correctly in a real implementation
+    expect(input).toHaveValue('http://change-endpoint.com');
   });
 
   it('shows error toast on invalid input change', () => {
     const store = mockStore({ restful: { endpoint: '' } });
 
-    (usePathname as jest.Mock).mockReturnValue('/some/path'); // Ensure mock returns valid pathname
+    (usePathname as jest.Mock).mockReturnValue('/some/path');
 
     render(
       <Provider store={store}>
@@ -77,9 +77,9 @@ describe('Endpoint component', () => {
     );
 
     const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'http://пример.com' } }); // Non-Latin characters
+    fireEvent.change(input, { target: { value: 'http://тест.com' } });
 
-    expect(toast.error).toHaveBeenCalledWith('Only Latin letters are allowed'); // Ensure the correct error message
+    expect(toast.error).toHaveBeenCalledWith('Only Latin letters are allowed');
   });
 
   it('calls updateUrl on blur', () => {
@@ -98,7 +98,7 @@ describe('Endpoint component', () => {
   });
 
   it('focuses input field based on pathname', () => {
-    (usePathname as jest.Mock).mockReturnValue('/api/test'); // Mock pathname to simulate focus
+    (usePathname as jest.Mock).mockReturnValue('/api/test');
 
     const store = mockStore({ restful: { endpoint: '' } });
 

@@ -5,12 +5,14 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../authorization/firebase';
-import { signInSchema } from '../../authorization/validationSchemas';
+import { signInSchemaYup } from '../../authorization/validationSchemas';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import '../../../i18n';
 
 export default function SignIn() {
+  const { t } = useTranslation();
+  const signInSchema = signInSchemaYup(t);
   const {
     register,
     handleSubmit,
@@ -19,7 +21,6 @@ export default function SignIn() {
     resolver: yupResolver(signInSchema),
     mode: 'onChange',
   });
-  const { t } = useTranslation();
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();

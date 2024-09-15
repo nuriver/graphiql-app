@@ -15,7 +15,6 @@ export const handlePrettify = (
     const prettyJson = JSON.stringify(json, null, 2);
     return [prettyJson, true];
   } catch (e) {
-    // console.error('Error formatting JSON:', e);
     return ['Invalid JSON', false];
   }
 };
