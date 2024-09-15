@@ -31,7 +31,8 @@
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
     "test/**/*",
-    "i18n.ts"
+    "i18n.ts",
+    "./next/types/**/*.ts"
   ],
   "exclude": ["./node_modules"]
 }
