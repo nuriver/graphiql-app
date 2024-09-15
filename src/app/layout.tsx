@@ -6,7 +6,6 @@ import AuthGuard from '../authorization/AuthGuard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBoundary';
-import Head from 'next/head';
 
 export default function RootLayout({
   children,
@@ -17,14 +16,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="./favicon.ico" />
-      </Head>
       <body>
         <ErrorBoundary>
           <AuthProvider>
             <AuthGuard publicRoutes={publicRoutes}>
               <StoreProvider>
+                <link rel="icon" href="./favicon.ico" />
                 <Header />
                 {children}
                 <Footer />
