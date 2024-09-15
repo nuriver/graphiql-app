@@ -16,6 +16,7 @@ export default function Main() {
 
   useEffect(() => {
     setIsMounted(true);
+    setTimeout(() => {}, 300);
   }, []);
 
   if (loading) {
