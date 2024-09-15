@@ -16,6 +16,7 @@ module.exports = {
     '!src/app/loading.tsx',
     '!src/app/not-found.tsx',
     '!src/app/ErrorBoundary.tsx',
+    '!src/app/StoreProvider.tsx',
     '!src/app/page.tsx',
     '!src/app/authorization/firebase.ts',
     '!src/store/graphiqlFeatures/graphiqlSlice.ts',

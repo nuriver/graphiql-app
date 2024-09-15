@@ -44,6 +44,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-compiler/react-compiler': 'error',
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
   settings: {
     react: {

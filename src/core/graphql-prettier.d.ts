@@ -1,4 +1,4 @@
 declare module 'graphql-prettier' {
-  const prettify: (input: string) => string;
+  const prettify: (_input: string) => string;
   export default prettify;
 }

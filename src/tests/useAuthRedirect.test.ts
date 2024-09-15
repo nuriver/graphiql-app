@@ -51,7 +51,7 @@ describe('useAuthRedirect', () => {
   it('should unsubscribe on unmount', () => {
     const unsubscribeMock = jest.fn();
 
-    (onAuthStateChanged as jest.Mock).mockImplementation((_auth) => {
+    (onAuthStateChanged as jest.Mock).mockImplementation(() => {
       return unsubscribeMock;
     });
 

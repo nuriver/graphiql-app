@@ -41,14 +41,10 @@ export interface BodyRequestProps {
   body: string;
   setBody: React.Dispatch<React.SetStateAction<string>>;
 }
-export interface EndpointProps {
-  endpoint: string;
-  setEndpoint: (url: string) => void;
-}
 
 export interface MethodProps {
   method: string;
-  setMethod: (method: string) => void;
+  setMethod: (_method: string) => void;
   updateUrl: () => void;
 }
 
@@ -83,7 +79,7 @@ export interface RestfulState {
   response?: ResponseState | null;
 }
 export type SendClickHandler = (
-  event: React.MouseEvent<HTMLButtonElement>
+  _event: React.MouseEvent<HTMLButtonElement>
 ) => void;
 
 export interface HistoryObject {

@@ -13,7 +13,7 @@ type RootState = {
   };
 };
 
-type SelectorFn<T> = (state: RootState) => T;
+type SelectorFn<T> = (_state: RootState) => T;
 
 jest.mock('react-toastify/dist/ReactToastify.css', () => {});
 
