@@ -51,7 +51,7 @@ export default function Header() {
       await signOut(auth);
       router.push('/');
     } catch (error) {
-      console.warn('Error signing out: ', error);
+      return;
     }
   };
   const handleSignIn = () => {
