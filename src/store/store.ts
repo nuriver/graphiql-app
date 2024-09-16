@@ -1,0 +1,32 @@
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import graphiqlReducer from './graphiqlFeatures/graphiqlSlice';
+import restfulReducer from './restfulSlice';
+
+const rootReducer = combineReducers({
+  restful: restfulReducer,
+  graphiql: graphiqlReducer,
+});
+
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+};
+
+export const makeStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+    devTools: true,
+  });
+};
+
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppDispatch = AppStore['dispatch'];
+export type RootState = ReturnType<typeof rootReducer>;
+
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
+export const useAppStore = useStore.withTypes<AppStore>();

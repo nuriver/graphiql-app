@@ -1,0 +1,327 @@
+.graphiql-page-wrapper {
+  max-width: 1318px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+  label,
+  h3 {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  h2 {
+    font-size: 64px;
+    padding-left: 128px;
+    font-weight: 700;
+  }
+  input,
+  .graphiql-status-output {
+    height: 69px;
+    border: none;
+    border-radius: 15px;
+    background-color: $input-background;
+    font-size: 24px;
+    padding: 33px 43px 33px 43px;
+    color: $main-color;
+    &:focus {
+      outline-color: $main-color;
+    }
+  }
+  section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .graphiql-wrapper {
+    @include border-style;
+    padding: 44px 22px 44px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .graphiql-endpoint-wrapper {
+      width: 100%;
+      height: 148px;
+      @include border-style;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .graphiql-headers-wrapper {
+      @include border-style;
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      .graphiql-headers-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 21px;
+        .content-toggle-button {
+          margin-left: auto;
+          align-self: flex-start;
+        }
+      }
+      .graphiql-headers-main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .graphiql-headers-name-wrapper {
+          display: flex;
+          gap: 10px;
+          h4 {
+            width: 40%;
+          }
+        }
+        .graphiql-headers-pairs-wrapper {
+          display: flex;
+          gap: 10px;
+          input {
+            width: 40%;
+            height: 35px !important;
+            padding: 0px;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 10px;
+          }
+        }
+      }
+    }
+    .graphiql-query-wrapper,
+    .graphiql-variables-wrapper {
+      @include border-style;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .graphiql-query-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 21px;
+    }
+    .graphiql-variables-wrapper {
+      .graphiql-variables-header {
+        display: flex;
+        justify-content: space-between;
+        .content-toggle-button {
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+}
+
+.add-headers-button,
+.prettify-button {
+  width: fit-content;
+  height: 24px;
+  border: none;
+  background: none;
+  padding: 10px;
+  @include border-style;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: $main-color;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: $main-color;
+    color: white;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.graphiql-response {
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  h3 {
+    margin-bottom: 16px;
+  }
+  .response-wrapper {
+    @include border-style;
+    padding: 20px;
+    padding-bottom: 53px;
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+    .graphiql-response-body-wrapper {
+      .graphiql-response-body {
+        @include border-style;
+        height: 245px;
+      }
+    }
+
+    .graphiql-status-output-wrapper {
+      .graphiql-status-output {
+        background: none;
+        @include border-style;
+      }
+    }
+  }
+}
+
+.content-toggle-button {
+  border: none;
+  background: none;
+  span {
+    display: block;
+    height: 15px;
+    width: 24px;
+    background-image: url('/assets/images/content-toggle-img.png');
+    background-size: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.endpoint-wrapper {
+  display: flex;
+  gap: 10px;
+  input {
+    width: 100% !important;
+  }
+  button {
+    width: fit-content;
+    border: 2px solid $main-color;
+    background: none;
+    border-radius: 15px;
+    font-size: 15px;
+    color: $main-color;
+    font-weight: 500;
+    padding: 5px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background-color: $main-color;
+      color: white;
+    }
+  }
+}
+
+.graphiql-page-wrapper {
+  .rest-client__response {
+    h2 {
+      font-size: 32px;
+      font-weight: 500;
+      padding: 0;
+      margin: 0;
+      margin-left: 43px;
+      margin-bottom: 16px;
+    }
+    @include border-style;
+    padding: 20px;
+    padding-bottom: 53px;
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+    .response__status {
+      .status__window {
+        @include border-style;
+        height: 69px;
+        font-size: 24px;
+        font-weight: 400;
+        padding: 20px;
+        color: $main-color;
+      }
+    }
+    .response__body {
+      .body__window {
+        @include border-style;
+        height: 245px;
+        overflow: auto;
+        padding: 20px;
+        pre {
+          color: $main-color;
+          font-size: 20px;
+          white-space: pre-wrap;
+        }
+      }
+    }
+  }
+}
+
+.graphiql-documentation-wrapper {
+  h3 {
+    margin-bottom: 23px;
+    margin-left: 43px;
+  }
+  .graphiql-documentation {
+    @include border-style;
+    height: 345px;
+    overflow: auto;
+    padding: 20px;
+    pre {
+      color: $main-color;
+      font-size: 20px;
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.graphql-hidden-content {
+  height: 80px;
+  overflow: hidden;
+}
+
+.header-note {
+  color: $main-color;
+  padding-left: 5px;
+}
+
+.graphiql-headers-wrapper {
+  @include border-style;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .graphiql-headers-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 21px;
+    .content-toggle-button {
+      margin-left: auto;
+      align-self: flex-start;
+    }
+  }
+  .graphiql-headers-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .graphiql-headers-name-wrapper {
+      display: flex;
+      gap: 10px;
+      h4 {
+        width: 40%;
+      }
+    }
+    .graphiql-headers-pairs-wrapper {
+      display: flex;
+      gap: 10px;
+      input {
+        width: 40%;
+        height: 35px !important;
+        padding: 0px;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px;
+      }
+    }
+  }
+}
